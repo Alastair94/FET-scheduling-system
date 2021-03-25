@@ -1,0 +1,15 @@
+<form name="myForm">
+	<div class="" ng-class="">
+		Group name: <input name="input" ng-model="item.group_name" disabled required><br>
+		Subgroup name: <input name="input" ng-model="item.subgroup_name" required><br>
+		Number of students in subgroups: <input type="number" name="input" ng-model="item.num_of_students" required><br>
+		<span ng-show="" class="help-inline">Required</span>
+	</div>
+
+	<br>
+	<!-- <a href="#/" >Cancel</a> -->
+
+	<a href ng-click="cancel()">Cancel</a>
+	<button ng-click="saveSubgroup()" ng-disabled="isClean()" >Save</button>
+	<button ng-click="destroyGroup()" ng-show="item.id" >Delete</button>
+</form>

@@ -1,0 +1,14 @@
+
+<form name="myForm">
+	<div class="" ng-class="">
+		Hour Name: <input name="input" ng-model="item.hour_name" required><br>
+		<span ng-show="" class="help-inline">Required</span>
+	</div>
+
+	<br>
+	<!-- <a href="#/" >Cancel</a> -->
+
+	<a href ng-click="cancelHour()">Cancel</a>
+	<button ng-click="saveHour()" ng-disabled="isCleanHour()" >Save</button>
+	<button ng-click="destroyHour()" ng-show="item.id" >Delete</button>
+</form>
