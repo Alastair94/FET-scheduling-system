@@ -1,5 +1,5 @@
 This file contains the result (log) of last operation
 
-FET command line simulation started on 3/23/21 8:33 PM
+FET command line simulation started on 4/1/21 11:55 AM
 
 Cannot precompute - data is wrong - aborting

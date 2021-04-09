@@ -504,32 +504,38 @@ function querySingle($mysqli, $id){
                 $result->free();
             }
         } else if($_GET['query'] == 'groups'){
+            // $sql =
+            // 'SELECT group_id, group_name, num_of_students, groups.student_id '.
+            // 'FROM groups, students WHERE groups.student_id = '.$id.' AND user_table_id = '.$user_table_id.'AND students.student_id = '.$id;
+
             $sql =
-            'SELECT group_id, group_name, num_of_students, student_id '.
-            'FROM groups WHERE student_id = '.$id.' AND user_table_id = '.$user_table_id;
+            'SELECT group_id, group_name, num_of_students, groups.student_id, year_name FROM groups INNER JOIN students ON groups.student_id = students.student_id WHERE groups.student_id = '.$id;
 
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['group_id'];
                     $row_array['group_name'] = $row['group_name'];
                     $row_array['num_of_students']   = $row['num_of_students'];
-                    $row_array['student_id'] = $row['student_id'];
+                    $row_array['student_id'] = $row['groups.student_id'];
+                    $row_array['year_name'] = $row['year_name'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();
             }
         } else if($_GET['query'] == 'subgroups'){
             $sql =
-            'SELECT subgroup_id, subgroup_name, num_of_students, group_id, student_id '.
-            'FROM subgroups WHERE group_id = '.$id.' AND user_table_id = '.$user_table_id;
+            'SELECT subgroup_id, subgroup_name, subgroups.num_of_students, subgroups.group_id, subgroups.student_id, group_name, year_name '.
+            'FROM subgroups INNER JOIN groups ON subgroups.group_id = groups.group_id INNER JOIN students ON subgroups.student_id = students.student_id WHERE subgroups.group_id = '.$id;
 
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['subgroup_id'];
                     $row_array['subgroup_name'] = $row['subgroup_name'];
-                    $row_array['num_of_students']   = $row['num_of_students'];
-                    $row_array['group_id'] = $row['group_id'];
-                    $row_array['student_id'] = $row['student_id'];
+                    $row_array['num_of_students']   = $row['subgroups.num_of_students'];
+                    $row_array['group_id'] = $row['subgroups.group_id'];
+                    $row_array['student_id'] = $row['subgroups.student_id'];
+                    $row_array['group_name'] = $row['group_name'];
+                    $row_array['year_name'] = $row['year_name'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();

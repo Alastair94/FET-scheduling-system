@@ -308,6 +308,10 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 	$scope.duration = 1;
 	$scope.active = 0;
 	$scope.student_number = -1;
+
+	$scope.groups = [];
+	$scope.subgroups = [];
+
 	$scope.getActivities = function () {
         myHttp.query({
             'query': 'activities',
@@ -316,6 +320,85 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
             $scope.activities = data;
         });
     }
+
+	$scope.getStudents = function () {
+        myHttp.query({
+            'query': 'students',
+            'method': 'get-all'
+        }).success(function (data) {
+            $scope.students = data;
+            $scope.act_student = $scope.students[0];
+
+			$scope.getGroups($scope.act_student.id);
+        });
+    }
+
+	$scope.getGroups = function (id) {
+		if(id){
+			myHttp.query({
+				'query': 'groups',
+				'method': 'get-single',
+				'id': id
+			}).success(function (data){
+				$scope.groups = data;
+				if($scope.groups[0] != undefined){
+					$scope.act_group = $scope.groups[0];
+					$scope.getSubgroups($scope.act_group.id);
+				}else{
+					$scope.groups = [];
+					$scope.act_group = null;
+				}
+				$scope.act_subgroup = null;
+				$scope.subgroups = [];				
+			});
+		}
+	}
+
+	$scope.getSubgroups = function (id) {
+		if(id){
+			myHttp.query({
+				'query': 'subgroups',
+				'method': 'get-single',
+				'id': id
+			}).success(function (data){
+				$scope.subgroups = data;
+				if($scope.subgroups[0] != undefined){
+					$scope.act_subgroup = $scope.subgroups[0];
+				} else{
+					$scope.act_subgroup = null;
+				}
+			});
+		}
+	}
+
+	$scope.chosenTeachers = [];
+	$scope.chosenStudents = [];
+
+	$scope.selectGroup = function () {
+		for (var i = 0; i < $scope.chosenStudents.length; i++) {
+			// window.alert($scope.chosenStudents[i].group_name);
+			if($scope.chosenStudents[i].group_name == $scope.act_group.group_name) {			
+				console.log("Group matches");	
+				return;
+			}
+		}
+		//window.alert($scope.act_group.group_name);
+		$scope.chosenStudents.push($scope.act_group);
+		$scope.chosenS = $scope.chosenStudents[0];
+	}
+
+	$scope.selectSubGroup = function () {
+		for (var i = 0; i < $scope.chosenStudents.length; i++) {
+			// window.alert($scope.chosenStudents[i].group_name);
+			if($scope.chosenStudents[i].subgroup_name == $scope.act_subgroup.subgroup_name) {			
+				console.log("Subgroup matches");	
+				return;
+			}
+		}
+		//window.alert($scope.act_group.group_name);
+		$scope.chosenStudents.push($scope.act_subgroup);
+		$scope.chosenS = $scope.chosenStudents[0];
+	}
 
 	$scope.removeS = function () {
 		for (var i = $scope.chosenStudents.length - 1; i >= 0; i--) {
@@ -336,9 +419,6 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 			}
 		}
 	}
-
-	$scope.chosenTeachers = [];
-	$scope.chosenStudents = [];
 	
 	$scope.updateT = function() {
 		for (var i = $scope.chosenTeachers.length - 1; i >= 0; i--) {
@@ -357,7 +437,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 	$scope.updateS = function() {
 		for (var i = $scope.chosenStudents.length - 1; i >= 0; i--) {
 			if($scope.chosenStudents[i] == $scope.act_student) {			
-				console.log("S matches");	
+				console.log("Year matches");	
 				return;
 			}			
 		}
@@ -476,7 +556,9 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 		};
 		return 1;
 	}
+
     $scope.getActivities();
+	$scope.getStudents();
 });
 //////////////////////////////
 //		SubjectsCtrl		//

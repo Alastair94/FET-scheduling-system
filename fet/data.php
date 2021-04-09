@@ -255,6 +255,7 @@
 											<select size="10" 
 												ng-model="act_group" 
 												ng-options="g.group_name for g in groups" style="min-width: 150px"
+												ng-dblclick="selectGroup()"
 												ng-click="getSubgroups(act_group.id)" 
 												>
 											</select>
@@ -263,7 +264,7 @@
 											Subgroups
 											<select size="10" 
 												ng-model="act_subgroup"
-												ng-click="getSubgroupInfo()"
+												ng-dblclick="selectSubGroup()"
 												ng-options="s.subgroup_name for s in subgroups" style="min-width: 150px"
 												>
 											</select>
@@ -272,7 +273,7 @@
 											Selected students
 											<select size="10" 
 												ng-model="chosenS" 
-												ng-options="st.year_name for st in chosenStudents" 
+												ng-options="st.year_name +' -> '+ st.group_name +' -> '+ st.subgroup_name for st in chosenStudents" 
 												ng-dblclick="removeS()"
 												style="background-color:khaki;min-width:185px;">
 											</select>
