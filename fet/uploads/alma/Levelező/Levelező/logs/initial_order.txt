@@ -1,0 +1,11 @@
+﻿This is the initial evaluation order of activities computed by FET. If the generation gets stuck after a certain number of activities, please check the activity corresponding to this number+1. You might find errors in your input.
+
+The initial order of activities (id-s):
+
+No: 1, Id: 62,     Duration: 1/0, Teachers: Geda Gábor, Subject: Informatika, Activity tags: , Students: 2019, 2018, 007, informatikus, jók
+No: 2, Id: 63,     Duration: 1/0, Teachers: Király Roland, Subject: Matematika, Activity tags: , Students: 2020, 2019
+No: 3, Id: 64,     Duration: 1/0, Teachers: Geda Gábor, Subject: Biológia, Activity tags: , Students: informatikus, rosszak
+No: 4, Id: 65,     Duration: 1/0, Teachers: Geda Gábor, Subject: Biológia, Activity tags: , Students: informatikus, rosszak
+No: 5, Id: 66,     Duration: 1/0, Teachers: Király Roland, Subject: Biológia, Activity tags: , Students: informatikus, rosszak
+No: 6, Id: 67,     Duration: 1/0, Teachers: Király Roland, Subject: Történelem, Activity tags: , Students: 2018
+End - the order of activities (id-s)

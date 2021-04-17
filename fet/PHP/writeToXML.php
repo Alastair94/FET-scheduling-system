@@ -182,7 +182,7 @@
 		$query .= "AND activities.teacher_id = teachers.teacher_id AND activities.subj_id = subjects.subj_id ";
 		$query .= "AND /*activities.student_id = students.student_id AND */activities.user_table_id = ".$userTableID;
 		$queryResult = $mysqli->query($query);
-		
+
 		$activities = $fet->createElement('Activities_List');
 		$activities = $root->appendChild($activities);
 		
@@ -193,7 +193,34 @@
 			
 			buildNode($fet, $activity, 'Teacher', $tuple['teach_name']);
 			buildNode($fet, $activity, 'Subject', $tuple['subj_name']);
-			//buildNode($fet, $activity, 'Students', $tuple['year_name']);
+
+			// $query2 = "SELECT activity_years.year_name, activity_groups.group_name, activity_subgroups.subgroup_name FROM activity_years, activity_groups, activity_subgroups WHERE activity_years.activity_id = ".$tuple['activities_id']." ";
+			// $query2 .= "AND activity_groups.activity_id = ".$tuple['activities_id']." AND activity_subgroups.activity_id = ".$tuple['activities_id'];
+			// $queryResult2 = $mysqli->query($query2);
+			// while($tuple2 = $queryResult2->fetch_assoc()){
+			// 	if($tuple2['subgroup_name'])	
+			// 		buildNode($fet, $activity, 'Students', $tuple2['subgroup_name']);
+			// 	else if($tuple2['group_name'])
+			// 		buildNode($fet, $activity, 'Students', $tuple2['group_name']);
+			// 	else if($tuple2['year_name'])
+			// 		buildNode($fet, $activity, 'Students', $tuple2['year_name']);
+			// }
+			$query2 = "SELECT year_name FROM activity_years WHERE activity_id = ".$tuple['activities_id'];
+			$queryResult2 = $mysqli->query($query2);
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				buildNode($fet, $activity, 'Students', $tuple2['year_name']);
+			}
+			$query2 = "SELECT group_name FROM activity_groups WHERE activity_id = ".$tuple['activities_id'];
+			$queryResult2 = $mysqli->query($query2);
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				buildNode($fet, $activity, 'Students', $tuple2['group_name']);
+			}
+			$query2 = "SELECT subgroup_name FROM activity_subgroups WHERE activity_id = ".$tuple['activities_id'];
+			$queryResult2 = $mysqli->query($query2);
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				buildNode($fet, $activity, 'Students', $tuple2['subgroup_name']);
+			}
+
 			buildNode($fet, $activity, 'Duration', $tuple['duration']);
 			buildNode($fet, $activity, 'Total_Duration', $tuple['total_duration']);
 			//buildNode($fet, $activity, 'Id', $count);

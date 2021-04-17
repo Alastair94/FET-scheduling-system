@@ -321,16 +321,16 @@ function updateRow($mysqli, $id) {
 
 function createNew($mysqli)
 {
-
-    $name          = $_GET['name'];
     $user_table_id = $_SESSION['user']['user_table_id'];
     $user_id       = $_SESSION['user']['username'];
     if ($_GET['query'] == 'teachers') {
+        $name          = $_GET['name'];
         $stmt = $mysqli->prepare('INSERT INTO teachers VALUES (NULL, ?, ?)');
         $stmt->bind_param("ss", $name, $user_table_id);
         $stmt->execute();
 
     } else if ($_GET['query'] == 'subjects') {
+        $name          = $_GET['name'];
         $stmt = $mysqli->prepare('INSERT INTO subjects VALUES (NULL, ?, ?)');
         $stmt->bind_param("ss", $name, $user_table_id);
         $stmt->execute();
@@ -358,27 +358,47 @@ function createNew($mysqli)
     } else if ($_GET['query'] == 'activities') {
 		$data = json_decode($_GET['data']);
 		$teacher_id = $data[0][0]->id;
-		$student_id = $data[1][0]->id;
+		$chosenStudents = $data[1];
 		$subj_id = $data[2]->id;
         $duration = $data[3];
         $active = $data[4];
         $number_of_students = $data[5];
 
 		// $stmt = $mysqli->prepare('INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `student_id`, `user_table_id`, `activity_group_id`) VALUES (NULL, 21, 12, "true", ?, ?, ?, ?, NULL);');
-        $stmt = $mysqli->prepare('INSERT INTO activities (duration, total_duration, active, teacher_id, subj_id, student_id, user_table_id, activity_group_id, number_of_students) VALUES (?, NULL, ?, ?, ?, ?, ?, NULL,?);');
-        $stmt->bind_param("iiiiiii",$duration, $active, $teacher_id, $subj_id, $student_id,$user_table_id,$number_of_students);
-		$stmt->execute();
+        $stmt = $mysqli->prepare('INSERT INTO activities (duration, total_duration, active, teacher_id, subj_id, user_table_id, activity_group_id, number_of_students) VALUES (?, NULL, ?, ?, ?, ?, NULL,?);');
+        $stmt->bind_param("iiiiii",$duration, $active, $teacher_id, $subj_id, $user_table_id,$number_of_students);
+        $stmt->execute();
+
+        $activity_id = $mysqli->insert_id;
+
+        for($i = 0; $i < count($chosenStudents); $i++){
+            if($chosenStudents[$i]->subgroup_name){
+                $stmt = $mysqli->prepare('INSERT INTO activity_subgroups (activity_id, subgroup_id, subgroup_name) VALUES (?, ?, ?);');
+                $stmt->bind_param("iis", $activity_id, $chosenStudents[$i]->id, $chosenStudents[$i]->subgroup_name);
+                $stmt->execute();
+            }
+            else if($chosenStudents[$i]->group_name){
+                $stmt = $mysqli->prepare('INSERT INTO activity_groups (activity_id, group_id, group_name) VALUES (?, ?, ?);');
+                $stmt->bind_param("iis", $activity_id, $chosenStudents[$i]->id, $chosenStudents[$i]->group_name);
+                $stmt->execute();
+            }
+            else if($chosenStudents[$i]->year_name){
+                $stmt = $mysqli->prepare('INSERT INTO activity_years (activity_id, year_id, year_name) VALUES (?, ?, ?);');
+                $stmt->bind_param("iis", $activity_id, $chosenStudents[$i]->id, $chosenStudents[$i]->year_name);
+                $stmt->execute();
+            }
+        }
     } else if ($_GET['query'] == 'days'){
         $day_name   = $_GET['day_name'];
 
         $stmt = $mysqli->prepare('INSERT INTO days (user_table_id, day_name) VALUES(?, ?)');
-        $stmt->bind_param("ss", $user_table_id, $day_name);
+        $stmt->bind_param("is", $user_table_id, $day_name);
         $stmt->execute();
     } else if ($_GET['query'] == 'hours'){
         $hour_name   = $_GET['hour_name'];
 
         $stmt = $mysqli->prepare('INSERT INTO hours (user_table_id, hour_name) VALUES(?, ?)');
-        $stmt->bind_param("ss", $user_table_id, $hour_name);
+        $stmt->bind_param("is", $user_table_id, $hour_name);
         $stmt->execute();
     } else if ($_GET['query'] == 'subjectSpaceConstraints'){
         $data = json_decode($_GET['data']);
@@ -387,7 +407,7 @@ function createNew($mysqli)
         $numb_of_pref_rooms = count($data[0]);
 
         $stmt = $mysqli->prepare('INSERT INTO space_constraints (weight_percentage, num_of_pref_rooms, active, comments, user_table_id, activity_id, subject_id, permanently_locked) VALUES (?, ?, NULL, NULL, ?, NULL, ?, NULL);');
-        $stmt->bind_param("ssss", $weight_percentage, $numb_of_pref_rooms, $user_table_id, $subject_id);
+        $stmt->bind_param("iiii", $weight_percentage, $numb_of_pref_rooms, $user_table_id, $subject_id);
         $stmt->execute();
     } else if ($_GET['query'] == 'preferredRooms'){
         $data = json_decode($_GET['data']);
@@ -395,7 +415,7 @@ function createNew($mysqli)
 
         foreach($data[1] as &$v){
             $stmt = $mysqli->prepare('INSERT INTO preferred_rooms (space_cons_id, room_id) VALUES (?, ?);');
-            $stmt->bind_param("ss", $space_cons_id, $v->id);
+            $stmt->bind_param("ii", $space_cons_id, $v->id);
             $stmt->execute();
         }
     } else if ($_GET['query'] == 'groups'){
@@ -404,7 +424,7 @@ function createNew($mysqli)
         $group_name  = $_GET['group_name'];
 
         $stmt = $mysqli->prepare('INSERT INTO groups (group_name, num_of_students, student_id, user_table_id) VALUES (?, ?, ?, ?);');
-        $stmt->bind_param("ssss", $group_name, $num_students, $year_id, $user_table_id);
+        $stmt->bind_param("siii", $group_name, $num_students, $year_id, $user_table_id);
         $stmt->execute();
     }else if ($_GET['query'] == 'subgroups'){
         $group_id = $_GET['group_id'];
@@ -413,7 +433,7 @@ function createNew($mysqli)
         $student_id = $_GET['student_id'];
 
         $stmt = $mysqli->prepare('INSERT INTO subgroups (subgroup_name, num_of_students, group_id, user_table_id, student_id) VALUES (?, ?, ?, ?, ?);');
-        $stmt->bind_param("sssss", $subgroup_name, $num_of_students, $group_id, $user_table_id, $student_id);
+        $stmt->bind_param("siiii", $subgroup_name, $num_of_students, $group_id, $user_table_id, $student_id);
         $stmt->execute();
     }
 
@@ -511,12 +531,15 @@ function querySingle($mysqli, $id){
             $sql =
             'SELECT group_id, group_name, num_of_students, groups.student_id, year_name FROM groups INNER JOIN students ON groups.student_id = students.student_id WHERE groups.student_id = '.$id;
 
+            // $sql = 
+            // 'SELECT * FROM groups WHERE student_id = '.$id;
+
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['group_id'];
                     $row_array['group_name'] = $row['group_name'];
                     $row_array['num_of_students']   = $row['num_of_students'];
-                    $row_array['student_id'] = $row['groups.student_id'];
+                    $row_array['student_id'] = $row['student_id'];
                     $row_array['year_name'] = $row['year_name'];
                     array_push($return_arr, $row_array);
                 }
@@ -527,13 +550,17 @@ function querySingle($mysqli, $id){
             'SELECT subgroup_id, subgroup_name, subgroups.num_of_students, subgroups.group_id, subgroups.student_id, group_name, year_name '.
             'FROM subgroups INNER JOIN groups ON subgroups.group_id = groups.group_id INNER JOIN students ON subgroups.student_id = students.student_id WHERE subgroups.group_id = '.$id;
 
+
+                // $sql =
+                // 'SELECT * FROM subgroups WHERE group_id = 15';
+
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['subgroup_id'];
                     $row_array['subgroup_name'] = $row['subgroup_name'];
-                    $row_array['num_of_students']   = $row['subgroups.num_of_students'];
-                    $row_array['group_id'] = $row['subgroups.group_id'];
-                    $row_array['student_id'] = $row['subgroups.student_id'];
+                    $row_array['num_of_students']   = $row['num_of_students'];
+                    $row_array['group_id'] = $row['group_id'];
+                    $row_array['student_id'] = $row['student_id'];
                     $row_array['group_name'] = $row['group_name'];
                     $row_array['year_name'] = $row['year_name'];
                     array_push($return_arr, $row_array);

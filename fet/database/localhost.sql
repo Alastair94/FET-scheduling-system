@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2021 at 10:44 PM
+-- Generation Time: Apr 17, 2021 at 12:55 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -38,16 +38,25 @@ CREATE TABLE `activities` (
   `subj_id` int(11) NOT NULL,
   `user_table_id` int(11) NOT NULL,
   `activity_group_id` int(11) DEFAULT NULL,
-  `number_of_students` int(11) NOT NULL
+  `number_of_students` int(11) NOT NULL,
+  `years_id` int(11) DEFAULT NULL,
+  `groups_id` int(11) DEFAULT NULL,
+  `subgroups_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- Dumping data for table `activities`
 --
 
-INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `user_table_id`, `activity_group_id`, `number_of_students`) VALUES
-(43, '1', NULL, 0, 10, 12, 183, NULL, -1),
-(44, '1', NULL, 0, 10, 12, 183, NULL, 200);
+INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `user_table_id`, `activity_group_id`, `number_of_students`, `years_id`, `groups_id`, `subgroups_id`) VALUES
+(43, '1', NULL, 0, 10, 12, 183, NULL, -1, NULL, NULL, NULL),
+(44, '1', NULL, 0, 10, 12, 183, NULL, 200, NULL, NULL, NULL),
+(62, '1', NULL, 0, 16, 24, 191, NULL, 20, NULL, NULL, NULL),
+(63, '1', NULL, 0, 17, 23, 191, NULL, -1, NULL, NULL, NULL),
+(64, '1', NULL, 0, 16, 25, 191, NULL, 400, NULL, NULL, NULL),
+(65, '1', NULL, 0, 16, 25, 191, NULL, 200, NULL, NULL, NULL),
+(66, '1', NULL, 0, 17, 25, 191, NULL, 80, NULL, NULL, NULL),
+(67, '1', NULL, 0, 17, 28, 191, NULL, -1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -60,6 +69,77 @@ CREATE TABLE `activities_same_start` (
   `same_start_cons_id` int(11) NOT NULL,
   `actvites_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_groups`
+--
+
+CREATE TABLE `activity_groups` (
+  `activity_groups_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `group_name` varchar(45) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `activity_groups`
+--
+
+INSERT INTO `activity_groups` (`activity_groups_id`, `activity_id`, `group_id`, `group_name`) VALUES
+(5, 62, 41, '007'),
+(6, 62, 40, 'informatikus'),
+(7, 64, 40, 'informatikus'),
+(8, 65, 40, 'informatikus'),
+(9, 66, 40, 'informatikus');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_subgroups`
+--
+
+CREATE TABLE `activity_subgroups` (
+  `activity_subgroups_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL,
+  `subgroup_id` int(11) NOT NULL,
+  `subgroup_name` varchar(45) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `activity_subgroups`
+--
+
+INSERT INTO `activity_subgroups` (`activity_subgroups_id`, `activity_id`, `subgroup_id`, `subgroup_name`) VALUES
+(3, 62, 19, 'jók'),
+(4, 64, 20, 'rosszak'),
+(5, 65, 20, 'rosszak'),
+(6, 66, 20, 'rosszak');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_years`
+--
+
+CREATE TABLE `activity_years` (
+  `activity_years_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL,
+  `year_id` int(11) NOT NULL,
+  `year_name` varchar(45) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `activity_years`
+--
+
+INSERT INTO `activity_years` (`activity_years_id`, `activity_id`, `year_id`, `year_name`) VALUES
+(10, 62, 43, '2019'),
+(11, 62, 44, '2018'),
+(12, 63, 42, '2020'),
+(13, 63, 43, '2019'),
+(14, 67, 44, '2018');
 
 -- --------------------------------------------------------
 
@@ -93,7 +173,10 @@ CREATE TABLE `buildings` (
 
 INSERT INTO `buildings` (`building_id`, `build_name`, `user_table_id`) VALUES
 (8, 'C', 183),
-(11, 'B', 183);
+(11, 'B', 183),
+(13, 'C', 191),
+(14, 'B', 191),
+(15, 'A', 191);
 
 -- --------------------------------------------------------
 
@@ -128,7 +211,12 @@ INSERT INTO `days` (`days_id`, `day_name`, `user_table_id`) VALUES
 (7, 'Kedd', 183),
 (8, 'Szerda', 183),
 (9, 'Csütörtök', 183),
-(10, 'Péntek', 183);
+(10, 'Péntek', 183),
+(11, 'Hétfő', 191),
+(12, 'Kedd', 191),
+(13, 'Szerda', 191),
+(14, 'Csütörtök', 191),
+(15, 'Péntek', 191);
 
 -- --------------------------------------------------------
 
@@ -154,7 +242,10 @@ INSERT INTO `groups` (`group_id`, `group_name`, `num_of_students`, `student_id`,
 (24, 'mégse', 2, 22, 183),
 (26, '2018', 100, 19, 183),
 (27, 'fordítók', 1, 28, 183),
-(28, 'tolmácsok', 1, 28, 183);
+(28, 'tolmácsok', 1, 28, 183),
+(39, 'matematikus', 500, 42, 191),
+(40, 'informatikus', 500, 42, 191),
+(41, '007', 1, 42, 191);
 
 -- --------------------------------------------------------
 
@@ -177,7 +268,15 @@ INSERT INTO `hours` (`hours_id`, `hour_name`, `user_table_id`) VALUES
 (8, '10:00', 183),
 (10, '12:00', 183),
 (11, '14:00', 183),
-(12, '16:00', 183);
+(12, '16:00', 183),
+(14, '09:00', 191),
+(16, '10:00', 191),
+(17, '11:00', 191),
+(18, '12:00', 191),
+(19, '13:00', 191),
+(20, '14:00', 191),
+(21, '15:00', 191),
+(22, '16:00', 191);
 
 -- --------------------------------------------------------
 
@@ -227,7 +326,27 @@ CREATE TABLE `preferred_rooms` (
 INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`) VALUES
 (28, 58, 10),
 (29, 58, 11),
-(30, 58, 12);
+(30, 58, 12),
+(54, 78, 102),
+(55, 78, 103),
+(56, 78, 104),
+(57, 78, 105),
+(65, 82, 102),
+(66, 82, 103),
+(67, 82, 104),
+(68, 82, 105),
+(69, 82, 106),
+(70, 83, 102),
+(71, 83, 103),
+(72, 83, 104),
+(73, 83, 105),
+(74, 83, 106),
+(80, 85, 108),
+(81, 85, 106),
+(82, 85, 105),
+(83, 85, 104),
+(84, 85, 103),
+(85, 85, 102);
 
 -- --------------------------------------------------------
 
@@ -252,7 +371,13 @@ INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `building_id`, `user_ta
 (11, '124', 200, 8, 183),
 (12, '123', 100, 8, 183),
 (13, '122', 50, 8, 183),
-(14, '121', 25, 8, 183);
+(14, '121', 25, 8, 183),
+(102, '100', 200, 13, 191),
+(103, '101', 300, 13, 191),
+(104, '102', 100, 13, 191),
+(105, '103', 40, 13, 191),
+(106, 'Nagyterem', 1000, 14, 191),
+(108, 'xaxaxaxaxa', 10000, 15, 191);
 
 -- --------------------------------------------------------
 
@@ -305,8 +430,11 @@ CREATE TABLE `space_constraints` (
 
 INSERT INTO `space_constraints` (`space_cons_id`, `weight_percentage`, `num_of_pref_rooms`, `active`, `comments`, `user_table_id`, `activity_id`, `subject_id`, `permanently_locked`) VALUES
 (58, '100', 3, NULL, NULL, 183, NULL, 11, NULL),
-(67, '100', 3, NULL, NULL, 183, NULL, 12, NULL),
-(68, '100', 3, NULL, NULL, 183, NULL, 15, NULL);
+(68, '100', 3, NULL, NULL, 183, NULL, 15, NULL),
+(78, '100', 4, NULL, NULL, 191, NULL, 24, NULL),
+(82, '100', 5, NULL, NULL, 191, NULL, 25, NULL),
+(83, '100', 5, NULL, NULL, 191, NULL, 28, NULL),
+(85, '100', 6, NULL, NULL, 191, NULL, 23, NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +457,10 @@ INSERT INTO `students` (`student_id`, `year_name`, `num_students`, `user_table_i
 (19, 'programtervező informatikus', 10000, 183),
 (26, 'programtervező matematikus', 5000, 183),
 (28, 'fordítólmács', 2, 183),
-(41, '2020', 10000, 183);
+(41, '2020', 10000, 183),
+(42, '2020', 1000, 191),
+(43, '2019', 1000, 191),
+(44, '2018', 1000, 191);
 
 -- --------------------------------------------------------
 
@@ -373,7 +504,9 @@ CREATE TABLE `subgroups` (
 INSERT INTO `subgroups` (`subgroup_id`, `subgroup_name`, `num_of_students`, `group_id`, `user_table_id`, `student_id`) VALUES
 (4, 'A szakirány', 100, 15, 183, 19),
 (5, 'B szakirány', 100, 15, 183, 19),
-(7, 'angol', 1, 27, 183, 28);
+(7, 'angol', 1, 27, 183, 28),
+(19, 'jók', 200, 39, 191, 42),
+(20, 'rosszak', 300, 39, 191, 42);
 
 -- --------------------------------------------------------
 
@@ -405,7 +538,13 @@ INSERT INTO `subjects` (`subj_id`, `subj_name`, `user_table_id`) VALUES
 (19, 'Formális nyelvek és automaták ea.', 183),
 (20, 'Magasszintű programozási nyelvek I. ea.', 183),
 (21, 'Magasszintű programozási nyelvek I. gy.', 183),
-(22, 'Számítógép architektúrák', 183);
+(22, 'Számítógép architektúrák', 183),
+(23, 'Matematika', 191),
+(24, 'Informatika', 191),
+(25, 'Biológia', 191),
+(26, 'Ének', 191),
+(27, 'Rajz', 191),
+(28, 'Történelem', 191);
 
 -- --------------------------------------------------------
 
@@ -430,7 +569,9 @@ INSERT INTO `teachers` (`teacher_id`, `teach_name`, `user_table_id`) VALUES
 (11, 'Dr. Kusper Gábor', 183),
 (12, 'Dr. Király Roland', 183),
 (13, 'Keresztes Péter', 183),
-(14, 'Troll Ede', 183);
+(14, 'Troll Ede', 183),
+(16, 'Geda Gábor', 191),
+(17, 'Király Roland', 191);
 
 -- --------------------------------------------------------
 
@@ -503,7 +644,8 @@ INSERT INTO `user_tables` (`user_table_id`, `semester`, `institution_name`, `com
 (187, 'ww', NULL, NULL, 'alma'),
 (188, 'ee', NULL, NULL, 'alma'),
 (189, 'ee', NULL, NULL, 'alma'),
-(190, 'qq', NULL, NULL, 'alma');
+(190, 'qq', NULL, NULL, 'alma'),
+(191, 'Levelező', 'EKE', '', 'alma');
 
 --
 -- Indexes for dumped tables
@@ -525,6 +667,24 @@ ALTER TABLE `activities_same_start`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_activites_same_start_same_start_hr_constraint1` (`same_start_cons_id`),
   ADD KEY `fk_activites_same_start_actvites1` (`actvites_id`);
+
+--
+-- Indexes for table `activity_groups`
+--
+ALTER TABLE `activity_groups`
+  ADD PRIMARY KEY (`activity_groups_id`);
+
+--
+-- Indexes for table `activity_subgroups`
+--
+ALTER TABLE `activity_subgroups`
+  ADD PRIMARY KEY (`activity_subgroups_id`);
+
+--
+-- Indexes for table `activity_years`
+--
+ALTER TABLE `activity_years`
+  ADD PRIMARY KEY (`activity_years_id`);
 
 --
 -- Indexes for table `basic_compulsory_constraints`
@@ -694,13 +854,31 @@ ALTER TABLE `user_tables`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `activities_same_start`
 --
 ALTER TABLE `activities_same_start`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `activity_groups`
+--
+ALTER TABLE `activity_groups`
+  MODIFY `activity_groups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `activity_subgroups`
+--
+ALTER TABLE `activity_subgroups`
+  MODIFY `activity_subgroups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `activity_years`
+--
+ALTER TABLE `activity_years`
+  MODIFY `activity_years_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `basic_compulsory_constraints`
@@ -712,7 +890,7 @@ ALTER TABLE `basic_compulsory_constraints`
 -- AUTO_INCREMENT for table `buildings`
 --
 ALTER TABLE `buildings`
-  MODIFY `building_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `building_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `constraints`
@@ -724,19 +902,19 @@ ALTER TABLE `constraints`
 -- AUTO_INCREMENT for table `days`
 --
 ALTER TABLE `days`
-  MODIFY `days_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `days_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `hours`
 --
 ALTER TABLE `hours`
-  MODIFY `hours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `hours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `min_days_constraints`
@@ -754,13 +932,13 @@ ALTER TABLE `min_days_for_activities`
 -- AUTO_INCREMENT for table `preferred_rooms`
 --
 ALTER TABLE `preferred_rooms`
-  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `semesters`
@@ -772,13 +950,13 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `space_constraints`
 --
 ALTER TABLE `space_constraints`
-  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `students_in_activity`
@@ -790,19 +968,19 @@ ALTER TABLE `students_in_activity`
 -- AUTO_INCREMENT for table `subgroups`
 --
 ALTER TABLE `subgroups`
-  MODIFY `subgroup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `subgroup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `time_constraints`
@@ -820,7 +998,7 @@ ALTER TABLE `user_files`
 -- AUTO_INCREMENT for table `user_tables`
 --
 ALTER TABLE `user_tables`
-  MODIFY `user_table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `user_table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
 -- Constraints for dumped tables

@@ -311,6 +311,8 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 
 	$scope.groups = [];
 	$scope.subgroups = [];
+	$scope.act_group = '';
+	$scope.act_subgroup = '';
 
 	$scope.getActivities = function () {
         myHttp.query({
@@ -334,12 +336,14 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
     }
 
 	$scope.getGroups = function (id) {
+		//window.alert("Valami");
 		if(id){
 			myHttp.query({
 				'query': 'groups',
 				'method': 'get-single',
 				'id': id
 			}).success(function (data){
+				// window.alert(data[0].id);
 				$scope.groups = data;
 				if($scope.groups[0] != undefined){
 					$scope.act_group = $scope.groups[0];
@@ -361,6 +365,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 				'method': 'get-single',
 				'id': id
 			}).success(function (data){
+				// window.alert(data[0].subgroup_name);
 				$scope.subgroups = data;
 				if($scope.subgroups[0] != undefined){
 					$scope.act_subgroup = $scope.subgroups[0];
