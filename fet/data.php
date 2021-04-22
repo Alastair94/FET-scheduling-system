@@ -46,7 +46,7 @@
 									<ul class="unstyled">
 										<li ng-repeat="day in days">
 											{{day.day_name}}
-											<a href ng-click="editThisDay(day.id)">edit</a>
+											<a href ng-click="editThisDay(day.day_id)">edit</a>
 										</li>
 									</ul>
 								</div>
@@ -59,12 +59,12 @@
 									<ul class="unstyled">
 										<li ng-repeat="hour in hours">
 											{{hour.hour_name}}
-											<a href ng-click="editThisHour(hour.id)">edit</a>
+											<a href ng-click="editThisHour(hour.hour_id)">edit</a>
 										</li>
 									</ul>
 								</div>
 								
-								<div style="clear: both" ng-include src="template.url"></div>
+								<div style="clear: both" ng-include="template.url"></div>
 							</div>
 							
 							<!-- ================= TAB 2 ========================= -->

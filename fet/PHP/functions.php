@@ -61,16 +61,22 @@ function queryAll($mysqli)
                 $result->free();
             }
         } else if ($_GET['query'] == 'rooms') {
-            $sql = 'SELECT room_id, room_name,capacity, building_id ' .
-            'FROM rooms, user_tables ' .
-            'WHERE rooms.user_table_id = user_tables.user_table_id ' .
-            'AND user_tables.user_table_id = ' . $user_table_id;
+            // $sql = 'SELECT room_id, room_name, capacity, rooms.building_id, build_name ' .
+            // 'FROM rooms, buildings, user_tables ' .
+            // 'WHERE rooms.user_table_id = user_tables.user_table_id ' .
+            // 'AND user_tables.user_table_id = ' . $user_table_id.' '.
+            // 'AND rooms.building_id = buidings.building_id';
+            // $sql =
+            // 'SELECT group_id, group_name, num_of_students, groups.student_id, year_name FROM groups INNER JOIN students ON groups.student_id = students.student_id WHERE groups.student_id = '.$id;
+
+            $sql = 'SELECT * FROM rooms INNER JOIN buildings ON rooms.building_id = buildings.building_id WHERE rooms.user_table_id = '.$user_table_id;
 
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']          = $row['room_id'];
                     $row_array['name']        = $row['room_name'];
                     $row_array['building_id'] = $row['building_id'];
+                    $row_array['build_name']  = $row['build_name'];
                     $row_array['capacity']    = $row['capacity'];
                     array_push($return_arr, $row_array);
                 }
@@ -92,32 +98,34 @@ function queryAll($mysqli)
                 /* free result set */
                 $result->free();
             }
-        } else if ($_GET['query'] == 'asd') {
-			$sql = 'SELECT activities_id, teach_name, activities.teacher_id,activities.student_id, subj_name, year_name, user_tables.user_table_id, activities.number_of_students, duration '.
-			'FROM teachers, subjects, students, activities, user_tables '.
-			'WHERE activities.teacher_id = teachers.teacher_id '.
-			'AND activities.subj_id = subjects.subj_id '.
-			'AND activities.student_id = students.student_id '.
-			'AND activities.user_table_id = user_tables.user_table_id '.
-			'AND user_tables.user_table_id = '. $user_table_id;
-			if ($result = $mysqli->query($sql)) {
-                while ($row = $result->fetch_assoc()) {
-					$row_array['id']   = $row['activities_id'];
-                    $row_array['teach_name']   = $row['teach_name'];
-					$row_array['teacher_id']   = $row['teacher_id'];
-					$row_array['student_id']   = $row['student_id'];
-                    $row_array['subj_name'] = $row['subj_name'];
-					$row_array['year_name'] = $row['year_name'];
-                    $row_array['number_of_students'] = $row['number_of_students'];
-                    $row_array['duration'] = $row['duration'];
-                    array_push($return_arr, $row_array);
-                }
-                /* free result set */
-                $result->free();
-            }
+        } 
+        // else if ($_GET['query'] == 'asd') {
+		// 	$sql = 'SELECT activities_id, teach_name, activities.teacher_id,activities.student_id, subj_name, year_name, user_tables.user_table_id, activities.number_of_students, duration '.
+		// 	'FROM teachers, subjects, students, activities, user_tables '.
+		// 	'WHERE activities.teacher_id = teachers.teacher_id '.
+		// 	'AND activities.subj_id = subjects.subj_id '.
+		// 	'AND activities.student_id = students.student_id '.
+		// 	'AND activities.user_table_id = user_tables.user_table_id '.
+		// 	'AND user_tables.user_table_id = '. $user_table_id;
+		// 	if ($result = $mysqli->query($sql)) {
+        //         while ($row = $result->fetch_assoc()) {
+		// 			$row_array['id']   = $row['activities_id'];
+        //             $row_array['teach_name']   = $row['teach_name'];
+		// 			$row_array['teacher_id']   = $row['teacher_id'];
+		// 			$row_array['student_id']   = $row['student_id'];
+        //             $row_array['subj_name'] = $row['subj_name'];
+		// 			$row_array['year_name'] = $row['year_name'];
+        //             $row_array['number_of_students'] = $row['number_of_students'];
+        //             $row_array['duration'] = $row['duration'];
+        //             array_push($return_arr, $row_array);
+        //         }
+        //         /* free result set */
+        //         $result->free();
+        //     }
 			
 			
-		} else if ($_GET['query'] == 'activities') {
+		// }
+         else if ($_GET['query'] == 'activities') {
 			$sql = 'SELECT * '.
 			'FROM activities, subjects, teachers '.
 			'WHERE activities.teacher_id = teachers.teacher_id '.
@@ -126,12 +134,55 @@ function queryAll($mysqli)
 
 			if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
+                    $temp_array = [];
 					$row_array['id']   = $row['activities_id'];
                     $row_array['teach_name']   = $row['teach_name'];
 					$row_array['teacher_id']   = $row['teacher_id'];
                     $row_array['subj_name']   = $row['subj_name'];
+                    $row_array['active']   = $row['active'];
                     $row_array['number_of_students'] = $row['number_of_students'];
                     $row_array['duration'] = $row['duration'];
+                    
+                    $sql2 = 'SELECT * FROM activity_years WHERE activity_years.activity_id = '.$row['activities_id'];
+                    if($result2 = $mysqli->query($sql2)){
+                        while($row2 = $result2->fetch_assoc()){
+                            $row_array2['activity_years_id'] = $row2['activity_years_id'];
+                            $row_array2['activity_id'] = $row2['activity_id'];
+                            $row_array2['year_id'] = $row2['year_id'];
+                            $row_array2['year_name'] = $row2['year_name'];
+                            array_push($temp_array, $row_array2);
+                        }
+                        $result2->free();
+                    }
+                    $row_array['year_array'] = $temp_array;
+                    $temp_array = [];
+
+                    $sql2 = 'SELECT * FROM activity_groups WHERE activity_groups.activity_id = '.$row['activities_id'];
+                    if($result2 = $mysqli->query($sql2)){
+                        while($row2 = $result2->fetch_assoc()){
+                            $row_array2['activity_groups_id'] = $row2['activity_groups_id'];
+                            $row_array2['activity_id'] = $row2['activity_id'];
+                            $row_array2['group_id'] = $row2['group_id'];
+                            $row_array2['group_name'] = $row2['group_name'];
+                            array_push($temp_array, $row_array2);
+                        }
+                        $result2->free();
+                    }
+                    $row_array['group_array'] = $temp_array;
+                    $temp_array = [];
+
+                    $sql2 = 'SELECT * FROM activity_subgroups WHERE activity_subgroups.activity_id = '.$row['activities_id'];
+                    if($result2 = $mysqli->query($sql2)){
+                        while($row2 = $result2->fetch_assoc()){
+                            $row_array2['activity_subgroups_id'] = $row2['activity_subgroups_id'];
+                            $row_array2['activity_id'] = $row2['activity_id'];
+                            $row_array2['subgroup_id'] = $row2['subgroup_id'];
+                            $row_array2['subgroup_name'] = $row2['subgroup_name'];
+                            array_push($temp_array, $row_array2);
+                        }
+                        $result2->free();
+                    }
+                    $row_array['subgroup_array'] = $temp_array;
                     array_push($return_arr, $row_array);
                 }
                 $result->free();
@@ -148,7 +199,7 @@ function queryAll($mysqli)
 
                 /* fetch associative array */
                 while ($row = $result->fetch_assoc()) {
-                    $row_array['id']           = $row['days_id'];
+                    $row_array['day_id']           = $row['days_id'];
                     //$row_array['group_id'] = $row['group_id'];
                     $row_array['day_name']    = $row['day_name'];
                     array_push($return_arr, $row_array);
@@ -166,7 +217,7 @@ function queryAll($mysqli)
 
                 /* fetch associative array */
                 while ($row = $result->fetch_assoc()) {
-                    $row_array['id']           = $row['hours_id'];
+                    $row_array['hour_id']           = $row['hours_id'];
                     //$row_array['group_id'] = $row['group_id'];
                     $row_array['hour_name']    = $row['hour_name'];
                     array_push($return_arr, $row_array);
@@ -435,6 +486,40 @@ function createNew($mysqli)
         $stmt = $mysqli->prepare('INSERT INTO subgroups (subgroup_name, num_of_students, group_id, user_table_id, student_id) VALUES (?, ?, ?, ?, ?);');
         $stmt->bind_param("siiii", $subgroup_name, $num_of_students, $group_id, $user_table_id, $student_id);
         $stmt->execute();
+    } else if ($_GET['query'] == 'activityTimeConstraints'){
+        $data = json_decode($_GET['data']);
+        $activity_id            = $data[0]->id;
+        $weight_percentage      = $data[1];
+        $numb_of_pref_times     = count($data[2]);
+        // $isCentral = $data[3] ? "true" : "false";
+        if($data[3])
+            $isCentral = "true";
+        else
+            $isCentral = "false";
+
+        $stmt = $mysqli->prepare('INSERT INTO time_constraints (weight_percentage, num_of_pref_times, active, comments, user_table_id, activity_id, subject_id, permanently_locked) VALUES (?, ?, NULL, NULL, ?, ?, NULL, ?);');
+        $stmt->bind_param("iiiis", $weight_percentage, $numb_of_pref_times, $user_table_id, $activity_id, $isCentral);
+        $stmt->execute();
+    }
+    else if ($_GET['query'] == 'preferredTimes'){
+        $data = json_decode($_GET['data']);
+        $time_cons_id = $data[0];
+
+        foreach($data[1] as &$v){
+            $stmt = $mysqli->prepare('INSERT INTO preferred_times (time_cons_id, day_id, hour_id) VALUES (?, ?, ?);');
+            $stmt->bind_param("iii", $time_cons_id, $v->day_id, $v->hour_id);
+            $stmt->execute();
+        }
+    } else if ($_GET['query'] == 'activitySpaceConstraints'){
+        $data = json_decode($_GET['data']);
+        $activity_id        = $data[0]->id;
+        $weight_percentage  = $data[1];
+        $numb_of_pref_rooms = count($data[2]);
+        $isCentral = $data[3] ? "true" : "false";
+
+        $stmt = $mysqli->prepare('INSERT INTO space_constraints (weight_percentage, num_of_pref_rooms, active, comments, user_table_id, activity_id, subject_id, permanently_locked) VALUES (?, ?, NULL, NULL, ?, ?, NULL, ?);');
+        $stmt->bind_param("iiiis", $weight_percentage, $numb_of_pref_rooms, $user_table_id, $activity_id, $isCentral);
+        $stmt->execute();
     }
 
     $nrows = $mysqli->insert_id;
@@ -482,7 +567,7 @@ function destroyRow($mysqli, $id)
     return $i;
 }
 
-function querySingle($mysqli, $id){
+function queryById($mysqli, $id){
     if (isset($_SESSION['user']['username'], $_SESSION['user']['user_table_id'])) {
         $user_id      = $_SESSION['user']['username'];
         $user_table_id = $_SESSION['user']['user_table_id'];
@@ -581,7 +666,54 @@ function querySingle($mysqli, $id){
                 }
                 $result->free();
             }
+        } else if($_GET['query'] == 'rooms'){
+            $sql =
+            'SELECT * FROM rooms INNER JOIN buildings ON rooms.building_id = buildings.building_id WHERE rooms.building_id = '.$id;
+
+            if($result = $mysqli->query($sql)){
+                while($row = $result->fetch_assoc()){
+                    $row_array['id']    = $row['room_id'];
+                    $row_array['room_name']    = $row['room_name'];
+                    $row_array['capacity']    = $row['capacity'];
+                    $row_array['building_id']    = $row['building_id'];
+                    $row_array['build_name']    = $row['build_name'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if($_GET['query'] == 'activityTimeConstraints') {
+            $sql =
+            'SELECT * FROM time_constraints '.
+            'WHERE time_constraints.activity_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['time_cons_id']   = $row['time_cons_id'];
+                    $row_array['subject_id'] = $row['subject_id'];
+                    $row_array['activity_id']   = $row['activity_id'];
+                    $row_array['weight_percentage']   = $row['weight_percentage'];
+                    $row_array['num_of_pref_times']   = $row['num_of_pref_times'];
+                    $row_array['locked'] = $row['permanently_locked'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if($_GET['query'] == 'activitySpaceConstraints') {
+            $sql =
+            'SELECT space_cons_id FROM space_constraints '.
+            'WHERE space_constraints.activity_id = '.$id;
+        if ($result = $mysqli->query($sql)) {
+            while ($row = $result->fetch_assoc()) {
+                $row_array['space_cons_id']   = $row['space_cons_id'];
+                $row_array['subject_id'] = $row['subject_id'];
+                $row_array['activity_id']   = $row['activity_id'];
+                $row_array['weight_percentage']   = $row['weight_percentage'];
+                $row_array['num_of_pref_rooms']   = $row['num_of_pref_rooms'];
+                $row_array['locked'] = $row['permanently_locked'];
+                array_push($return_arr, $row_array);
+            }
+            $result->free();
         }
+    }
         return json_encode($return_arr);
     }
 }

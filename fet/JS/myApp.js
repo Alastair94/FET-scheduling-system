@@ -92,6 +92,7 @@ app.controller("AppController", function( $scope, myHttp ) {
 //			Days	 		//
 //////////////////////////////
 app.controller('DaysCtrl', function ($scope, myHttp) {
+
     $scope.addDay = function () {
         var tmp_name = $scope.dayName;
         if (tmp_name) {
@@ -102,7 +103,7 @@ app.controller('DaysCtrl', function ($scope, myHttp) {
 	        }).success(function (data) {
 	            console.log(data);
 	            $scope.days.push({
-	                id: data,
+	                day_id: data,
 	                day_name: tmp_name
 	            });
 	            $scope.dayName = '';
@@ -124,10 +125,11 @@ app.controller('DaysCtrl', function ($scope, myHttp) {
             name: 'form_nko.html',
             url: 'templates/detail_d.html'
         };
+		
         for (var i = $scope.days.length - 1; i >= 0; i--) {
-            if ($scope.days[i].id === id) {
+            if ($scope.days[i].day_id === id) {
                 $scope.item = angular.copy($scope.days[i]);
-                $scope.temp = angular.copy($scope.item);
+				$scope.temp = angular.copy($scope.item);
             }
         };
     }
@@ -136,7 +138,7 @@ app.controller('DaysCtrl', function ($scope, myHttp) {
         myHttp.query({
             'query': 'days',
             'method': 'delete',
-            'id': $scope.item.id
+            'id': $scope.item.day_id
         })
             .success(function (data) {
                 $scope.getDays();
@@ -149,7 +151,7 @@ app.controller('DaysCtrl', function ($scope, myHttp) {
 	        myHttp.query({
 	            'query': 'days',
 	            'method': 'update',
-	            'id': $scope.item.id,
+	            'id': $scope.item.day_id,
 	            'day_name': $scope.item.day_name
 	        }).success(function (data) {
 	            $scope.getDays();
@@ -170,7 +172,7 @@ $scope.addHour = function () {
 		}).success(function (data) {
 			console.log(data);
 			$scope.hours.push({
-				id: data,
+				hour_id: data,
 				hour_name: tmp_name
 			});
 			$scope.hourName = '';
@@ -192,7 +194,7 @@ $scope.editThisHour = function (id) {
 		url: 'templates/detail_h.html'
 	};
 	for (var i = $scope.hours.length - 1; i >= 0; i--) {
-		if ($scope.hours[i].id === id) {
+		if ($scope.hours[i].hour_id === id) {
 			$scope.item = angular.copy($scope.hours[i]);
 			$scope.temp = angular.copy($scope.item);
 		}
@@ -202,7 +204,7 @@ $scope.destroyHour = function () {
 	myHttp.query({
 		'query': 'hours',
 		'method': 'delete',
-		'id': $scope.item.id
+		'id': $scope.item.hour_id
 	})
 		.success(function (data) {
 			$scope.getHours();
@@ -214,7 +216,7 @@ $scope.saveHour = function () {
 		myHttp.query({
 			'query': 'hours',
 			'method': 'update',
-			'id': $scope.item.id,
+			'id': $scope.item.hour_id,
 			'hour_name': $scope.item.hour_name
 		}).success(function (data) {
 			$scope.getHours();
@@ -297,7 +299,6 @@ app.controller('TeachersCtrl', function( $scope, myHttp ) {
         	$scope.template = '';
         });
     }
-
 });
 
 //////////////////////////////

@@ -357,29 +357,13 @@
 		buildNode($fet, $basic, 'Active', 'True');				
 		buildNode($fet, $basic, 'Comments',  '');
 
-		$query = "SELECT weight_percentage, active, space_constraints.comments, space_cons_id, activity_id, num_of_pref_rooms, permanently_locked, subj_name FROM user_tables, space_constraints, subjects ";
-		$query .= "WHERE user_tables.user_table_id = space_constraints.user_table_id AND user_tables.user_table_id = ".$userTableID." ";
-		$query .= "AND space_constraints.subject_id = subjects.subj_id OR activity_id IS NOT NULL";
+		$query = "SELECT *FROM space_constraints ";
+		$query .= "WHERE space_constraints.user_table_id = ".$userTableID." ";
+		// $query .= "AND space_constraints.subject_id = subjects.subj_id";
 		$queryResult = $mysqli->query($query);
 
 		while($tuple = $queryResult->fetch_assoc()){
-			if($tuple['activity_id'] != NULL){
-				if($tuple['num_of_pref_rooms'] == 1){
-					$actPrefRooms = $fet->createElement('ConstraintActivityPreferredRoom');
-					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);
-					buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
-
-				} else {
-					$actPrefRooms = $fet->createElement('ConstraintActivityPreferredRooms');
-					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);					
-					buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
-				}
-				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
-				buildNode($fet, $actPrefRooms, 'Activity_Id', $tuple['activity_id']);
-				buildNode($fet, $actPrefRooms, 'Weight_Percentage', $tuple['weight_percentage']);
-				buildNode($fet, $actPrefRooms, 'Active', $tuple['active']);
-				buildNode($fet, $actPrefRooms, 'Comments', $tuple['comments']);
-			} else if ($tuple['subj_name'] != NULL){
+			if($tuple['activity_id'] == NULL){
 				if($tuple['num_of_pref_rooms'] == 1){
 					$actPrefRooms = $fet->createElement('ConstraintSubjectPreferredRoom');
 					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);
@@ -390,10 +374,28 @@
 					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);					
 				}
 				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
-				buildNode($fet, $actPrefRooms, 'Subject', $tuple['subj_name']);
+				// buildNode($fet, $actPrefRooms, 'Subject', $tuple['subj_name']);
 				buildNode($fet, $actPrefRooms, 'Weight_Percentage', $tuple['weight_percentage']);
 				buildNode($fet, $actPrefRooms, 'Active', $tuple['active']);
 				buildNode($fet, $actPrefRooms, 'Comments', $tuple['comments']);
+			} 
+			else if ($tuple['subject_id'] == NULL){
+				if($tuple['num_of_pref_rooms'] == 1){
+					$actPrefRooms = $fet->createElement('ConstraintActivityPreferredRoom');
+					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);
+					buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
+
+				} else {
+					$actPrefRooms = $fet->createElement('ConstraintActivityPreferredRooms');
+					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);					
+					// buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
+				}
+				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
+				buildNode($fet, $actPrefRooms, 'Activity_Id', $tuple['activity_id']);
+				buildNode($fet, $actPrefRooms, 'Weight_Percentage', $tuple['weight_percentage']);
+				buildNode($fet, $actPrefRooms, 'Active', $tuple['active']);
+				buildNode($fet, $actPrefRooms, 'Comments', $tuple['comments']);
+				
 			}
 		}
 	}

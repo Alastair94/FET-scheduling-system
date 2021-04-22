@@ -1,5 +1,5 @@
 ﻿Soft conflicts of Levelező.fet
-Generated with FET 5.49.1 on 4/17/21 1:03 AM
+Generated with FET 5.49.1 on 4/22/21 3:54 AM
 
 Number of broken soft constraints: 0
 Total soft conflicts: 0

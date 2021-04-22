@@ -9,7 +9,7 @@
 <Days_List>
 <Number_of_Days>5</Number_of_Days>
 <Day>
-	<Name>Hétfő</Name>
+	<Name>Hétf</Name>
 </Day>
 <Day>
 	<Name>Kedd</Name>
@@ -28,7 +28,7 @@
 <Hours_List>
 <Number_of_Hours>8</Number_of_Hours>
 <Hour>
-	<Name>09:00</Name>
+	<Name>08:00</Name>
 </Hour>
 <Hour>
 	<Name>10:00</Name>
@@ -141,10 +141,72 @@
 	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
 	<Number_of_Categories>0</Number_of_Categories>
 	<Separator> </Separator>
+	<Group>
+		<Name>programtervező informatikus</Name>
+		<Number_of_Students>500</Number_of_Students>
+		<Comments></Comments>
+		<Subgroup>
+			<Name>A csoport</Name>
+			<Number_of_Students>100</Number_of_Students>
+			<Comments></Comments>
+		</Subgroup>
+		<Subgroup>
+			<Name>B csoport</Name>
+			<Number_of_Students>100</Number_of_Students>
+			<Comments></Comments>
+		</Subgroup>
+		<Subgroup>
+			<Name>C csoport</Name>
+			<Number_of_Students>100</Number_of_Students>
+			<Comments></Comments>
+		</Subgroup>
+		<Subgroup>
+			<Name>D csoport</Name>
+			<Number_of_Students>1000</Number_of_Students>
+			<Comments></Comments>
+		</Subgroup>
+		<Subgroup>
+			<Name>E csoport</Name>
+			<Number_of_Students>100</Number_of_Students>
+			<Comments></Comments>
+		</Subgroup>
+	</Group>
 </Year>
 <Year>
 	<Name>2018</Name>
 	<Number_of_Students>1000</Number_of_Students>
+	<Comments></Comments>
+	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
+	<Number_of_Categories>0</Number_of_Categories>
+	<Separator> </Separator>
+</Year>
+<Year>
+	<Name>2017</Name>
+	<Number_of_Students>0</Number_of_Students>
+	<Comments></Comments>
+	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
+	<Number_of_Categories>0</Number_of_Categories>
+	<Separator> </Separator>
+</Year>
+<Year>
+	<Name>2016</Name>
+	<Number_of_Students>0</Number_of_Students>
+	<Comments></Comments>
+	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
+	<Number_of_Categories>0</Number_of_Categories>
+	<Separator> </Separator>
+</Year>
+<Year>
+	<Name>2015</Name>
+	<Number_of_Students>0</Number_of_Students>
+	<Comments></Comments>
+	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
+	<Number_of_Categories>0</Number_of_Categories>
+	<Separator> </Separator>
+</Year>
+<Year>
+	<Name>2014</Name>
+	<Number_of_Students>0</Number_of_Students>
 	<Comments></Comments>
 	<!-- The information regarding categories, divisions of each category, and separator is only used in the divide year automatically by categories dialog. -->
 	<Number_of_Categories>0</Number_of_Categories>
@@ -231,6 +293,56 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </Activity>
+<Activity>
+	<Teacher>Geda Gábor</Teacher>
+	<Subject>Informatika</Subject>
+	<Students>2018</Students>
+	<Duration>1</Duration>
+	<Total_Duration>0</Total_Duration>
+	<Id>68</Id>
+	<Activity_Group_Id>0</Activity_Group_Id>
+	<Active>false</Active>
+	<Comments></Comments>
+</Activity>
+<Activity>
+	<Teacher>Király Roland</Teacher>
+	<Subject>Informatika</Subject>
+	<Students>A csoport</Students>
+	<Students>B csoport</Students>
+	<Students>C csoport</Students>
+	<Students>D csoport</Students>
+	<Students>E csoport</Students>
+	<Duration>1</Duration>
+	<Total_Duration>0</Total_Duration>
+	<Id>69</Id>
+	<Activity_Group_Id>0</Activity_Group_Id>
+	<Number_Of_Students>50</Number_Of_Students>
+	<Active>true</Active>
+	<Comments></Comments>
+</Activity>
+<Activity>
+	<Teacher>Király Roland</Teacher>
+	<Subject>Matematika</Subject>
+	<Students>2020</Students>
+	<Students>2019</Students>
+	<Students>2018</Students>
+	<Students>2017</Students>
+	<Students>2016</Students>
+	<Students>2015</Students>
+	<Students>2014</Students>
+	<Students>A csoport</Students>
+	<Students>B csoport</Students>
+	<Students>C csoport</Students>
+	<Students>D csoport</Students>
+	<Students>E csoport</Students>
+	<Duration>1</Duration>
+	<Total_Duration>0</Total_Duration>
+	<Id>70</Id>
+	<Activity_Group_Id>0</Activity_Group_Id>
+	<Number_Of_Students>100</Number_Of_Students>
+	<Active>true</Active>
+	<Comments></Comments>
+</Activity>
 </Activities_List>
 
 <Buildings_List>
@@ -302,8 +414,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>62</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>14:00</Preferred_Hour>
+	<Preferred_Day>Hétf</Preferred_Day>
+	<Preferred_Hour>16:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -311,8 +423,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>63</Activity_Id>
-	<Preferred_Day>Csütörtök</Preferred_Day>
-	<Preferred_Hour>09:00</Preferred_Hour>
+	<Preferred_Day>Hétf</Preferred_Day>
+	<Preferred_Hour>14:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -320,8 +432,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>64</Activity_Id>
-	<Preferred_Day>Szerda</Preferred_Day>
-	<Preferred_Hour>16:00</Preferred_Hour>
+	<Preferred_Day>Péntek</Preferred_Day>
+	<Preferred_Hour>10:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -330,7 +442,7 @@
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>65</Activity_Id>
 	<Preferred_Day>Péntek</Preferred_Day>
-	<Preferred_Hour>12:00</Preferred_Hour>
+	<Preferred_Hour>13:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -338,8 +450,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>66</Activity_Id>
-	<Preferred_Day>Péntek</Preferred_Day>
-	<Preferred_Hour>11:00</Preferred_Hour>
+	<Preferred_Day>Kedd</Preferred_Day>
+	<Preferred_Hour>08:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -347,8 +459,26 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>67</Activity_Id>
-	<Preferred_Day>Hétfő</Preferred_Day>
+	<Preferred_Day>Kedd</Preferred_Day>
+	<Preferred_Hour>11:00</Preferred_Hour>
+	<Permanently_Locked>false</Permanently_Locked>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivityPreferredStartingTime>
+<ConstraintActivityPreferredStartingTime>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Activity_Id>69</Activity_Id>
+	<Preferred_Day>Csütörtök</Preferred_Day>
 	<Preferred_Hour>14:00</Preferred_Hour>
+	<Permanently_Locked>false</Permanently_Locked>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivityPreferredStartingTime>
+<ConstraintActivityPreferredStartingTime>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Activity_Id>70</Activity_Id>
+	<Preferred_Day>Kedd</Preferred_Day>
+	<Preferred_Hour>13:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -363,20 +493,7 @@
 </ConstraintBasicCompulsorySpace>
 <ConstraintSubjectPreferredRooms>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Subject>Matematika</Subject>
-	<Number_of_Preferred_Rooms>6</Number_of_Preferred_Rooms>
-	<Preferred_Room>xaxaxaxaxa</Preferred_Room>
-	<Preferred_Room>Nagyterem</Preferred_Room>
-	<Preferred_Room>103</Preferred_Room>
-	<Preferred_Room>102</Preferred_Room>
-	<Preferred_Room>101</Preferred_Room>
-	<Preferred_Room>100</Preferred_Room>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintSubjectPreferredRooms>
-<ConstraintSubjectPreferredRooms>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Subject>Informatika</Subject>
+	<Subject></Subject>
 	<Number_of_Preferred_Rooms>4</Number_of_Preferred_Rooms>
 	<Preferred_Room>100</Preferred_Room>
 	<Preferred_Room>101</Preferred_Room>
@@ -387,7 +504,7 @@
 </ConstraintSubjectPreferredRooms>
 <ConstraintSubjectPreferredRooms>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Subject>Biológia</Subject>
+	<Subject></Subject>
 	<Number_of_Preferred_Rooms>5</Number_of_Preferred_Rooms>
 	<Preferred_Room>100</Preferred_Room>
 	<Preferred_Room>101</Preferred_Room>
@@ -399,7 +516,7 @@
 </ConstraintSubjectPreferredRooms>
 <ConstraintSubjectPreferredRooms>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Subject>Történelem</Subject>
+	<Subject></Subject>
 	<Number_of_Preferred_Rooms>5</Number_of_Preferred_Rooms>
 	<Preferred_Room>100</Preferred_Room>
 	<Preferred_Room>101</Preferred_Room>
@@ -409,33 +526,38 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintSubjectPreferredRooms>
-<ConstraintActivityPreferredRoom>
+<ConstraintSubjectPreferredRooms>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Subject></Subject>
+	<Number_of_Preferred_Rooms>6</Number_of_Preferred_Rooms>
+	<Preferred_Room>xaxaxaxaxa</Preferred_Room>
+	<Preferred_Room>Nagyterem</Preferred_Room>
+	<Preferred_Room>103</Preferred_Room>
+	<Preferred_Room>102</Preferred_Room>
+	<Preferred_Room>101</Preferred_Room>
+	<Preferred_Room>100</Preferred_Room>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintSubjectPreferredRooms>
+<ConstraintSubjectPreferredRoom>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Subject></Subject>
+	<Room>xaxaxaxaxa</Room>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintSubjectPreferredRoom>
+<ConstraintActivityPreferredRooms>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>62</Activity_Id>
-	<Room>102</Room>
-	<Permanently_Locked>false</Permanently_Locked>
+	<Number_of_Preferred_Rooms>2</Number_of_Preferred_Rooms>
+	<Preferred_Room>103</Preferred_Room>
+	<Preferred_Room>102</Preferred_Room>
 	<Active>true</Active>
 	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
+</ConstraintActivityPreferredRooms>
 <ConstraintActivityPreferredRoom>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>63</Activity_Id>
-	<Room>xaxaxaxaxa</Room>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
-<ConstraintActivityPreferredRoom>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>64</Activity_Id>
-	<Room>Nagyterem</Room>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
-<ConstraintActivityPreferredRoom>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>65</Activity_Id>
+	<Activity_Id>66</Activity_Id>
 	<Room>100</Room>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
@@ -443,16 +565,8 @@
 </ConstraintActivityPreferredRoom>
 <ConstraintActivityPreferredRoom>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>66</Activity_Id>
+	<Activity_Id>62</Activity_Id>
 	<Room>102</Room>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
-<ConstraintActivityPreferredRoom>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>67</Activity_Id>
-	<Room>Nagyterem</Room>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>

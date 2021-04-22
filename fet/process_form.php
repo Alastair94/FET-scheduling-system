@@ -22,7 +22,7 @@ if( isset($_REQUEST['query'] )) {
 			echo queryAll($mysqli);
 			break;
 		case 'get-single':
-			echo querySingle($mysqli, $_GET['id']);
+			echo queryById($mysqli, $_GET['id']);
 			break;
 	}
 	die();

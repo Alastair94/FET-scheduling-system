@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Teachers_Timetable>
   <Teacher name="Geda Gábor">
-   <Day name="Hétfő">
-    <Hour name="09:00">
+   <Day name="Hétf">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -24,11 +24,11 @@
      
     </Hour>
     <Hour name="16:00">
-     
+     <Subject name="Informatika"></Subject><Students name="2019"></Students><Students name="2018"></Students><Students name="007"></Students><Students name="informatikus"></Students><Students name="jók"></Students><Room name="102"></Room>
     </Hour>
    </Day>
    <Day name="Kedd">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -44,7 +44,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Subject name="Informatika"></Subject><Students name="2019"></Students><Students name="2018"></Students><Students name="007"></Students><Students name="informatikus"></Students><Students name="jók"></Students><Room name="102"></Room>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -54,7 +54,7 @@
     </Hour>
    </Day>
    <Day name="Szerda">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -76,11 +76,11 @@
      
     </Hour>
     <Hour name="16:00">
-     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students><Room name="Nagyterem"></Room>
+     
     </Hour>
    </Day>
    <Day name="Csütörtök">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -106,20 +106,20 @@
     </Hour>
    </Day>
    <Day name="Péntek">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
-     
+     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students>
     </Hour>
     <Hour name="11:00">
      
     </Hour>
     <Hour name="12:00">
-     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students><Room name="100"></Room>
+     
     </Hour>
     <Hour name="13:00">
-     
+     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students>
     </Hour>
     <Hour name="14:00">
      
@@ -133,8 +133,8 @@
    </Day>
   </Teacher>
   <Teacher name="Király Roland">
-   <Day name="Hétfő">
-    <Hour name="09:00">
+   <Day name="Hétf">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -150,7 +150,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Subject name="Történelem"></Subject><Students name="2018"></Students><Room name="Nagyterem"></Room>
+     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="2019"></Students>
     </Hour>
     <Hour name="15:00">
      
@@ -160,20 +160,20 @@
     </Hour>
    </Day>
    <Day name="Kedd">
-    <Hour name="09:00">
-     
+    <Hour name="08:00">
+     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students><Room name="100"></Room>
     </Hour>
     <Hour name="10:00">
      
     </Hour>
     <Hour name="11:00">
-     
+     <Subject name="Történelem"></Subject><Students name="2018"></Students>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     
+     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="2019"></Students><Students name="2018"></Students><Students name="2017"></Students><Students name="2016"></Students><Students name="2015"></Students><Students name="2014"></Students><Students name="A csoport"></Students><Students name="B csoport"></Students><Students name="C csoport"></Students><Students name="D csoport"></Students><Students name="E csoport"></Students>
     </Hour>
     <Hour name="14:00">
      
@@ -186,7 +186,7 @@
     </Hour>
    </Day>
    <Day name="Szerda">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
@@ -212,8 +212,8 @@
     </Hour>
    </Day>
    <Day name="Csütörtök">
-    <Hour name="09:00">
-     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="2019"></Students><Room name="xaxaxaxaxa"></Room>
+    <Hour name="08:00">
+     
     </Hour>
     <Hour name="10:00">
      
@@ -228,7 +228,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Subject name="Informatika"></Subject><Students name="A csoport"></Students><Students name="B csoport"></Students><Students name="C csoport"></Students><Students name="D csoport"></Students><Students name="E csoport"></Students>
     </Hour>
     <Hour name="15:00">
      
@@ -238,14 +238,14 @@
     </Hour>
    </Day>
    <Day name="Péntek">
-    <Hour name="09:00">
+    <Hour name="08:00">
      
     </Hour>
     <Hour name="10:00">
      
     </Hour>
     <Hour name="11:00">
-     <Subject name="Biológia"></Subject><Students name="informatikus"></Students><Students name="rosszak"></Students><Room name="102"></Room>
+     
     </Hour>
     <Hour name="12:00">
      

@@ -6,9 +6,8 @@
 	</div>
 
 	<br>
-	<!-- <a href="#/" >Cancel</a> -->
 
 	<a href ng-click="cancelHour()">Cancel</a>
 	<button ng-click="saveHour()" ng-disabled="isCleanHour()" >Save</button>
-	<button ng-click="destroyHour()" ng-show="item.id" >Delete</button>
+	<button ng-click="destroyHour()" ng-show="item.hour_id">Delete</button>
 </form>

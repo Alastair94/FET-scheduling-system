@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 17, 2021 at 12:55 PM
+-- Generation Time: Apr 22, 2021 at 06:23 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -38,25 +38,25 @@ CREATE TABLE `activities` (
   `subj_id` int(11) NOT NULL,
   `user_table_id` int(11) NOT NULL,
   `activity_group_id` int(11) DEFAULT NULL,
-  `number_of_students` int(11) NOT NULL,
-  `years_id` int(11) DEFAULT NULL,
-  `groups_id` int(11) DEFAULT NULL,
-  `subgroups_id` int(11) DEFAULT NULL
+  `number_of_students` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- Dumping data for table `activities`
 --
 
-INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `user_table_id`, `activity_group_id`, `number_of_students`, `years_id`, `groups_id`, `subgroups_id`) VALUES
-(43, '1', NULL, 0, 10, 12, 183, NULL, -1, NULL, NULL, NULL),
-(44, '1', NULL, 0, 10, 12, 183, NULL, 200, NULL, NULL, NULL),
-(62, '1', NULL, 0, 16, 24, 191, NULL, 20, NULL, NULL, NULL),
-(63, '1', NULL, 0, 17, 23, 191, NULL, -1, NULL, NULL, NULL),
-(64, '1', NULL, 0, 16, 25, 191, NULL, 400, NULL, NULL, NULL),
-(65, '1', NULL, 0, 16, 25, 191, NULL, 200, NULL, NULL, NULL),
-(66, '1', NULL, 0, 17, 25, 191, NULL, 80, NULL, NULL, NULL),
-(67, '1', NULL, 0, 17, 28, 191, NULL, -1, NULL, NULL, NULL);
+INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `user_table_id`, `activity_group_id`, `number_of_students`) VALUES
+(43, '1', NULL, 0, 10, 12, 183, NULL, -1),
+(44, '1', NULL, 0, 10, 12, 183, NULL, 200),
+(62, '1', NULL, 0, 16, 24, 191, NULL, 20),
+(63, '1', NULL, 0, 17, 23, 191, NULL, -1),
+(64, '1', NULL, 0, 16, 25, 191, NULL, 400),
+(65, '1', NULL, 0, 16, 25, 191, NULL, 200),
+(66, '1', NULL, 0, 17, 25, 191, NULL, 80),
+(67, '1', NULL, 0, 17, 28, 191, NULL, -1),
+(68, '1', NULL, 1, 16, 24, 191, NULL, -1),
+(69, '1', NULL, 0, 17, 24, 191, NULL, 50),
+(70, '1', NULL, 0, 17, 23, 191, NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,17 @@ INSERT INTO `activity_subgroups` (`activity_subgroups_id`, `activity_id`, `subgr
 (3, 62, 19, 'jók'),
 (4, 64, 20, 'rosszak'),
 (5, 65, 20, 'rosszak'),
-(6, 66, 20, 'rosszak');
+(6, 66, 20, 'rosszak'),
+(7, 69, 21, 'A csoport'),
+(8, 69, 22, 'B csoport'),
+(9, 69, 23, 'C csoport'),
+(10, 69, 24, 'D csoport'),
+(11, 69, 25, 'E csoport'),
+(12, 70, 21, 'A csoport'),
+(13, 70, 22, 'B csoport'),
+(14, 70, 23, 'C csoport'),
+(15, 70, 24, 'D csoport'),
+(16, 70, 25, 'E csoport');
 
 -- --------------------------------------------------------
 
@@ -139,7 +149,15 @@ INSERT INTO `activity_years` (`activity_years_id`, `activity_id`, `year_id`, `ye
 (11, 62, 44, '2018'),
 (12, 63, 42, '2020'),
 (13, 63, 43, '2019'),
-(14, 67, 44, '2018');
+(14, 67, 44, '2018'),
+(15, 68, 44, '2018'),
+(16, 70, 42, '2020'),
+(17, 70, 43, '2019'),
+(18, 70, 44, '2018'),
+(19, 70, 45, '2017'),
+(20, 70, 46, '2016'),
+(21, 70, 47, '2015'),
+(22, 70, 48, '2014');
 
 -- --------------------------------------------------------
 
@@ -212,7 +230,7 @@ INSERT INTO `days` (`days_id`, `day_name`, `user_table_id`) VALUES
 (8, 'Szerda', 183),
 (9, 'Csütörtök', 183),
 (10, 'Péntek', 183),
-(11, 'Hétfő', 191),
+(11, 'Hétf', 191),
 (12, 'Kedd', 191),
 (13, 'Szerda', 191),
 (14, 'Csütörtök', 191),
@@ -245,7 +263,8 @@ INSERT INTO `groups` (`group_id`, `group_name`, `num_of_students`, `student_id`,
 (28, 'tolmácsok', 1, 28, 183),
 (39, 'matematikus', 500, 42, 191),
 (40, 'informatikus', 500, 42, 191),
-(41, '007', 1, 42, 191);
+(41, '007', 1, 42, 191),
+(42, 'programtervező informatikus', 500, 43, 191);
 
 -- --------------------------------------------------------
 
@@ -269,14 +288,14 @@ INSERT INTO `hours` (`hours_id`, `hour_name`, `user_table_id`) VALUES
 (10, '12:00', 183),
 (11, '14:00', 183),
 (12, '16:00', 183),
-(14, '09:00', 191),
+(14, '08:00', 191),
 (16, '10:00', 191),
 (17, '11:00', 191),
 (18, '12:00', 191),
 (19, '13:00', 191),
 (20, '14:00', 191),
 (21, '15:00', 191),
-(22, '16:00', 191);
+(23, '16:00', 191);
 
 -- --------------------------------------------------------
 
@@ -346,7 +365,45 @@ INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`) VALU
 (82, 85, 105),
 (83, 85, 104),
 (84, 85, 103),
-(85, 85, 102);
+(85, 85, 102),
+(86, 86, 108),
+(96, 94, 105),
+(97, 94, 104),
+(98, 95, 102),
+(99, 96, 104),
+(100, 96, 103),
+(101, 96, 108),
+(102, 97, 106),
+(103, 97, 108);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preferred_times`
+--
+
+CREATE TABLE `preferred_times` (
+  `pref_times_id` int(11) NOT NULL,
+  `time_cons_id` int(11) NOT NULL,
+  `day_id` int(11) NOT NULL,
+  `hour_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `preferred_times`
+--
+
+INSERT INTO `preferred_times` (`pref_times_id`, `time_cons_id`, `day_id`, `hour_id`) VALUES
+(1, 6, 11, 17),
+(2, 7, 13, 20),
+(3, 7, 13, 19),
+(4, 7, 15, 21),
+(5, 8, 11, 14),
+(6, 8, 11, 17),
+(7, 9, 11, 14),
+(8, 9, 11, 17),
+(9, 10, 11, 14),
+(10, 10, 11, 17);
 
 -- --------------------------------------------------------
 
@@ -421,7 +478,7 @@ CREATE TABLE `space_constraints` (
   `user_table_id` int(11) NOT NULL,
   `activity_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
-  `permanently_locked` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'true'
+  `permanently_locked` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
@@ -434,7 +491,12 @@ INSERT INTO `space_constraints` (`space_cons_id`, `weight_percentage`, `num_of_p
 (78, '100', 4, NULL, NULL, 191, NULL, 24, NULL),
 (82, '100', 5, NULL, NULL, 191, NULL, 25, NULL),
 (83, '100', 5, NULL, NULL, 191, NULL, 28, NULL),
-(85, '100', 6, NULL, NULL, 191, NULL, 23, NULL);
+(85, '100', 6, NULL, NULL, 191, NULL, 23, NULL),
+(86, '100', 1, NULL, NULL, 191, NULL, 26, NULL),
+(94, '100', 2, NULL, NULL, 191, 62, NULL, 'false'),
+(95, '100', 1, NULL, NULL, 191, 66, NULL, 'false'),
+(96, '100', 3, NULL, NULL, 191, 69, NULL, 'false'),
+(97, '100', 2, NULL, NULL, 191, 70, NULL, 'false');
 
 -- --------------------------------------------------------
 
@@ -460,7 +522,11 @@ INSERT INTO `students` (`student_id`, `year_name`, `num_students`, `user_table_i
 (41, '2020', 10000, 183),
 (42, '2020', 1000, 191),
 (43, '2019', 1000, 191),
-(44, '2018', 1000, 191);
+(44, '2018', 1000, 191),
+(45, '2017', NULL, 191),
+(46, '2016', NULL, 191),
+(47, '2015', NULL, 191),
+(48, '2014', NULL, 191);
 
 -- --------------------------------------------------------
 
@@ -506,7 +572,12 @@ INSERT INTO `subgroups` (`subgroup_id`, `subgroup_name`, `num_of_students`, `gro
 (5, 'B szakirány', 100, 15, 183, 19),
 (7, 'angol', 1, 27, 183, 28),
 (19, 'jók', 200, 39, 191, 42),
-(20, 'rosszak', 300, 39, 191, 42);
+(20, 'rosszak', 300, 39, 191, 42),
+(21, 'A csoport', 100, 42, 191, 43),
+(22, 'B csoport', 100, 42, 191, 43),
+(23, 'C csoport', 100, 42, 191, 43),
+(24, 'D csoport', 1000, 42, 191, 43),
+(25, 'E csoport', 100, 42, 191, 43);
 
 -- --------------------------------------------------------
 
@@ -581,9 +652,26 @@ INSERT INTO `teachers` (`teacher_id`, `teach_name`, `user_table_id`) VALUES
 
 CREATE TABLE `time_constraints` (
   `time_cons_id` int(11) NOT NULL,
-  `cons_id` int(11) NOT NULL,
-  `type` varchar(45) COLLATE utf8_hungarian_ci DEFAULT NULL COMMENT '(min days or same start)\n'
+  `weight_percentage` int(11) NOT NULL,
+  `num_of_pref_times` int(11) NOT NULL,
+  `active` varchar(5) COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `comments` longtext COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `user_table_id` int(11) NOT NULL,
+  `activity_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `permanently_locked` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `time_constraints`
+--
+
+INSERT INTO `time_constraints` (`time_cons_id`, `weight_percentage`, `num_of_pref_times`, `active`, `comments`, `user_table_id`, `activity_id`, `subject_id`, `permanently_locked`) VALUES
+(6, 100, 1, NULL, NULL, 191, 62, NULL, 'true'),
+(7, 100, 3, NULL, NULL, 191, 66, NULL, 'true'),
+(8, 100, 2, NULL, NULL, 191, 62, NULL, 'false'),
+(9, 100, 2, NULL, NULL, 191, 62, NULL, 'false'),
+(10, 100, 2, NULL, NULL, 191, 62, NULL, 'false');
 
 -- --------------------------------------------------------
 
@@ -753,6 +841,12 @@ ALTER TABLE `preferred_rooms`
   ADD KEY `fk_preferred_rooms_rooms1` (`room_id`);
 
 --
+-- Indexes for table `preferred_times`
+--
+ALTER TABLE `preferred_times`
+  ADD PRIMARY KEY (`pref_times_id`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -822,8 +916,7 @@ ALTER TABLE `teachers`
 -- Indexes for table `time_constraints`
 --
 ALTER TABLE `time_constraints`
-  ADD PRIMARY KEY (`time_cons_id`),
-  ADD KEY `fk_time_cons_constriants1` (`cons_id`);
+  ADD PRIMARY KEY (`time_cons_id`);
 
 --
 -- Indexes for table `users`
@@ -854,7 +947,7 @@ ALTER TABLE `user_tables`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `activities_same_start`
@@ -872,13 +965,13 @@ ALTER TABLE `activity_groups`
 -- AUTO_INCREMENT for table `activity_subgroups`
 --
 ALTER TABLE `activity_subgroups`
-  MODIFY `activity_subgroups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `activity_subgroups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `activity_years`
 --
 ALTER TABLE `activity_years`
-  MODIFY `activity_years_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `activity_years_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `basic_compulsory_constraints`
@@ -908,13 +1001,13 @@ ALTER TABLE `days`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `hours`
 --
 ALTER TABLE `hours`
-  MODIFY `hours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `hours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `min_days_constraints`
@@ -932,7 +1025,13 @@ ALTER TABLE `min_days_for_activities`
 -- AUTO_INCREMENT for table `preferred_rooms`
 --
 ALTER TABLE `preferred_rooms`
-  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
+-- AUTO_INCREMENT for table `preferred_times`
+--
+ALTER TABLE `preferred_times`
+  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -950,13 +1049,13 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `space_constraints`
 --
 ALTER TABLE `space_constraints`
-  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `students_in_activity`
@@ -968,7 +1067,7 @@ ALTER TABLE `students_in_activity`
 -- AUTO_INCREMENT for table `subgroups`
 --
 ALTER TABLE `subgroups`
-  MODIFY `subgroup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `subgroup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -986,7 +1085,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `time_constraints`
 --
 ALTER TABLE `time_constraints`
-  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_files`
