@@ -279,7 +279,6 @@ function queryAll($mysqli)
             }
         }
 
-
         return json_encode($return_arr);
     }
 }
@@ -465,8 +464,8 @@ function createNew($mysqli)
         $space_cons_id = $data[0];
 
         foreach($data[1] as &$v){
-            $stmt = $mysqli->prepare('INSERT INTO preferred_rooms (space_cons_id, room_id) VALUES (?, ?);');
-            $stmt->bind_param("ii", $space_cons_id, $v->id);
+            $stmt = $mysqli->prepare('INSERT INTO preferred_rooms (space_cons_id, room_id, building_id) VALUES (?, ?, ?);');
+            $stmt->bind_param("iii", $space_cons_id, $v->id, $v->building_id);
             $stmt->execute();
         }
     } else if ($_GET['query'] == 'groups'){
@@ -699,21 +698,52 @@ function queryById($mysqli, $id){
             }
         } else if($_GET['query'] == 'activitySpaceConstraints') {
             $sql =
-            'SELECT space_cons_id FROM space_constraints '.
+            'SELECT * FROM space_constraints '.
             'WHERE space_constraints.activity_id = '.$id;
-        if ($result = $mysqli->query($sql)) {
-            while ($row = $result->fetch_assoc()) {
-                $row_array['space_cons_id']   = $row['space_cons_id'];
-                $row_array['subject_id'] = $row['subject_id'];
-                $row_array['activity_id']   = $row['activity_id'];
-                $row_array['weight_percentage']   = $row['weight_percentage'];
-                $row_array['num_of_pref_rooms']   = $row['num_of_pref_rooms'];
-                $row_array['locked'] = $row['permanently_locked'];
-                array_push($return_arr, $row_array);
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['space_cons_id']   = $row['space_cons_id'];
+                    $row_array['subject_id'] = $row['subject_id'];
+                    $row_array['activity_id']   = $row['activity_id'];
+                    $row_array['weight_percentage']   = $row['weight_percentage'];
+                    $row_array['num_of_pref_rooms']   = $row['num_of_pref_rooms'];
+                    $row_array['locked'] = $row['permanently_locked'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
             }
-            $result->free();
+        } else if ($_GET['query'] == 'preferredTimes'){
+            $sql = 
+            'SELECT * FROM preferred_times INNER JOIN days ON preferred_times.day_id = days.days_id INNER JOIN hours ON preferred_times.hour_id = hours.hours_id WHERE time_cons_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['pref_times_id']   = $row['pref_times_id '];
+                    $row_array['time_cons_id'] = $row['time_cons_id'];
+                    $row_array['day_id']   = $row['preferred_times.day_id'];
+                    $row_array['day_name'] = $row['day_name'];
+                    $row_array['hour_id']   = $row['preferred_times.hour_id'];
+                    $row_array['hour_name'] = $row['hour_name'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if ($_GET['query'] == 'preferredRooms'){
+            $sql = 
+            'SELECT * FROM preferred_rooms INNER JOIN rooms ON preferred_rooms.room_id = rooms.room_id INNER JOIN buildings ON preferred_rooms.building_id = buildings.building_id WHERE space_cons_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['pref_rooms_id']   = $row['pref_rooms_id '];
+                    $row_array['space_cons_id'] = $row['space_cons_id'];
+                    $row_array['room_id']   = $row['preferred_rooms.room_id'];
+                    $row_array['room_name'] = $row['room_name'];
+                    $row_array['building_id']   = $row['preferred_rooms.building_id'];
+                    $row_array['build_name'] = $row['build_name'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
         }
-    }
+
         return json_encode($return_arr);
     }
 }

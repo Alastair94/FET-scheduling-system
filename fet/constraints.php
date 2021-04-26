@@ -151,7 +151,8 @@
 							Activities:<br>
 							<select 
 								ng-model="activity" 
-								ng-options="'ID: ' + act.id for act in activities">
+								ng-options="'ID: ' + act.id for act in activities"
+								ng-change="isTaken(activity)">
 								<option value="" selected disabled hidden>Choose here</option>
 							</select>
 						</div>
@@ -195,20 +196,29 @@
 						</div>
 						<div style="display:flex;">
 							<div style="display:flex">
-								<p style="width:200px;">
-									Time constraint:
-								</p>
+								<div>
+									<p style="width:200px;">
+										Time constraint:
+									</p>
+									<p style="width:200px; color:red" ng-show="takenTime">
+										There is already a time constraint for activity with that ID!
+									</p>
+								</div>
 								<select size="10" 
 										ng-model="act_day"
+										ng-disabled="takenTime"
 										ng-options="d.day_name for d in days" style="min-width: 150px;">
 								</select>
 								<select size="10" 
 										ng-model="act_hour"
 										ng-options="h.hour_name for h in hours" style="min-width: 150px;"
+										ng-disabled="takenTime"
 										ng-dblclick="selectTime()">
 								</select>
 								<select size="10" 
 										ng-model="chosen_time"
+										ng-dblclick="removeTime()"
+										ng-disabled="takenTime"
 										ng-options="c.day_name + '->' + c.hour_name for c in chosenTimes" style="min-width: 150px;">
 								</select>
 							</div>
@@ -218,41 +228,49 @@
 								</div>
 								<div style="display:flex;">
 									<div style="display:flex;">
-										<input type="checkbox" id="centralTime" ng-click="isItCentralTime()" ng-model="act_central_time"><label for="centralTime">Is it central?</label>
+										<input type="checkbox" ng-disabled="takenTime" id="centralTime" ng-click="isItCentralTime()" ng-model="act_central_time"><label for="centralTime">Is it central?</label>
 									</div>
 									<div style="margin-left:20px;">
 										<label for="weightPrefTime" style="width:100%;">Weight Percentage</label>
 										<input size="10"
 											ng-model="weightPTime"
-											ng-disabled="act_central_time"
+											ng-disabled="act_central_time || takenTime"
 											type="number"
 											min="0" max="100"
 											id="weightPrefTime" 
 										>
 									</div>
 								</div>
-								<button ng-click="saveActPrefTime()" ng-disabled="isTimeWrong()" style="margin-top:30px; margin-left:100px;" >Add time constraint</button>
+								<button ng-click="saveActPrefTime()" ng-disabled="isTimeWrong() || takenTime" style="margin-top:30px; margin-left:100px;" >Add time constraint</button>
 							</div>
 						</div>
 						<div style="display:flex;">
 							<div style="display:flex">
-							<p style="width:200px;">
-								Space constraint:
-							</p>
+								<div>
+									<p style="width:200px;">
+										Space constraint:
+									</p>
+									<p style="width:200px; color:red" ng-show="takenSpace">
+										There is already a space constraint for activity with that ID!
+									</p>
+								</div>
 								<select size="10" 
 										ng-model="act_building"
 										ng-options="b.name for b in buildings" style="min-width: 150px;"
 										ng-change="searchRoomsByBuilding(act_building.id)"
+										ng-disabled="takenSpace"
 										>
 								</select>
 								<select size="10" 
 										ng-model="act_room"
 										ng-options="r.room_name for r in rooms" style="min-width: 150px;"
-										ng-dblclick="selectSpace()">
+										ng-dblclick="selectSpace()"
+										ng-disabled="takenSpace">
 								</select>
 								<select size="10" 
 										ng-model="chosen_space"
-										ng-options="c.build_name + ' - ' + c.room_name for c in chosenSpaces" style="min-width: 150px;">
+										ng-options="c.build_name + ' - ' + c.room_name for c in chosenSpaces" style="min-width: 150px;"
+										ng-disabled="takenSpace">
 								</select>
 							</div>
 							<div>
@@ -261,20 +279,20 @@
 								</div>
 								<div style="display:flex;">
 									<div style="display:flex;">
-										<input type="checkbox" id="centralSpace" ng-click="isItCentralSpace()" ng-model="act_central_space"><label for="centralSpace">Is it central?</label>
+										<input ng-disabled="takenSpace" type="checkbox" id="centralSpace" ng-click="isItCentralSpace()" ng-model="act_central_space"><label for="centralSpace">Is it central?</label>
 									</div>
 									<div style="margin-left:20px;">
 										<label for="weightPrefSpace" style="width:100%;">Weight Percentage</label>
 										<input size="10"
 											ng-model="weightPSpace"
-											ng-disabled="act_central_space"
+											ng-disabled="act_central_space || takenSpace"
 											type="number"
 											min="0" max="100"
 											id="weightPrefSpace" 
 										>
 									</div>
 								</div>
-								<button ng-click="saveActPrefSpace()" ng-disabled="isSpaceWrong()" style="margin-top:30px; margin-left:100px;" >Add space constraint</button>
+								<button ng-click="saveActPrefSpace()" ng-disabled="isSpaceWrong() || takenSpace" style="margin-top:30px; margin-left:100px;" >Add space constraint</button>
 							</div>
 						</div>
 						<div ng-include src="template.url"></div>

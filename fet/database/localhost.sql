@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2021 at 06:23 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Apr 26, 2021 at 02:22 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -335,46 +335,43 @@ CREATE TABLE `min_days_for_activities` (
 CREATE TABLE `preferred_rooms` (
   `pref_rooms_id` int(11) NOT NULL,
   `space_cons_id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL
+  `room_id` int(11) NOT NULL,
+  `building_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- Dumping data for table `preferred_rooms`
 --
 
-INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`) VALUES
-(28, 58, 10),
-(29, 58, 11),
-(30, 58, 12),
-(54, 78, 102),
-(55, 78, 103),
-(56, 78, 104),
-(57, 78, 105),
-(65, 82, 102),
-(66, 82, 103),
-(67, 82, 104),
-(68, 82, 105),
-(69, 82, 106),
-(70, 83, 102),
-(71, 83, 103),
-(72, 83, 104),
-(73, 83, 105),
-(74, 83, 106),
-(80, 85, 108),
-(81, 85, 106),
-(82, 85, 105),
-(83, 85, 104),
-(84, 85, 103),
-(85, 85, 102),
-(86, 86, 108),
-(96, 94, 105),
-(97, 94, 104),
-(98, 95, 102),
-(99, 96, 104),
-(100, 96, 103),
-(101, 96, 108),
-(102, 97, 106),
-(103, 97, 108);
+INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`, `building_id`) VALUES
+(28, 58, 10, 0),
+(29, 58, 11, 0),
+(30, 58, 12, 0),
+(54, 78, 102, 0),
+(55, 78, 103, 0),
+(56, 78, 104, 0),
+(57, 78, 105, 0),
+(65, 82, 102, 0),
+(66, 82, 103, 0),
+(67, 82, 104, 0),
+(68, 82, 105, 0),
+(69, 82, 106, 0),
+(70, 83, 102, 0),
+(71, 83, 103, 0),
+(72, 83, 104, 0),
+(73, 83, 105, 0),
+(74, 83, 106, 0),
+(80, 85, 108, 0),
+(81, 85, 106, 0),
+(82, 85, 105, 0),
+(83, 85, 104, 0),
+(84, 85, 103, 0),
+(85, 85, 102, 0),
+(86, 86, 108, 0),
+(108, 103, 105, 13),
+(109, 103, 106, 14),
+(110, 104, 104, 13),
+(111, 104, 108, 15);
 
 -- --------------------------------------------------------
 
@@ -394,16 +391,18 @@ CREATE TABLE `preferred_times` (
 --
 
 INSERT INTO `preferred_times` (`pref_times_id`, `time_cons_id`, `day_id`, `hour_id`) VALUES
-(1, 6, 11, 17),
-(2, 7, 13, 20),
-(3, 7, 13, 19),
-(4, 7, 15, 21),
-(5, 8, 11, 14),
-(6, 8, 11, 17),
-(7, 9, 11, 14),
-(8, 9, 11, 17),
-(9, 10, 11, 14),
-(10, 10, 11, 17);
+(13, 21, 11, 14),
+(14, 21, 11, 18),
+(15, 22, 11, 19),
+(16, 22, 15, 23),
+(17, 23, 11, 14),
+(18, 23, 11, 16),
+(19, 23, 11, 17),
+(20, 23, 11, 18),
+(21, 23, 11, 19),
+(22, 23, 11, 20),
+(23, 23, 11, 21),
+(24, 23, 11, 23);
 
 -- --------------------------------------------------------
 
@@ -493,10 +492,8 @@ INSERT INTO `space_constraints` (`space_cons_id`, `weight_percentage`, `num_of_p
 (83, '100', 5, NULL, NULL, 191, NULL, 28, NULL),
 (85, '100', 6, NULL, NULL, 191, NULL, 23, NULL),
 (86, '100', 1, NULL, NULL, 191, NULL, 26, NULL),
-(94, '100', 2, NULL, NULL, 191, 62, NULL, 'false'),
-(95, '100', 1, NULL, NULL, 191, 66, NULL, 'false'),
-(96, '100', 3, NULL, NULL, 191, 69, NULL, 'false'),
-(97, '100', 2, NULL, NULL, 191, 70, NULL, 'false');
+(103, '97', 2, NULL, NULL, 191, 62, NULL, 'false'),
+(104, '100', 2, NULL, NULL, 191, 63, NULL, 'true');
 
 -- --------------------------------------------------------
 
@@ -667,11 +664,9 @@ CREATE TABLE `time_constraints` (
 --
 
 INSERT INTO `time_constraints` (`time_cons_id`, `weight_percentage`, `num_of_pref_times`, `active`, `comments`, `user_table_id`, `activity_id`, `subject_id`, `permanently_locked`) VALUES
-(6, 100, 1, NULL, NULL, 191, 62, NULL, 'true'),
-(7, 100, 3, NULL, NULL, 191, 66, NULL, 'true'),
-(8, 100, 2, NULL, NULL, 191, 62, NULL, 'false'),
-(9, 100, 2, NULL, NULL, 191, 62, NULL, 'false'),
-(10, 100, 2, NULL, NULL, 191, 62, NULL, 'false');
+(21, 62, 2, NULL, NULL, 191, 70, NULL, 'false'),
+(22, 96, 2, NULL, NULL, 191, 62, NULL, 'false'),
+(23, 100, 8, NULL, NULL, 191, 65, NULL, 'true');
 
 -- --------------------------------------------------------
 
@@ -1025,13 +1020,13 @@ ALTER TABLE `min_days_for_activities`
 -- AUTO_INCREMENT for table `preferred_rooms`
 --
 ALTER TABLE `preferred_rooms`
-  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `preferred_times`
 --
 ALTER TABLE `preferred_times`
-  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -1049,7 +1044,7 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `space_constraints`
 --
 ALTER TABLE `space_constraints`
-  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -1085,7 +1080,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `time_constraints`
 --
 ALTER TABLE `time_constraints`
-  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `user_files`

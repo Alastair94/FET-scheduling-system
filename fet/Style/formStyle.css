@@ -260,7 +260,15 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
   margin-left: 0px;
 }
 
-select{
+/* select{
 	min-width: 150px;
 	background-color: beige;
+} */
+
+.taken{
+	background: lightcoral;
+}
+
+.untaken{
+	background: lightgreen;
 }
