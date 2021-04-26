@@ -226,10 +226,7 @@ function queryAll($mysqli)
                 $result->free();
             }
         } else if($_GET['query'] == 'subjectSpaceConstraints'){
-            $sql = 'SELECT space_cons_id, weight_percentage, num_of_pref_rooms, activity_id, subject_id, subj_name '.
-            'FROM space_constraints, user_tables, subjects ' .
-            'WHERE user_tables.user_table_id = space_constraints.user_table_id ' .
-            'AND user_tables.user_table_id = ' . $user_table_id . ' AND space_constraints.subject_id = subjects.subj_id OR activity_id IS NOT NULL';
+            $sql = 'SELECT * FROM space_constraints INNER JOIN subjects ON space_constraints.subject_id = subjects.subj_id WHERE space_constraints.user_table_id = '.$user_table_id;
 
             if ($result = $mysqli->query($sql)) {
 
@@ -557,7 +554,13 @@ function destroyRow($mysqli, $id)
         $mysqli->query("DELETE FROM subgroups    WHERE group_id = $id");
     } else if ($_GET['query'] == 'subgroups') {
         $mysqli->query("DELETE FROM subgroups WHERE subgroup_id = $id");
-    } 
+    } else if ($_GET['query'] == 'activityTimeConstraints'){
+        $mysqli->query("DELETE FROM time_constraints WHERE time_cons_id = $id");
+        $mysqli->query("DELETE FROM preferred_times WHERE time_cons_id = $id");
+    } else if ($_GET['query'] == 'activitySpaceConstraints'){
+        $mysqli->query("DELETE FROM space_constraints WHERE space_cons_id = $id");
+        $mysqli->query("DELETE FROM preferred_rooms WHERE space_cons_id = $id");
+    }
 
     $i = $mysqli->affected_rows;
     if (!$i) {

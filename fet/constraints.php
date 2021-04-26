@@ -242,6 +242,7 @@
 									</div>
 								</div>
 								<button ng-click="saveActPrefTime()" ng-disabled="isTimeWrong() || takenTime" style="margin-top:30px; margin-left:100px;" >Add time constraint</button>
+								<button ng-click="deleteTime(act_timeConstraint.time_cons_id)" ng-show="takenTime" style="margin-top:30px; margin-left:100px;" >Delete time constraint</button>
 							</div>
 						</div>
 						<div style="display:flex;">
@@ -293,6 +294,7 @@
 									</div>
 								</div>
 								<button ng-click="saveActPrefSpace()" ng-disabled="isSpaceWrong() || takenSpace" style="margin-top:30px; margin-left:100px;" >Add space constraint</button>
+								<button ng-click="deleteSpace(act_spaceConstraint.space_cons_id)" ng-show="takenSpace" style="margin-top:30px; margin-left:100px;" >Delete space constraint</button>
 							</div>
 						</div>
 						<div ng-include src="template.url"></div>

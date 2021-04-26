@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 26, 2021 at 02:22 AM
+-- Generation Time: Apr 27, 2021 at 12:01 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -230,11 +230,11 @@ INSERT INTO `days` (`days_id`, `day_name`, `user_table_id`) VALUES
 (8, 'Szerda', 183),
 (9, 'Csütörtök', 183),
 (10, 'Péntek', 183),
-(11, 'Hétf', 191),
+(11, 'Hétfő', 191),
 (12, 'Kedd', 191),
 (13, 'Szerda', 191),
 (14, 'Csütörtök', 191),
-(15, 'Péntek', 191);
+(16, 'Péntek', 191);
 
 -- --------------------------------------------------------
 
@@ -367,11 +367,7 @@ INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`, `bui
 (83, 85, 104, 0),
 (84, 85, 103, 0),
 (85, 85, 102, 0),
-(86, 86, 108, 0),
-(108, 103, 105, 13),
-(109, 103, 106, 14),
-(110, 104, 104, 13),
-(111, 104, 108, 15);
+(86, 86, 108, 0);
 
 -- --------------------------------------------------------
 
@@ -385,24 +381,6 @@ CREATE TABLE `preferred_times` (
   `day_id` int(11) NOT NULL,
   `hour_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
-
---
--- Dumping data for table `preferred_times`
---
-
-INSERT INTO `preferred_times` (`pref_times_id`, `time_cons_id`, `day_id`, `hour_id`) VALUES
-(13, 21, 11, 14),
-(14, 21, 11, 18),
-(15, 22, 11, 19),
-(16, 22, 15, 23),
-(17, 23, 11, 14),
-(18, 23, 11, 16),
-(19, 23, 11, 17),
-(20, 23, 11, 18),
-(21, 23, 11, 19),
-(22, 23, 11, 20),
-(23, 23, 11, 21),
-(24, 23, 11, 23);
 
 -- --------------------------------------------------------
 
@@ -491,9 +469,7 @@ INSERT INTO `space_constraints` (`space_cons_id`, `weight_percentage`, `num_of_p
 (82, '100', 5, NULL, NULL, 191, NULL, 25, NULL),
 (83, '100', 5, NULL, NULL, 191, NULL, 28, NULL),
 (85, '100', 6, NULL, NULL, 191, NULL, 23, NULL),
-(86, '100', 1, NULL, NULL, 191, NULL, 26, NULL),
-(103, '97', 2, NULL, NULL, 191, 62, NULL, 'false'),
-(104, '100', 2, NULL, NULL, 191, 63, NULL, 'true');
+(86, '100', 1, NULL, NULL, 191, NULL, 26, NULL);
 
 -- --------------------------------------------------------
 
@@ -658,15 +634,6 @@ CREATE TABLE `time_constraints` (
   `subject_id` int(11) DEFAULT NULL,
   `permanently_locked` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
-
---
--- Dumping data for table `time_constraints`
---
-
-INSERT INTO `time_constraints` (`time_cons_id`, `weight_percentage`, `num_of_pref_times`, `active`, `comments`, `user_table_id`, `activity_id`, `subject_id`, `permanently_locked`) VALUES
-(21, 62, 2, NULL, NULL, 191, 70, NULL, 'false'),
-(22, 96, 2, NULL, NULL, 191, 62, NULL, 'false'),
-(23, 100, 8, NULL, NULL, 191, 65, NULL, 'true');
 
 -- --------------------------------------------------------
 
@@ -990,7 +957,7 @@ ALTER TABLE `constraints`
 -- AUTO_INCREMENT for table `days`
 --
 ALTER TABLE `days`
-  MODIFY `days_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `days_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -1026,7 +993,7 @@ ALTER TABLE `preferred_rooms`
 -- AUTO_INCREMENT for table `preferred_times`
 --
 ALTER TABLE `preferred_times`
-  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -1080,7 +1047,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `time_constraints`
 --
 ALTER TABLE `time_constraints`
-  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `user_files`

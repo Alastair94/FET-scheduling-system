@@ -459,6 +459,8 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 	$scope.weightPTime = 100;
 	$scope.takenTime = false;
 	$scope.takenSpace = false;
+	$scope.act_timeConstraint = '';
+	$scope.act_spaceConstraint = '';
 	
 
 	$scope.getActivities = function () {
@@ -585,6 +587,34 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 		$scope.timeToDefault();		
 	}
 
+	$scope.deleteTime = function(id){
+		if(confirm("Are you sure you want to delete this time constraint?")){
+			myHttp.query({
+				'query': 'activityTimeConstraints',
+				'method': 'delete',
+				'id': id
+			}).success(function (data) {
+				$scope.timeToDefault();
+				$scope.activity = '';
+				$scope.takenTime = false;
+			});
+		}
+	}
+
+	$scope.deleteSpace = function(id){
+		if(confirm("Are you sure you want to delete this space constraint?")){
+			myHttp.query({
+				'query': 'activitySpaceConstraints',
+				'method': 'delete',
+				'id': id
+			}).success(function (data) {
+				$scope.spaceToDefault();
+				$scope.activity = '';
+				$scope.takenSpace = false;
+			});
+		}
+	}
+
 	$scope.saveActPrefSpace = function () {
 		var _activity = $scope.activity;
 		var _chosenSpaces = $scope.chosenSpaces;
@@ -654,6 +684,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 					$scope.takenTime = false;
 				}
 				else{ // If there there IS a constraint for that activity
+					$scope.act_timeConstraint = result[0];
 					$scope.takenTime = true;
 					$scope.weightPTime = parseInt(result[0].weight_percentage);
 					if(result[0].locked == "true")
@@ -683,6 +714,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 					$scope.takenSpace = false;
 				}
 				else{
+					$scope.act_spaceConstraint = resultSpace[0];
 					$scope.takenSpace = true;
 					$scope.weightPSpace = parseInt(resultSpace[0].weight_percentage);
 					if(resultSpace[0].locked == "true")
