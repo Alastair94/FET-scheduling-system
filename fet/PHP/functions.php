@@ -258,7 +258,7 @@ function queryAll($mysqli)
                 }
                 $result->free();
             }
-        }else if($_GET['query'] == 'subgroups'){
+        } else if($_GET['query'] == 'subgroups'){
             $sql = 'SELECT subgroup_id, subgroup_name, num_of_students, group_id, student_id '.
             'FROM subgroups, user_tables '.
             'WHERE user_tables.user_table_id = subgroups.user_table_id AND user_tables.user_table_id = '.$user_table_id;
@@ -270,6 +270,18 @@ function queryAll($mysqli)
                     $row_array['num_of_students'] = $row['num_of_students'];
                     $row_array['group_id']   = $row['group_id'];
                     $row_array['student_id']   = $row['student_id'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if($_GET['query'] == 'activityNOverlaps'){
+            $sql = 'SELECT * FROM activities_not_overlapping_con WHERE user_table_id = '.$user_table_id;
+
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['anoc_id']   = $row['anoc_id'];
+                    $row_array['num_of_activities'] = $row['num_of_activities'];
+                    $row_array['weight_percentage'] = $row['weight_percentage'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();
@@ -496,8 +508,7 @@ function createNew($mysqli)
         $stmt = $mysqli->prepare('INSERT INTO time_constraints (weight_percentage, num_of_pref_times, active, comments, user_table_id, activity_id, subject_id, permanently_locked) VALUES (?, ?, NULL, NULL, ?, ?, NULL, ?);');
         $stmt->bind_param("iiiis", $weight_percentage, $numb_of_pref_times, $user_table_id, $activity_id, $isCentral);
         $stmt->execute();
-    }
-    else if ($_GET['query'] == 'preferredTimes'){
+    } else if ($_GET['query'] == 'preferredTimes'){
         $data = json_decode($_GET['data']);
         $time_cons_id = $data[0];
 
@@ -516,6 +527,23 @@ function createNew($mysqli)
         $stmt = $mysqli->prepare('INSERT INTO space_constraints (weight_percentage, num_of_pref_rooms, active, comments, user_table_id, activity_id, subject_id, permanently_locked) VALUES (?, ?, NULL, NULL, ?, ?, NULL, ?);');
         $stmt->bind_param("iiiis", $weight_percentage, $numb_of_pref_rooms, $user_table_id, $activity_id, $isCentral);
         $stmt->execute();
+    } else if ($_GET['query'] == 'activityNOverlaps'){
+        $data = json_decode($_GET['data']);
+        $num_of_activities = count($data[0]);
+        $weight_percentage  = $data[1];
+
+        $stmt = $mysqli->prepare('INSERT INTO activities_not_overlapping_con (num_of_activities, weight_percentage, active, comments, user_table_id) VALUES (?, ?, NULL, NULL, ?);');
+        $stmt->bind_param("iii", $num_of_activities, $weight_percentage, $user_table_id);
+        $stmt->execute();
+    } else if ($_GET['query'] == 'listActivityNOverlaps'){
+        $data = json_decode($_GET['data']);
+        $anoc_id = $data[0];
+
+        foreach($data[1] as &$v){
+            $stmt = $mysqli->prepare('INSERT INTO list_of_anoc (anoc_id, activity_id) VALUES (?, ?);');
+            $stmt->bind_param("ii", $anoc_id, $v->id);
+            $stmt->execute();
+        }
     }
 
     $nrows = $mysqli->insert_id;
@@ -560,6 +588,9 @@ function destroyRow($mysqli, $id)
     } else if ($_GET['query'] == 'activitySpaceConstraints'){
         $mysqli->query("DELETE FROM space_constraints WHERE space_cons_id = $id");
         $mysqli->query("DELETE FROM preferred_rooms WHERE space_cons_id = $id");
+    } else if ($_GET['query'] == 'activityNOverlaps'){
+        $mysqli->query("DELETE FROM activities_not_overlapping_con WHERE anoc_id = $id");
+        $mysqli->query("DELETE FROM list_of_anoc WHERE anoc_id = $id");
     }
 
     $i = $mysqli->affected_rows;
@@ -741,6 +772,30 @@ function queryById($mysqli, $id){
                     $row_array['room_name'] = $row['room_name'];
                     $row_array['building_id']   = $row['preferred_rooms.building_id'];
                     $row_array['build_name'] = $row['build_name'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if ($_GET['query'] == 'activityNOverlaps'){
+            $sql = 
+            'SELECT * FROM activities_not_overlapping_con WHERE anoc_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['anoc_id']   = $row['anoc_id '];
+                    $row_array['num_of_activities'] = $row['num_of_activities'];
+                    $row_array['weight_percentage']   = $row['weight_percentage'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if ($_GET['query'] == 'listActivityNOverlaps'){
+            $sql = 
+            'SELECT * FROM list_of_anoc WHERE anoc_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['list_anoc_id']   = $row['list_anoc_id '];
+                    $row_array['anoc_id'] = $row['anoc_id'];
+                    $row_array['id']   = $row['activity_id'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();

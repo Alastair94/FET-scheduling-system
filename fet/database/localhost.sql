@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2021 at 12:01 AM
+-- Generation Time: Apr 27, 2021 at 06:51 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -56,7 +56,32 @@ INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active
 (67, '1', NULL, 0, 17, 28, 191, NULL, -1),
 (68, '1', NULL, 1, 16, 24, 191, NULL, -1),
 (69, '1', NULL, 0, 17, 24, 191, NULL, 50),
-(70, '1', NULL, 0, 17, 23, 191, NULL, 100);
+(70, '1', NULL, 0, 17, 23, 191, NULL, 100),
+(71, '1', NULL, 0, 17, 25, 191, NULL, 666);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activities_not_overlapping_con`
+--
+
+CREATE TABLE `activities_not_overlapping_con` (
+  `anoc_id` int(11) NOT NULL,
+  `num_of_activities` int(11) NOT NULL,
+  `weight_percentage` int(3) NOT NULL,
+  `active` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'true',
+  `comments` longtext COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `user_table_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `activities_not_overlapping_con`
+--
+
+INSERT INTO `activities_not_overlapping_con` (`anoc_id`, `num_of_activities`, `weight_percentage`, `active`, `comments`, `user_table_id`) VALUES
+(4, 2, 96, NULL, NULL, 191),
+(5, 2, 96, NULL, NULL, 191),
+(6, 2, 100, NULL, NULL, 191);
 
 -- --------------------------------------------------------
 
@@ -92,7 +117,10 @@ INSERT INTO `activity_groups` (`activity_groups_id`, `activity_id`, `group_id`, 
 (6, 62, 40, 'informatikus'),
 (7, 64, 40, 'informatikus'),
 (8, 65, 40, 'informatikus'),
-(9, 66, 40, 'informatikus');
+(9, 66, 40, 'informatikus'),
+(10, 71, 39, 'matematikus'),
+(11, 71, 40, 'informatikus'),
+(12, 71, 41, '007');
 
 -- --------------------------------------------------------
 
@@ -125,7 +153,9 @@ INSERT INTO `activity_subgroups` (`activity_subgroups_id`, `activity_id`, `subgr
 (13, 70, 22, 'B csoport'),
 (14, 70, 23, 'C csoport'),
 (15, 70, 24, 'D csoport'),
-(16, 70, 25, 'E csoport');
+(16, 70, 25, 'E csoport'),
+(17, 71, 19, 'jók'),
+(18, 71, 20, 'rosszak');
 
 -- --------------------------------------------------------
 
@@ -157,7 +187,14 @@ INSERT INTO `activity_years` (`activity_years_id`, `activity_id`, `year_id`, `ye
 (19, 70, 45, '2017'),
 (20, 70, 46, '2016'),
 (21, 70, 47, '2015'),
-(22, 70, 48, '2014');
+(22, 70, 48, '2014'),
+(23, 71, 48, '2014'),
+(24, 71, 47, '2015'),
+(25, 71, 46, '2016'),
+(26, 71, 45, '2017'),
+(27, 71, 44, '2018'),
+(28, 71, 43, '2019'),
+(29, 71, 42, '2020');
 
 -- --------------------------------------------------------
 
@@ -300,6 +337,30 @@ INSERT INTO `hours` (`hours_id`, `hour_name`, `user_table_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `list_of_anoc`
+--
+
+CREATE TABLE `list_of_anoc` (
+  `list_anoc_id` int(11) NOT NULL,
+  `anoc_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `list_of_anoc`
+--
+
+INSERT INTO `list_of_anoc` (`list_anoc_id`, `anoc_id`, `activity_id`) VALUES
+(4, 4, 64),
+(5, 4, 69),
+(6, 5, 66),
+(7, 5, 68),
+(8, 6, 70),
+(9, 6, 69);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `min_days_constraints`
 --
 
@@ -351,11 +412,6 @@ INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`, `bui
 (55, 78, 103, 0),
 (56, 78, 104, 0),
 (57, 78, 105, 0),
-(65, 82, 102, 0),
-(66, 82, 103, 0),
-(67, 82, 104, 0),
-(68, 82, 105, 0),
-(69, 82, 106, 0),
 (70, 83, 102, 0),
 (71, 83, 103, 0),
 (72, 83, 104, 0),
@@ -367,7 +423,8 @@ INSERT INTO `preferred_rooms` (`pref_rooms_id`, `space_cons_id`, `room_id`, `bui
 (83, 85, 104, 0),
 (84, 85, 103, 0),
 (85, 85, 102, 0),
-(86, 86, 108, 0);
+(86, 86, 108, 0),
+(112, 105, 108, 15);
 
 -- --------------------------------------------------------
 
@@ -466,10 +523,10 @@ INSERT INTO `space_constraints` (`space_cons_id`, `weight_percentage`, `num_of_p
 (58, '100', 3, NULL, NULL, 183, NULL, 11, NULL),
 (68, '100', 3, NULL, NULL, 183, NULL, 15, NULL),
 (78, '100', 4, NULL, NULL, 191, NULL, 24, NULL),
-(82, '100', 5, NULL, NULL, 191, NULL, 25, NULL),
 (83, '100', 5, NULL, NULL, 191, NULL, 28, NULL),
 (85, '100', 6, NULL, NULL, 191, NULL, 23, NULL),
-(86, '100', 1, NULL, NULL, 191, NULL, 26, NULL);
+(86, '100', 1, NULL, NULL, 191, NULL, 26, NULL),
+(105, '100', 1, NULL, NULL, 191, NULL, 25, NULL);
 
 -- --------------------------------------------------------
 
@@ -711,6 +768,12 @@ ALTER TABLE `activities`
   ADD KEY `fk_activities_user_tables1` (`user_table_id`);
 
 --
+-- Indexes for table `activities_not_overlapping_con`
+--
+ALTER TABLE `activities_not_overlapping_con`
+  ADD PRIMARY KEY (`anoc_id`);
+
+--
 -- Indexes for table `activities_same_start`
 --
 ALTER TABLE `activities_same_start`
@@ -778,6 +841,12 @@ ALTER TABLE `groups`
 ALTER TABLE `hours`
   ADD PRIMARY KEY (`hours_id`),
   ADD KEY `fk_hours_user_tables1` (`user_table_id`);
+
+--
+-- Indexes for table `list_of_anoc`
+--
+ALTER TABLE `list_of_anoc`
+  ADD PRIMARY KEY (`list_anoc_id`);
 
 --
 -- Indexes for table `min_days_constraints`
@@ -909,7 +978,13 @@ ALTER TABLE `user_tables`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `activities_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `activities_not_overlapping_con`
+--
+ALTER TABLE `activities_not_overlapping_con`
+  MODIFY `anoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `activities_same_start`
@@ -921,19 +996,19 @@ ALTER TABLE `activities_same_start`
 -- AUTO_INCREMENT for table `activity_groups`
 --
 ALTER TABLE `activity_groups`
-  MODIFY `activity_groups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `activity_groups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `activity_subgroups`
 --
 ALTER TABLE `activity_subgroups`
-  MODIFY `activity_subgroups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `activity_subgroups_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `activity_years`
 --
 ALTER TABLE `activity_years`
-  MODIFY `activity_years_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `activity_years_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `basic_compulsory_constraints`
@@ -972,6 +1047,12 @@ ALTER TABLE `hours`
   MODIFY `hours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `list_of_anoc`
+--
+ALTER TABLE `list_of_anoc`
+  MODIFY `list_anoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `min_days_constraints`
 --
 ALTER TABLE `min_days_constraints`
@@ -987,13 +1068,13 @@ ALTER TABLE `min_days_for_activities`
 -- AUTO_INCREMENT for table `preferred_rooms`
 --
 ALTER TABLE `preferred_rooms`
-  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `pref_rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `preferred_times`
 --
 ALTER TABLE `preferred_times`
-  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `pref_times_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -1011,7 +1092,7 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `space_constraints`
 --
 ALTER TABLE `space_constraints`
-  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `space_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -1047,7 +1128,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `time_constraints`
 --
 ALTER TABLE `time_constraints`
-  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `time_cons_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_files`

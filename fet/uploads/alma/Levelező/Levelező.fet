@@ -5,7 +5,7 @@
   <Days_List>
     <Number_of_Days>5</Number_of_Days>
     <Day>
-      <Name>Hétf</Name>
+      <Name>Hétfő</Name>
     </Day>
     <Day>
       <Name>Kedd</Name>
@@ -278,6 +278,29 @@
       <Active>true</Active>
       <Comments></Comments>
     </Activity>
+    <Activity>
+      <Teacher>Király Roland</Teacher>
+      <Subject>Biológia</Subject>
+      <Students>2014</Students>
+      <Students>2015</Students>
+      <Students>2016</Students>
+      <Students>2017</Students>
+      <Students>2018</Students>
+      <Students>2019</Students>
+      <Students>2020</Students>
+      <Students>matematikus</Students>
+      <Students>informatikus</Students>
+      <Students>007</Students>
+      <Students>jók</Students>
+      <Students>rosszak</Students>
+      <Duration>1</Duration>
+      <Total_Duration></Total_Duration>
+      <Id>71</Id>
+      <Activity_Group_Id></Activity_Group_Id>
+      <Number_Of_Students>666</Number_Of_Students>
+      <Active>true</Active>
+      <Comments></Comments>
+    </Activity>
   </Activities_List>
   <Buildings_List>
     <Building>
@@ -334,6 +357,30 @@
       <Active>True</Active>
       <Comments></Comments>
     </ConstraintBasicCompulsoryTime>
+    <ConstraintActivitiesNotOverlapping>
+      <Weight_Percentage>96</Weight_Percentage>
+      <Number_of_Activities>2</Number_of_Activities>
+      <Activity_Id>64</Activity_Id>
+      <Activity_Id>69</Activity_Id>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivitiesNotOverlapping>
+    <ConstraintActivitiesNotOverlapping>
+      <Weight_Percentage>96</Weight_Percentage>
+      <Number_of_Activities>2</Number_of_Activities>
+      <Activity_Id>66</Activity_Id>
+      <Activity_Id>68</Activity_Id>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivitiesNotOverlapping>
+    <ConstraintActivitiesNotOverlapping>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Number_of_Activities>2</Number_of_Activities>
+      <Activity_Id>70</Activity_Id>
+      <Activity_Id>69</Activity_Id>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivitiesNotOverlapping>
   </Time_Constraints_List>
   <Space_Constraints_List>
     <ConstraintBasicCompulsorySpace>
@@ -348,7 +395,7 @@
       <Preferred_Room>102</Preferred_Room>
       <Preferred_Room>103</Preferred_Room>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
+      <Active>true</Active>
       <Comments></Comments>
     </ConstraintSubjectPreferredRooms>
     <ConstraintSubjectPreferredRooms>
@@ -359,18 +406,7 @@
       <Preferred_Room>103</Preferred_Room>
       <Preferred_Room>Nagyterem</Preferred_Room>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
-      <Comments></Comments>
-    </ConstraintSubjectPreferredRooms>
-    <ConstraintSubjectPreferredRooms>
-      <Number_of_Preferred_Rooms>5</Number_of_Preferred_Rooms>
-      <Preferred_Room>100</Preferred_Room>
-      <Preferred_Room>101</Preferred_Room>
-      <Preferred_Room>102</Preferred_Room>
-      <Preferred_Room>103</Preferred_Room>
-      <Preferred_Room>Nagyterem</Preferred_Room>
-      <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
+      <Active>true</Active>
       <Comments></Comments>
     </ConstraintSubjectPreferredRooms>
     <ConstraintSubjectPreferredRooms>
@@ -382,31 +418,20 @@
       <Preferred_Room>101</Preferred_Room>
       <Preferred_Room>100</Preferred_Room>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
+      <Active>true</Active>
       <Comments></Comments>
     </ConstraintSubjectPreferredRooms>
     <ConstraintSubjectPreferredRoom>
       <Room>xaxaxaxaxa</Room>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
+      <Active>true</Active>
       <Comments></Comments>
     </ConstraintSubjectPreferredRoom>
-    <ConstraintActivityPreferredRooms>
-      <Number_of_Preferred_Rooms>2</Number_of_Preferred_Rooms>
-      <Preferred_Room>103</Preferred_Room>
-      <Preferred_Room>102</Preferred_Room>
-      <Activity_Id>62</Activity_Id>
+    <ConstraintSubjectPreferredRoom>
+      <Room>xaxaxaxaxa</Room>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
+      <Active>true</Active>
       <Comments></Comments>
-    </ConstraintActivityPreferredRooms>
-    <ConstraintActivityPreferredRoom>
-      <Permanently_Locked>false</Permanently_Locked>
-      <Room>100</Room>
-      <Activity_Id>66</Activity_Id>
-      <Weight_Percentage>100</Weight_Percentage>
-      <Active></Active>
-      <Comments></Comments>
-    </ConstraintActivityPreferredRoom>
+    </ConstraintSubjectPreferredRoom>
   </Space_Constraints_List>
 </fet>

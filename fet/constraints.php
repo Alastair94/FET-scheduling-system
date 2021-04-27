@@ -26,13 +26,11 @@
 			<article id="box">
 				<ul class="tabs">
 					<li><a href="#tab1" data-toggle="tab">Subjects</a></li>
-					<li><a href="#tab2" data-toggle="tab">Teachers</a></li>
-					<li><a href="#tab3" data-toggle="tab">Students</a></li>
-					<li><a href="#tab4" data-toggle="tab">Space</a></li>
-					<li><a href="#tab5" data-toggle="tab">Activities</a></li>
+					<li><a href="#tab2" data-toggle="tab">Space&Time for activities</a></li>
+					<li><a href="#tab3" data-toggle="tab">Not overlapping activities</a></li>
 				</ul>
 				<div class="tab_container" ng-controller="AppController">
-				<!-- ================= TAB 1 ========================= -->
+				
 					<div id="tab1" class="tab_content">
 						<div ng-controller="SubjectsCtrl">
 							<div>
@@ -86,218 +84,244 @@
 							<div ng-view></div>
 						</div>
 					</div>
-					<!--
-					<div id="tab2" class="tab_content" ng-controller="SubjectsCtrl">
-						<form class="subForm" name="myForm">
-							Subject name:<br> <input name="input" ng-model="subjectName" required>
-							<span class="error" ng-show="myForm.input.$error.required">Required!</span>
-							<button ng-click="addItem()" >Add</button><br>
-						</form>
-						<ul class="unstyled">
-							<li ng-repeat="subject in subjects">
-								<span class="done-{{todo.done}}">{{subject.name}}</span>
-								<a href ng-click="editThis(subject.id)">edit</a>
-							</li>
-						</ul>
-						<div ng-include src="template.url"></div>
-						<div ng-view="testXX"></div>
 
-					</div>
-    
-					<div id="tab3" class="tab_content" ng-controller="StudentsCtrl">
-						<form class="subForm" name="myForm">
-							Student name:<br> <input name="input" ng-model="studentName" required><br>
-							Student amount:<br> <input name="input" ng-model="studentAmount" required><br>
-							<span class="error" ng-show="myForm.input.$error.required">Required!</span>
-							<button ng-click="addItem()">Add</button><br>
-						</form>
-						<ul class="unstyled">
-							<li ng-repeat="student in students">
-								<span class="done-{{todo.done}}">{{student.year_name}} - {{student.num_students}}</span>
-								<a href ng-click="editThis(student.id)">edit</a>
-							</li>
-						</ul>
-						<div ng-include src="template.url"></div>
-					</div>
-					
-					<div id="tab4" class="tab_content" ng-controller="SpaceCtrl">
-						<div style="width: 300px; float: left">
-							<p>Add buildings</p>
-							<form class="subForm" name="myForm">
-								Building:<br> <input name="input" ng-model="buildingInput"><br>
-								<input name="input" type="hidden" ng-model="buildingID"><br>
-								<button ng-click="addItem()">Add</button> <button ng-click="editItem()" ng-disabled="showB()">Edit</button>
-								<button ng-click="deleteItem()" ng-disabled="showB()">Delete</button><br>
-							</form>
-							<select ng-model="building" ng-options="c.name for c in buildings" size="10" ng-change="update()" style="min-width: 200px;"></select>
-						</div>
-						<div style="width: 300px; float: left">
-							<p>Add rooms</p> 
-							<form class="subForm" name="myForm">
-								Select building: <br><select ng-model="building" ng-options="c.name for c in buildings" ng-change="update()"></select><br/>
-								Room name: <br><input name="input" ng-model="roomName" required><br>
-								Capacity: <br><input name="input" ng-model="roomCapacity" required><br>
-								<input name="input" type="hidden" ng-model="roomID"><br>
-								<button ng-click="addRoom()">Add</button> <button ng-click="editRoom()" ng-disabled="show()">Edit</button>
-								<button ng-click="deleteRoom(room.id)" ng-disabled="show()">Delete</button><br>
-							</form><br>
-							<select ng-model="room" ng-options="(r.name + ' - ' + r.capacity) for r in rooms" size="10" style="min-width: 200px;" select>
-						</div>
-					</div>
-      -->
-					<div id="tab5" class="tab_content" ng-controller="ActivitiesCtrl">
-					<div>
+					<div id="tab2" class="tab_content" ng-controller="ActivitiesCtrl">
 						<div>
-							Activities:<br>
-							<select 
-								ng-model="activity" 
-								ng-options="'ID: ' + act.id for act in activities"
-								ng-change="isTaken(activity)">
-								<option value="" selected disabled hidden>Choose here</option>
-							</select>
-						</div>
-						<table style="width:100%; text-align: center; table-layout: fixed">
-							<tr>
-								<th>ID:</th>
-								<th>Duration:</th>
-								<th>Active:</th>
-								<th>Teacher:</th>
-								<th>Subject:</th>
-								<th>Headcount:</th>
-							</tr>
-							<tr style="height: 30px">
-								<td>{{activity.id}} </td>
-								<td>{{activity.duration}}</td>
-								<td>{{activity.active==0 && 'True' || activity.active==1 && 'False' || ''}}</td>
-								<td>{{activity.teach_name}}</td>
-								<td>{{activity.subj_name}}</td>
-								<td>{{activity.number_of_students}}</td>
-							</tr>
-							<tr>
-								<td colspan="6">Students:</td>
-							</tr>
-							<tr>
-								<th colspan="2">Years:</th>
-								<th colspan="2">Groups:</th>
-								<th colspan="2">Subgroups:</th>
-							</tr>
-						</table>
-						<div style="width:100%; display:flex; text-align: center;">
-							<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
-								<p ng-repeat="act in activity.year_array">{{act.year_name}}</p>
+							<div>
+								Activities:<br>
+								<select 
+									ng-model="activity" 
+									ng-options="'ID: ' + act.id for act in activities"
+									ng-change="isTaken(activity)">
+									<option value="" selected disabled hidden>Choose here</option>
+								</select>
 							</div>
-							<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
-								<p ng-repeat="act in activity.group_array">{{act.group_name}}</p>
+							<table style="width:100%; text-align: center; table-layout: fixed">
+								<tr>
+									<th>ID:</th>
+									<th>Duration:</th>
+									<th>Active:</th>
+									<th>Teacher:</th>
+									<th>Subject:</th>
+									<th>Headcount:</th>
+								</tr>
+								<tr style="height: 30px">
+									<td>{{activity.id}} </td>
+									<td>{{activity.duration}}</td>
+									<td>{{activity.active==0 && 'True' || activity.active==1 && 'False' || ''}}</td>
+									<td>{{activity.teach_name}}</td>
+									<td>{{activity.subj_name}}</td>
+									<td>{{activity.number_of_students}}</td>
+								</tr>
+								<tr>
+									<td colspan="6">Students:</td>
+								</tr>
+								<tr>
+									<th colspan="2">Years:</th>
+									<th colspan="2">Groups:</th>
+									<th colspan="2">Subgroups:</th>
+								</tr>
+							</table>
+							<div style="width:100%; display:flex; text-align: center;">
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.year_array">{{act.year_name}}</p>
+								</div>
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.group_array">{{act.group_name}}</p>
+								</div>
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.subgroup_array">{{act.subgroup_name}}</p>
+								</div>
 							</div>
-							<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
-								<p ng-repeat="act in activity.subgroup_array">{{act.subgroup_name}}</p>
+							<div style="display:flex;">
+								<div style="display:flex">
+									<div>
+										<p style="width:200px;">
+											Time constraint:
+										</p>
+										<p style="width:200px; color:red" ng-show="takenTime">
+											There is already a time constraint for activity with that ID!
+										</p>
+									</div>
+									<select size="10" 
+											ng-model="act_day"
+											ng-disabled="takenTime"
+											ng-options="d.day_name for d in days" style="min-width: 150px;">
+									</select>
+									<select size="10" 
+											ng-model="act_hour"
+											ng-options="h.hour_name for h in hours" style="min-width: 150px;"
+											ng-disabled="takenTime"
+											ng-dblclick="selectTime()">
+									</select>
+									<select size="10" 
+											ng-model="chosen_time"
+											ng-dblclick="removeTime()"
+											ng-disabled="takenTime"
+											ng-options="c.day_name + '->' + c.hour_name for c in chosenTimes" style="min-width: 150px;">
+									</select>
+								</div>
+								<div>
+									<div>
+										<p>Preferred time: <span style="color:green">{{act_day.day_name}} {{act_hour.hour_name}}</span></p>
+									</div>
+									<div style="display:flex;">
+										<div style="display:flex;">
+											<input type="checkbox" ng-disabled="takenTime" id="centralTime" ng-click="isItCentralTime()" ng-model="act_central_time"><label for="centralTime">Is it central?</label>
+										</div>
+										<div style="margin-left:20px;">
+											<label for="weightPrefTime" style="width:100%;">Weight Percentage</label>
+											<input size="10"
+												ng-model="weightPTime"
+												ng-disabled="act_central_time || takenTime"
+												type="number"
+												min="0" max="100"
+												id="weightPrefTime" 
+											>
+										</div>
+									</div>
+									<button ng-click="saveActPrefTime()" ng-disabled="isTimeWrong() || takenTime" style="margin-top:30px; margin-left:100px;" >Add time constraint</button>
+									<button ng-click="deleteTime(act_timeConstraint.time_cons_id)" ng-show="takenTime" style="margin-top:30px; margin-left:100px;" >Delete time constraint</button>
+								</div>
 							</div>
+							<div style="display:flex;">
+								<div style="display:flex">
+									<div>
+										<p style="width:200px;">
+											Space constraint:
+										</p>
+										<p style="width:200px; color:red" ng-show="takenSpace">
+											There is already a space constraint for activity with that ID!
+										</p>
+									</div>
+									<select size="10" 
+											ng-model="act_building"
+											ng-options="b.name for b in buildings" style="min-width: 150px;"
+											ng-change="searchRoomsByBuilding(act_building.id)"
+											ng-disabled="takenSpace"
+											>
+									</select>
+									<select size="10" 
+											ng-model="act_room"
+											ng-options="r.room_name for r in rooms" style="min-width: 150px;"
+											ng-dblclick="selectSpace()"
+											ng-disabled="takenSpace">
+									</select>
+									<select size="10" 
+											ng-model="chosen_space"
+											ng-options="c.build_name + ' - ' + c.room_name for c in chosenSpaces" style="min-width: 150px;"
+											ng-disabled="takenSpace">
+									</select>
+								</div>
+								<div>
+									<div>
+										<p>Preferred room: <span style="color:green">{{act_building.name}} {{act_room.room_name}}</span></p>
+									</div>
+									<div style="display:flex;">
+										<div style="display:flex;">
+											<input ng-disabled="takenSpace" type="checkbox" id="centralSpace" ng-click="isItCentralSpace()" ng-model="act_central_space"><label for="centralSpace">Is it central?</label>
+										</div>
+										<div style="margin-left:20px;">
+											<label for="weightPrefSpace" style="width:100%;">Weight Percentage</label>
+											<input size="10"
+												ng-model="weightPSpace"
+												ng-disabled="act_central_space || takenSpace"
+												type="number"
+												min="0" max="100"
+												id="weightPrefSpace" 
+											>
+										</div>
+									</div>
+									<button ng-click="saveActPrefSpace()" ng-disabled="isSpaceWrong() || takenSpace" style="margin-top:30px; margin-left:100px;" >Add space constraint</button>
+									<button ng-click="deleteSpace(act_spaceConstraint.space_cons_id)" ng-show="takenSpace" style="margin-top:30px; margin-left:100px;" >Delete space constraint</button>
+								</div>
+							</div>
+							<div ng-include src="template.url"></div>
 						</div>
-						</div>
-						<div style="display:flex;">
+					</div>
+					<div id="tab3" class="tab_content" ng-controller="OverlappingCtrl">
+						<div>
 							<div style="display:flex">
 								<div>
-									<p style="width:200px;">
-										Time constraint:
-									</p>
-									<p style="width:200px; color:red" ng-show="takenTime">
-										There is already a time constraint for activity with that ID!
-									</p>
+									Activities:<br>
+									<select size="10" 
+											ng-model="activity"
+											ng-options="'ID: ' + act.id for act in activities"
+											style="min-width: 100px; height: 200px; margin-right: 50px"
+											ng-dblclick="selectActivity()">
+									</select>
 								</div>
-								<select size="10" 
-										ng-model="act_day"
-										ng-disabled="takenTime"
-										ng-options="d.day_name for d in days" style="min-width: 150px;">
-								</select>
-								<select size="10" 
-										ng-model="act_hour"
-										ng-options="h.hour_name for h in hours" style="min-width: 150px;"
-										ng-disabled="takenTime"
-										ng-dblclick="selectTime()">
-								</select>
-								<select size="10" 
-										ng-model="chosen_time"
-										ng-dblclick="removeTime()"
-										ng-disabled="takenTime"
-										ng-options="c.day_name + '->' + c.hour_name for c in chosenTimes" style="min-width: 150px;">
-								</select>
-							</div>
-							<div>
 								<div>
-									<p>Preferred time: <span style="color:green">{{act_day.day_name}} {{act_hour.hour_name}}</span></p>
+									No overlap:<br>
+									<select size="10" 
+											ng-model="chosenActivity"
+											ng-disabled="disabledCActivities"
+											ng-options="'ID: ' + act.id for act in chosenActivities"
+											style="min-width: 100px; height: 200px;"
+											ng-dblclick="removeActivity()">
+									</select>
 								</div>
-								<div style="display:flex;">
-									<div style="display:flex;">
-										<input type="checkbox" ng-disabled="takenTime" id="centralTime" ng-click="isItCentralTime()" ng-model="act_central_time"><label for="centralTime">Is it central?</label>
-									</div>
-									<div style="margin-left:20px;">
-										<label for="weightPrefTime" style="width:100%;">Weight Percentage</label>
-										<input size="10"
-											ng-model="weightPTime"
-											ng-disabled="act_central_time || takenTime"
-											type="number"
-											min="0" max="100"
-											id="weightPrefTime" 
+								<div style="margin:auto;">
+									Weight Percentage<br>
+									<input size="10"
+										ng-model="weightO"
+										type="number"
+										min="0" max="100"
+										ng-disabled="disabledCActivities"
 										>
-									</div>
 								</div>
-								<button ng-click="saveActPrefTime()" ng-disabled="isTimeWrong() || takenTime" style="margin-top:30px; margin-left:100px;" >Add time constraint</button>
-								<button ng-click="deleteTime(act_timeConstraint.time_cons_id)" ng-show="takenTime" style="margin-top:30px; margin-left:100px;" >Delete time constraint</button>
+								<div style="margin:auto; margin-left:20px; width:150px">
+									<button ng-click="saveNOverlap()" ng-disabled="isActivityWrong() || disabledCActivities" style="height:50px; width:150px; margin:auto" >Add time constraint</button>
+									<button ng-click="deleteNOverlap(noverlap.anoc_id)" ng-show="disabledCActivities"  style="height:50px; width:150px; margin:auto"  >Delete time constraint</button>
+								</div>
+								<div>
+									Constraints:<br>
+									<select size="10" 
+											ng-model="noverlap"
+											ng-options="'ID: ' + n.anoc_id for n in noverlaps"
+											style="min-width: 100px; height: 200px; margin-right: 50px"
+											ng-click="selectNOverlap(noverlap)">
+									</select>
+								</div>
+							</div>
+							<table style="width:100%; text-align: center; table-layout: fixed">
+								<tr>
+									<th>ID:</th>
+									<th>Duration:</th>
+									<th>Active:</th>
+									<th>Teacher:</th>
+									<th>Subject:</th>
+									<th>Headcount:</th>
+								</tr>
+								<tr style="height: 30px">
+									<td>{{activity.id}} </td>
+									<td>{{activity.duration}}</td>
+									<td>{{activity.active==0 && 'True' || activity.active==1 && 'False' || ''}}</td>
+									<td>{{activity.teach_name}}</td>
+									<td>{{activity.subj_name}}</td>
+									<td>{{activity.number_of_students}}</td>
+								</tr>
+								<tr>
+									<td colspan="6">Students:</td>
+								</tr>
+								<tr>
+									<th colspan="2">Years:</th>
+									<th colspan="2">Groups:</th>
+									<th colspan="2">Subgroups:</th>
+								</tr>
+							</table>
+							<div style="width:100%; display:flex; text-align: center;">
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.year_array">{{act.year_name}}</p>
+								</div>
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.group_array">{{act.group_name}}</p>
+								</div>
+								<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+									<p ng-repeat="act in activity.subgroup_array">{{act.subgroup_name}}</p>
+								</div>
 							</div>
 						</div>
-						<div style="display:flex;">
-							<div style="display:flex">
-								<div>
-									<p style="width:200px;">
-										Space constraint:
-									</p>
-									<p style="width:200px; color:red" ng-show="takenSpace">
-										There is already a space constraint for activity with that ID!
-									</p>
-								</div>
-								<select size="10" 
-										ng-model="act_building"
-										ng-options="b.name for b in buildings" style="min-width: 150px;"
-										ng-change="searchRoomsByBuilding(act_building.id)"
-										ng-disabled="takenSpace"
-										>
-								</select>
-								<select size="10" 
-										ng-model="act_room"
-										ng-options="r.room_name for r in rooms" style="min-width: 150px;"
-										ng-dblclick="selectSpace()"
-										ng-disabled="takenSpace">
-								</select>
-								<select size="10" 
-										ng-model="chosen_space"
-										ng-options="c.build_name + ' - ' + c.room_name for c in chosenSpaces" style="min-width: 150px;"
-										ng-disabled="takenSpace">
-								</select>
-							</div>
-							<div>
-								<div>
-									<p>Preferred room: <span style="color:green">{{act_building.name}} {{act_room.room_name}}</span></p>
-								</div>
-								<div style="display:flex;">
-									<div style="display:flex;">
-										<input ng-disabled="takenSpace" type="checkbox" id="centralSpace" ng-click="isItCentralSpace()" ng-model="act_central_space"><label for="centralSpace">Is it central?</label>
-									</div>
-									<div style="margin-left:20px;">
-										<label for="weightPrefSpace" style="width:100%;">Weight Percentage</label>
-										<input size="10"
-											ng-model="weightPSpace"
-											ng-disabled="act_central_space || takenSpace"
-											type="number"
-											min="0" max="100"
-											id="weightPrefSpace" 
-										>
-									</div>
-								</div>
-								<button ng-click="saveActPrefSpace()" ng-disabled="isSpaceWrong() || takenSpace" style="margin-top:30px; margin-left:100px;" >Add space constraint</button>
-								<button ng-click="deleteSpace(act_spaceConstraint.space_cons_id)" ng-show="takenSpace" style="margin-top:30px; margin-left:100px;" >Delete space constraint</button>
-							</div>
-						</div>
-						<div ng-include src="template.url"></div>
 					</div>
 				</div>
 				<br>

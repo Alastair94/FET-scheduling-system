@@ -288,6 +288,7 @@
 		buildNode($fet, $basic, 'Comments',  '');
 					
 		getMinDays($fet, $timeCons, $mysqli, $userTableID);
+		getNOverlapActivities($fet, $timeCons, $mysqli, $userTableID);
 		
 		getSameStartHour($fet, $timeCons, $mysqli, $userTableID);	
 	}
@@ -376,7 +377,7 @@
 				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
 				// buildNode($fet, $actPrefRooms, 'Subject', $tuple['subj_name']);
 				buildNode($fet, $actPrefRooms, 'Weight_Percentage', $tuple['weight_percentage']);
-				buildNode($fet, $actPrefRooms, 'Active', $tuple['active']);
+				buildNode($fet, $actPrefRooms, 'Active', 'true');			//////////////////////////////////////////////////
 				buildNode($fet, $actPrefRooms, 'Comments', $tuple['comments']);
 			} 
 			else if ($tuple['subject_id'] == NULL){
@@ -424,6 +425,29 @@
 			while($tuple = $queryResult->fetch_assoc()){
 				buildNode($fet, $actPrefRooms, 'Preferred_Room', $tuple['room_name']);
 			}
+		}
+	}
+
+	function getNOverlapActivities(&$fet, $timeCons, $mysqli, $userTableID){
+		$query = "SELECT anoc_id, num_of_activities, weight_percentage, active, comments FROM activities_not_overlapping_con WHERE activities_not_overlapping_con.user_table_id = ".$userTableID;
+		$queryResult = $mysqli->query($query);
+
+		while($tuple = $queryResult->fetch_assoc()){
+			$NOverlapCons = $fet->createElement('ConstraintActivitiesNotOverlapping');
+			$NOverlapCons = $timeCons->appendChild($NOverlapCons);
+
+			buildNode($fet, $NOverlapCons, 'Weight_Percentage', $tuple['weight_percentage']);
+			buildNode($fet, $NOverlapCons, 'Number_of_Activities', $tuple['num_of_activities']);
+		
+			$query2 = "SELECT activity_id FROM list_of_anoc WHERE anoc_id = ".$tuple['anoc_id'];
+			$queryResult2 = $mysqli->query($query2);
+			
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				buildNode($fet, $NOverlapCons, 'Activity_Id', $tuple2['activity_id']);
+			}
+
+			buildNode($fet, $NOverlapCons, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $NOverlapCons, 'Comments', $tuple['comments']);
 		}
 	}
 

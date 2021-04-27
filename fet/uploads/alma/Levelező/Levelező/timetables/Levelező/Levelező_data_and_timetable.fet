@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<fet version="5.49.1">
+<fet version="5.49.0">
 
 <Institution_Name>EKE</Institution_Name>
 
@@ -9,7 +9,7 @@
 <Days_List>
 <Number_of_Days>5</Number_of_Days>
 <Day>
-	<Name>Hétf</Name>
+	<Name>Hétfő</Name>
 </Day>
 <Day>
 	<Name>Kedd</Name>
@@ -343,6 +343,29 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </Activity>
+<Activity>
+	<Teacher>Király Roland</Teacher>
+	<Subject>Biológia</Subject>
+	<Students>2014</Students>
+	<Students>2015</Students>
+	<Students>2016</Students>
+	<Students>2017</Students>
+	<Students>2018</Students>
+	<Students>2019</Students>
+	<Students>2020</Students>
+	<Students>matematikus</Students>
+	<Students>informatikus</Students>
+	<Students>007</Students>
+	<Students>jók</Students>
+	<Students>rosszak</Students>
+	<Duration>1</Duration>
+	<Total_Duration>0</Total_Duration>
+	<Id>71</Id>
+	<Activity_Group_Id>0</Activity_Group_Id>
+	<Number_Of_Students>666</Number_Of_Students>
+	<Active>true</Active>
+	<Comments></Comments>
+</Activity>
 </Activities_List>
 
 <Buildings_List>
@@ -411,19 +434,34 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintBasicCompulsoryTime>
+<ConstraintActivitiesNotOverlapping>
+	<Weight_Percentage>96</Weight_Percentage>
+	<Number_of_Activities>2</Number_of_Activities>
+	<Activity_Id>64</Activity_Id>
+	<Activity_Id>69</Activity_Id>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivitiesNotOverlapping>
+<ConstraintActivitiesNotOverlapping>
+	<Weight_Percentage>96</Weight_Percentage>
+	<Number_of_Activities>2</Number_of_Activities>
+	<Activity_Id>66</Activity_Id>
+	<Activity_Id>68</Activity_Id>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivitiesNotOverlapping>
+<ConstraintActivitiesNotOverlapping>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Number_of_Activities>2</Number_of_Activities>
+	<Activity_Id>70</Activity_Id>
+	<Activity_Id>69</Activity_Id>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivitiesNotOverlapping>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>62</Activity_Id>
-	<Preferred_Day>Hétf</Preferred_Day>
-	<Preferred_Hour>16:00</Preferred_Hour>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredStartingTime>
-<ConstraintActivityPreferredStartingTime>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>63</Activity_Id>
-	<Preferred_Day>Hétf</Preferred_Day>
+	<Preferred_Day>Péntek</Preferred_Day>
 	<Preferred_Hour>14:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
@@ -431,17 +469,8 @@
 </ConstraintActivityPreferredStartingTime>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>64</Activity_Id>
-	<Preferred_Day>Péntek</Preferred_Day>
-	<Preferred_Hour>10:00</Preferred_Hour>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredStartingTime>
-<ConstraintActivityPreferredStartingTime>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>65</Activity_Id>
-	<Preferred_Day>Péntek</Preferred_Day>
+	<Activity_Id>63</Activity_Id>
+	<Preferred_Day>Hétfő</Preferred_Day>
 	<Preferred_Hour>13:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
@@ -449,9 +478,27 @@
 </ConstraintActivityPreferredStartingTime>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
+	<Activity_Id>64</Activity_Id>
+	<Preferred_Day>Hétfő</Preferred_Day>
+	<Preferred_Hour>14:00</Preferred_Hour>
+	<Permanently_Locked>false</Permanently_Locked>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivityPreferredStartingTime>
+<ConstraintActivityPreferredStartingTime>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Activity_Id>65</Activity_Id>
+	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Hour>11:00</Preferred_Hour>
+	<Permanently_Locked>false</Permanently_Locked>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivityPreferredStartingTime>
+<ConstraintActivityPreferredStartingTime>
+	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>66</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>08:00</Preferred_Hour>
+	<Preferred_Day>Hétfő</Preferred_Day>
+	<Preferred_Hour>16:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -459,6 +506,15 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>67</Activity_Id>
+	<Preferred_Day>Péntek</Preferred_Day>
+	<Preferred_Hour>16:00</Preferred_Hour>
+	<Permanently_Locked>false</Permanently_Locked>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintActivityPreferredStartingTime>
+<ConstraintActivityPreferredStartingTime>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Activity_Id>69</Activity_Id>
 	<Preferred_Day>Kedd</Preferred_Day>
 	<Preferred_Hour>11:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
@@ -467,18 +523,18 @@
 </ConstraintActivityPreferredStartingTime>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>69</Activity_Id>
-	<Preferred_Day>Csütörtök</Preferred_Day>
-	<Preferred_Hour>14:00</Preferred_Hour>
+	<Activity_Id>70</Activity_Id>
+	<Preferred_Day>Péntek</Preferred_Day>
+	<Preferred_Hour>08:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintActivityPreferredStartingTime>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>70</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>13:00</Preferred_Hour>
+	<Activity_Id>71</Activity_Id>
+	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Hour>12:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -517,18 +573,6 @@
 <ConstraintSubjectPreferredRooms>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Subject></Subject>
-	<Number_of_Preferred_Rooms>5</Number_of_Preferred_Rooms>
-	<Preferred_Room>100</Preferred_Room>
-	<Preferred_Room>101</Preferred_Room>
-	<Preferred_Room>102</Preferred_Room>
-	<Preferred_Room>103</Preferred_Room>
-	<Preferred_Room>Nagyterem</Preferred_Room>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintSubjectPreferredRooms>
-<ConstraintSubjectPreferredRooms>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Subject></Subject>
 	<Number_of_Preferred_Rooms>6</Number_of_Preferred_Rooms>
 	<Preferred_Room>xaxaxaxaxa</Preferred_Room>
 	<Preferred_Room>Nagyterem</Preferred_Room>
@@ -546,31 +590,13 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintSubjectPreferredRoom>
-<ConstraintActivityPreferredRooms>
+<ConstraintSubjectPreferredRoom>
 	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>62</Activity_Id>
-	<Number_of_Preferred_Rooms>2</Number_of_Preferred_Rooms>
-	<Preferred_Room>103</Preferred_Room>
-	<Preferred_Room>102</Preferred_Room>
+	<Subject></Subject>
+	<Room>xaxaxaxaxa</Room>
 	<Active>true</Active>
 	<Comments></Comments>
-</ConstraintActivityPreferredRooms>
-<ConstraintActivityPreferredRoom>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>66</Activity_Id>
-	<Room>100</Room>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
-<ConstraintActivityPreferredRoom>
-	<Weight_Percentage>100</Weight_Percentage>
-	<Activity_Id>62</Activity_Id>
-	<Room>102</Room>
-	<Permanently_Locked>false</Permanently_Locked>
-	<Active>true</Active>
-	<Comments></Comments>
-</ConstraintActivityPreferredRoom>
+</ConstraintSubjectPreferredRoom>
 </Space_Constraints_List>
 
 </fet>

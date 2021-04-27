@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Students_Timetable>
   <Subgroup name="jók">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -15,16 +15,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -41,7 +41,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -64,7 +64,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -107,7 +107,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -122,7 +122,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -133,7 +133,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="rosszak">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -147,21 +147,21 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
    </Day>
    <Day name="Kedd">
     <Hour name="08:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject><Room name="100"></Room>
+     
     </Hour>
     <Hour name="10:00">
      
@@ -173,7 +173,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -193,10 +193,10 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -239,10 +239,10 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
+     
     </Hour>
     <Hour name="11:00">
      
@@ -251,7 +251,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -265,7 +265,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="informatikus Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -279,21 +279,21 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
    </Day>
    <Day name="Kedd">
     <Hour name="08:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject><Room name="100"></Room>
+     
     </Hour>
     <Hour name="10:00">
      
@@ -305,7 +305,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -325,10 +325,10 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -371,10 +371,10 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
+     
     </Hour>
     <Hour name="11:00">
      
@@ -383,10 +383,10 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Biológia"></Subject>
+     
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -397,7 +397,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="007 Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -411,16 +411,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -437,7 +437,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -460,7 +460,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -503,7 +503,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -518,7 +518,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -529,7 +529,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="A csoport">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -543,16 +543,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -563,13 +563,13 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -592,7 +592,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -624,7 +624,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -635,7 +635,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -650,7 +650,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -661,7 +661,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="B csoport">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -675,16 +675,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -695,13 +695,13 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -724,7 +724,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -756,7 +756,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -767,7 +767,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -782,7 +782,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -793,7 +793,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="C csoport">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -807,16 +807,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -827,13 +827,13 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -856,7 +856,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -888,7 +888,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -899,7 +899,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -914,7 +914,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -925,7 +925,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="D csoport">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -939,16 +939,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -959,13 +959,13 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -988,7 +988,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1020,7 +1020,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -1031,7 +1031,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1046,7 +1046,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -1057,7 +1057,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="E csoport">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1071,16 +1071,16 @@
      
     </Hour>
     <Hour name="13:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -1091,13 +1091,13 @@
      
     </Hour>
     <Hour name="11:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1120,7 +1120,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1152,7 +1152,7 @@
      
     </Hour>
     <Hour name="14:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Informatika"></Subject>
+     
     </Hour>
     <Hour name="15:00">
      
@@ -1163,7 +1163,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1178,7 +1178,7 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
@@ -1189,7 +1189,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="2018 Automatic Group Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1212,7 +1212,7 @@
      
     </Hour>
     <Hour name="16:00">
-     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject><Room name="102"></Room>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -1223,13 +1223,13 @@
      
     </Hour>
     <Hour name="11:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Történelem"></Subject>
+     
     </Hour>
     <Hour name="12:00">
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1252,7 +1252,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1295,7 +1295,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1310,18 +1310,18 @@
      
     </Hour>
     <Hour name="14:00">
-     
+     <Teacher name="Geda Gábor"></Teacher><Subject name="Informatika"></Subject>
     </Hour>
     <Hour name="15:00">
      
     </Hour>
     <Hour name="16:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Történelem"></Subject>
     </Hour>
    </Day>
   </Subgroup>
   <Subgroup name="2017 Automatic Group Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1361,7 +1361,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1384,7 +1384,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1427,7 +1427,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1453,7 +1453,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="2016 Automatic Group Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1493,7 +1493,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1516,7 +1516,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1559,7 +1559,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1585,7 +1585,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="2015 Automatic Group Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1625,7 +1625,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1648,7 +1648,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1691,7 +1691,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
@@ -1717,7 +1717,7 @@
    </Day>
   </Subgroup>
   <Subgroup name="2014 Automatic Group Automatic Subgroup">
-   <Day name="Hétf">
+   <Day name="Hétfő">
     <Hour name="08:00">
      
     </Hour>
@@ -1757,7 +1757,7 @@
      
     </Hour>
     <Hour name="13:00">
-     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="14:00">
      
@@ -1780,7 +1780,7 @@
      
     </Hour>
     <Hour name="12:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Biológia"></Subject>
     </Hour>
     <Hour name="13:00">
      
@@ -1823,7 +1823,7 @@
    </Day>
    <Day name="Péntek">
     <Hour name="08:00">
-     
+     <Teacher name="Király Roland"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="10:00">
      
