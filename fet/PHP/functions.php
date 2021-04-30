@@ -15,7 +15,6 @@ function queryAll($mysqli)
             if ($result = $mysqli->query($sql)) {
 
                 /* fetch associative array */
-                //var_dump($result);die();
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['teacher_id'];
                     $row_array['name'] = $row['teach_name'];
@@ -165,7 +164,6 @@ function queryAll($mysqli)
                 /* fetch associative array */
                 while ($row = $result->fetch_assoc()) {
                     $row_array['day_id']           = $row['days_id'];
-                    //$row_array['group_id'] = $row['group_id'];
                     $row_array['day_name']    = $row['day_name'];
                     array_push($return_arr, $row_array);
                 }
@@ -183,7 +181,6 @@ function queryAll($mysqli)
                 /* fetch associative array */
                 while ($row = $result->fetch_assoc()) {
                     $row_array['hour_id']           = $row['hours_id'];
-                    //$row_array['group_id'] = $row['group_id'];
                     $row_array['hour_name']    = $row['hour_name'];
                     array_push($return_arr, $row_array);
                 }
@@ -319,7 +316,6 @@ function updateRow($mysqli, $id) {
 
         $year_name    = $_GET['year_name'];
         $num_students = $_GET['num_students'];
-        //$group_id = $_GET['group_id'];
 
         $stmt = $mysqli->prepare("UPDATE students SET year_name = ?, num_students = ? WHERE student_id = ?");
         $stmt->bind_param("sss", $year_name, $num_students, $id);
@@ -408,7 +404,6 @@ function createNew($mysqli)
     } else if ($_GET['query'] == 'students') {
         $year_name    = $_GET['year_name'];
         $num_students = $_GET['num_students'];
-        //$group_id = $_GET['group_id'];
 
         $stmt = $mysqli->prepare('INSERT INTO students (user_table_id, year_name, num_students) VALUES(?, ?, ?)');
         $stmt->bind_param("sss", $user_table_id, $year_name, $num_students);
@@ -434,7 +429,6 @@ function createNew($mysqli)
         $active = $data[4];
         $number_of_students = $data[5];
 
-		// $stmt = $mysqli->prepare('INSERT INTO `activities` (`activities_id`, `duration`, `total_duration`, `active`, `teacher_id`, `subj_id`, `student_id`, `user_table_id`, `activity_group_id`) VALUES (NULL, 21, 12, "true", ?, ?, ?, ?, NULL);');
         $stmt = $mysqli->prepare('INSERT INTO activities (duration, total_duration, active, teacher_id, subj_id, user_table_id, activity_group_id, number_of_students) VALUES (?, NULL, ?, ?, ?, ?, NULL,?);');
         $stmt->bind_param("iiiiii",$duration, $active, $teacher_id, $subj_id, $user_table_id,$number_of_students);
         $stmt->execute();
@@ -510,7 +504,6 @@ function createNew($mysqli)
         $activity_id            = $data[0]->id;
         $weight_percentage      = $data[1];
         $numb_of_pref_times     = count($data[2]);
-        // $isCentral = $data[3] ? "true" : "false";
         if($data[3])
             $isCentral = "true";
         else
@@ -665,6 +658,7 @@ function queryById($mysqli, $id){
                 'SELECT space_cons_id, subj_name FROM space_constraints, subjects '.
                 'WHERE space_constraints.subject_id = '.$id.' AND space_constraints.subject_id = subjects.subj_id '.
                 'AND subjects.subj_id = '.$id;
+                // $sql = 'SELECT * FROM space_constraints INNER JOIN subjects ON space_constraints.subject_id = subjects.subj_id WHERE space_constraints.space_cons_id = '.$id;
             if ($result = $mysqli->query($sql)) {
                 /* fetch associative array */
                 while ($row = $result->fetch_assoc()) {
@@ -697,15 +691,8 @@ function queryById($mysqli, $id){
                 $result->free();
             }
         } else if($_GET['query'] == 'groups'){
-            // $sql =
-            // 'SELECT group_id, group_name, num_of_students, groups.student_id '.
-            // 'FROM groups, students WHERE groups.student_id = '.$id.' AND user_table_id = '.$user_table_id.'AND students.student_id = '.$id;
-
             $sql =
             'SELECT group_id, group_name, num_of_students, groups.student_id, year_name FROM groups INNER JOIN students ON groups.student_id = students.student_id WHERE groups.student_id = '.$id;
-
-            // $sql = 
-            // 'SELECT * FROM groups WHERE student_id = '.$id;
 
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
@@ -723,10 +710,6 @@ function queryById($mysqli, $id){
             'SELECT subgroup_id, subgroup_name, subgroups.num_of_students, subgroups.group_id, subgroups.student_id, group_name, year_name '.
             'FROM subgroups INNER JOIN groups ON subgroups.group_id = groups.group_id INNER JOIN students ON subgroups.student_id = students.student_id WHERE subgroups.group_id = '.$id;
 
-
-                // $sql =
-                // 'SELECT * FROM subgroups WHERE group_id = 15';
-
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_array['id']   = $row['subgroup_id'];
@@ -736,20 +719,6 @@ function queryById($mysqli, $id){
                     $row_array['student_id'] = $row['student_id'];
                     $row_array['group_name'] = $row['group_name'];
                     $row_array['year_name'] = $row['year_name'];
-                    array_push($return_arr, $row_array);
-                }
-                $result->free();
-            }
-        } else if($_GET['query'] == 'stud_activity'){
-            $sql =
-            'SELECT stud_activity_id, activities_id, student_name '.
-            'FROM students_in_activity WHERE activities_id = '.$id;
-
-            if ($result = $mysqli->query($sql)) {
-                while ($row = $result->fetch_assoc()) {
-                    $row_array['id']   = $row['stud_activity_id'];
-                    $row_array['activities_id'] = $row['activities_id'];
-                    $row_array['student_name']   = $row['student_name'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();

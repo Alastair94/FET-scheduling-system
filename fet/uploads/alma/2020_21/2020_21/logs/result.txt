@@ -1,6 +1,5 @@
 This file contains the result (log) of last operation
 
-FET command line simulation started on 4/30/21 3:55 PM
+FET command line simulation started on 4/30/21 9:25 PM
 
-Starting timetable generation...
-Simulation successful
+Cannot read input file (not existing, in use, or incorrect file) - aborting

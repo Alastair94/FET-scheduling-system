@@ -16,7 +16,7 @@
 <body>
 	<div id="wrapper">
 		<header>
-			<h1 class="mainheader">FET Time Tables</h1><!--end mainheader-->
+			<h1 class="mainheader">FET Time Tables</h1>
 		</header>
 		<div id="mainForm">
 			<fieldset style="display:flex;">
@@ -31,7 +31,6 @@
 					<li><a href="#tab4" data-toggle="tab">Teachers not available times</a></li>
 					<li><a href="#tab5" data-toggle="tab">Teachers max classes per day</a></li>
 					<li><a href="#tab6" data-toggle="tab">Rooms not available times</a></li>
-					<li><a href="#tab7" data-toggle="tab">Max gaps between classes</a></li>
 				</ul>
 				<div class="tab_container" ng-controller="AppController">
 				
@@ -40,54 +39,72 @@
 							<div>
 								<h2>Subjects' preferred rooms:</h2>
 								<div>
-									Subject:<br>
-									<select 
-										ng-model="subject" 
-										ng-options="sb.name for sb in subjects" >
-										<option value="" selected disabled hidden>Choose here</option>
-									</select>
+									
+									<div>
+										Subject:<br>
+										<select 
+											ng-model="subject" 
+											ng-options="sb.name for sb in subjects" >
+											<option value="" selected disabled hidden>Choose here</option>
+										</select>
+									</div>
+									<div>
+										Building:<br>
+										<select 
+											ng-model="act_building" 
+											ng-options="b.name for b in buildings"
+											ng-change="selectRoom(act_building)">
+											<option value="" selected disabled hidden>Choose here</option>
+										</select>
+									</div>
 								</div>
-								<div>
-									Preferred Room:<br>
-									<div style="width: 175px; float: left">
-										<select size="10" 
+								<div style="display:flex">
+									<div style="margin:auto;">
+										Rooms:
+										<select 
+											size="10" 
 											ng-model="act_room" 
-											ng-options="r.name for r in rooms" style="min-width: 150px;" 
-											ng-dblclick="updateR()" autofocus>
+											ng-options="r.room_name for r in selectedRooms" 
+											style="min-width: 150px; height: 200px;" 
+											ng-disabled="!act_building"
+											ng-dblclick="updateR()">
 										</select>
 									</div>
-
-									<div style="width: 175px; float: left">	
-										<select size="10" 
+									<div style="margin:auto;"> 
+										Preferred Rooms:<br>
+										<select 
+											size="10" 
 											ng-model="chosenR"
-											ng-options="cr.name for cr in chosenRooms" style="min-width: 150px;" 
-											ng-dblclick="removeR()">
+											ng-options="cr.build_name + '->' + cr.room_name for cr in chosenRooms" 
+											style="min-width: 150px; height: 200px;" 
+											ng-dblclick="removeR()"
+											ng-disabled="disabledSubjectCon">
+										</select>
+									</div>
+									<div style="margin-bottom:auto;margin-left:50px;margin-right:50px;margin-top:30px">
+										Weight Percentage<br>
+										<input size="10"
+											ng-model="weightP"
+											type="number"
+											min="0" max="100"
+											ng-disabled="disabledSubjectCon" 
+											>
+										<div style="margin-top:20px;text-align:center">
+											<button style="height:50px; width:150px;" ng-click="saveAct()" ng-disabled="isSubjectConWrong() || disabledSubjectCon" >Add constraint</button><br>
+											<button style="height:50px; width:150px;" ng-click="destroy(act_subSpaceCon.id)" ng-show="disabledSubjectCon">Delete constraint</button><br>
+										</div>
+									</div>
+									<div style="margin:auto;">
+									Subject constraints:
+										<select size="10" 
+											ng-model="act_subSpaceCon"
+											ng-options="s.name for s in spaceConstraints" 
+											ng-click="selectSubjectCon(act_subSpaceCon)"
+											style="min-width: 150px; height: 200px;">
 										</select>
 									</div>
 								</div>
-								<div>
-									Weight Percentage<br>
-									<input size="10"
-										ng-model="weightP"
-										type="number"
-										min="0" max="100" 
-										>
-								</div>
-								<button ng-click="saveAct()" >Add</button><br>
 							</div>
-							<p>Subject constraints:</p>
-							<div style="display:flex; overflow-y:scroll; overflow-x:hidden; height: 200px;" class="unstyled">
-								<ul class="unstyled">
-									<li ng-repeat="sConstraint in spaceConstraints">
-										<!-- Constraint ID: {{sConstraint.id}}<br> -->
-										Subject: {{sConstraint.name}}<br>
-										Weight percentage: {{sConstraint.weight_percentage}}<br>
-										Number of preferred rooms: {{sConstraint.num_of_pref_rooms}}<br>
-										<a href ng-click="destroy(sConstraint.id)">delete</a>
-									</li>
-								</ul>
-							</div>
-							<div ng-include src="template.url"></div>
 						</div>
 					</div>
 
@@ -242,6 +259,7 @@
 					</div>
 
 					<div id="tab3" class="tab_content" ng-controller="OverlappingCtrl">
+						<h2>Activities not to overlap:</h2>
 						<div>
 							<div style="display:flex">
 								<div>
@@ -327,6 +345,7 @@
 					</div>
 
 					<div id="tab4" class="tab_content" ng-controller="TeachersNATCtrl">
+						<h2>Times when teacher not available:</h2>
 						<div style="margin-bottom:20px">
 							Teacher:<br>
 							<select 
@@ -431,6 +450,7 @@
 					</div>
 
 					<div id="tab6" class="tab_content" ng-controller="RoomsNATCtrl">
+						<h2>Times when room not available:</h2>
 						<div style="margin-bottom:20px;display:flex;">
 							<div>
 								Building:<br>

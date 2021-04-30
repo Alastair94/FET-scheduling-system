@@ -166,18 +166,6 @@
     </Activity>
     <Activity>
       <Teacher>Teszt Elek</Teacher>
-      <Subject>Kommunikáció</Subject>
-      <Students>2019</Students>
-      <Students>2016</Students>
-      <Duration>1</Duration>
-      <Total_Duration></Total_Duration>
-      <Id>77</Id>
-      <Activity_Group_Id></Activity_Group_Id>
-      <Active>true</Active>
-      <Comments></Comments>
-    </Activity>
-    <Activity>
-      <Teacher>Teszt Elek</Teacher>
       <Subject>Matematika</Subject>
       <Students>Szoftverfejlesztők</Students>
       <Duration>3</Duration>
@@ -185,29 +173,6 @@
       <Id>78</Id>
       <Activity_Group_Id></Activity_Group_Id>
       <Number_Of_Students>6</Number_Of_Students>
-      <Active>true</Active>
-      <Comments></Comments>
-    </Activity>
-    <Activity>
-      <Teacher>Wincs Eszter</Teacher>
-      <Subject>Informatika gy.</Subject>
-      <Students>Informatikus</Students>
-      <Duration>1</Duration>
-      <Total_Duration></Total_Duration>
-      <Id>79</Id>
-      <Activity_Group_Id></Activity_Group_Id>
-      <Active>true</Active>
-      <Comments></Comments>
-    </Activity>
-    <Activity>
-      <Teacher>Wincs Eszter</Teacher>
-      <Subject>Kommunikáció</Subject>
-      <Students>2016</Students>
-      <Duration>1</Duration>
-      <Total_Duration></Total_Duration>
-      <Id>80</Id>
-      <Activity_Group_Id></Activity_Group_Id>
-      <Number_Of_Students>1</Number_Of_Students>
       <Active>true</Active>
       <Comments></Comments>
     </Activity>
@@ -224,12 +189,6 @@
     </Building>
   </Buildings_List>
   <Rooms_List>
-    <Room>
-      <Name>001</Name>
-      <Building>A</Building>
-      <Capacity>200</Capacity>
-      <Virtual>false</Virtual>
-    </Room>
     <Room>
       <Name>100</Name>
       <Building>C</Building>
@@ -254,6 +213,12 @@
       <Capacity>200</Capacity>
       <Virtual>false</Virtual>
     </Room>
+    <Room>
+      <Name>001</Name>
+      <Building>A</Building>
+      <Capacity>200</Capacity>
+      <Virtual>false</Virtual>
+    </Room>
   </Rooms_List>
   <Time_Constraints_List>
     <ConstraintBasicCompulsoryTime>
@@ -267,6 +232,14 @@
       <Activity_Id>76</Activity_Id>
       <Activity_Id>74</Activity_Id>
       <Activity_Id>72</Activity_Id>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivitiesNotOverlapping>
+    <ConstraintActivitiesNotOverlapping>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Number_of_Activities>2</Number_of_Activities>
+      <Activity_Id>72</Activity_Id>
+      <Activity_Id>74</Activity_Id>
       <Active>true</Active>
       <Comments></Comments>
     </ConstraintActivitiesNotOverlapping>
@@ -306,7 +279,7 @@
     </ConstraintTeacherNotAvailableTimes>
     <ConstraintTeacherMaxHoursDaily>
       <Weight_Percentage>100</Weight_Percentage>
-      <Teacher_Name>Kukor Ica</Teacher_Name>
+      <Teacher_Name>Teszt Elek</Teacher_Name>
       <Maximum_Hours_Daily>5</Maximum_Hours_Daily>
       <Active>true</Active>
       <Comments></Comments>
@@ -318,6 +291,43 @@
       <Active>true</Active>
       <Comments></Comments>
     </ConstraintTeacherMaxHoursDaily>
+    <ConstraintActivityPreferredStartingTimes>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Activity_Id>75</Activity_Id>
+      <Number_of_Preferred_Starting_Times>2</Number_of_Preferred_Starting_Times>
+      <Preferred_Starting_Time/>
+      <Preferred_Day>Szerda</Preferred_Day>
+      <Preferred_Hour>13:40-15:10</Preferred_Hour>
+      <Preferred_Starting_Time/>
+      <Preferred_Day>Szerda</Preferred_Day>
+      <Preferred_Hour>17:20-18:50</Preferred_Hour>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivityPreferredStartingTimes>
+    <ConstraintActivityPreferredStartingTime>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Activity_Id>78</Activity_Id>
+      <Preferred_Day>Hétfő</Preferred_Day>
+      <Preferred_Hour>13:40-15:10</Preferred_Hour>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivityPreferredStartingTime>
+    <ConstraintActivityPreferredStartingTime>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Activity_Id>72</Activity_Id>
+      <Preferred_Day>Hétfő</Preferred_Day>
+      <Preferred_Hour>10:00-11:30</Preferred_Hour>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivityPreferredStartingTime>
+    <ConstraintActivityPreferredStartingTime>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Activity_Id>74</Activity_Id>
+      <Preferred_Day>Hétfő</Preferred_Day>
+      <Preferred_Hour>17:20-18:50</Preferred_Hour>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintActivityPreferredStartingTime>
   </Time_Constraints_List>
   <Space_Constraints_List>
     <ConstraintBasicCompulsorySpace>
@@ -326,27 +336,55 @@
       <Comments></Comments>
     </ConstraintBasicCompulsorySpace>
     <ConstraintSubjectPreferredRooms>
+      <Room>102</Room>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintSubjectPreferredRooms>
+    <ConstraintActivityPreferredRooms>
       <Number_of_Preferred_Rooms>2</Number_of_Preferred_Rooms>
       <Preferred_Room>101</Preferred_Room>
       <Preferred_Room>102</Preferred_Room>
+      <Activity_Id>74</Activity_Id>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active>true</Active>
+      <Active></Active>
       <Comments></Comments>
-    </ConstraintSubjectPreferredRooms>
-    <ConstraintSubjectPreferredRooms>
+    </ConstraintActivityPreferredRooms>
+    <ConstraintActivityPreferredRooms>
       <Number_of_Preferred_Rooms>2</Number_of_Preferred_Rooms>
+      <Preferred_Room>101</Preferred_Room>
       <Preferred_Room>102</Preferred_Room>
-      <Preferred_Room>100</Preferred_Room>
+      <Activity_Id>75</Activity_Id>
       <Weight_Percentage>100</Weight_Percentage>
-      <Active>true</Active>
+      <Active></Active>
       <Comments></Comments>
-    </ConstraintSubjectPreferredRooms>
+    </ConstraintActivityPreferredRooms>
     <ConstraintSubjectPreferredRoom>
-      <Room>101</Room>
+      <Room>001</Room>
       <Weight_Percentage>100</Weight_Percentage>
       <Active>true</Active>
       <Comments></Comments>
     </ConstraintSubjectPreferredRoom>
+    <ConstraintSubjectPreferredRoom>
+      <Room>001</Room>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintSubjectPreferredRoom>
+    <ConstraintSubjectPreferredRoom>
+      <Room>001</Room>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Active>true</Active>
+      <Comments></Comments>
+    </ConstraintSubjectPreferredRoom>
+    <ConstraintActivityPreferredRoom>
+      <Permanently_Locked>false</Permanently_Locked>
+      <Room>101</Room>
+      <Activity_Id>78</Activity_Id>
+      <Weight_Percentage>100</Weight_Percentage>
+      <Active></Active>
+      <Comments></Comments>
+    </ConstraintActivityPreferredRoom>
     <ConstraintRoomNotAvailableTimes>
       <Weight_Percentage>100</Weight_Percentage>
       <Room>001</Room>

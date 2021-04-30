@@ -35,8 +35,6 @@ app.controller("AppController", function( $scope, myHttp ) {
 	$scope.hours = [];
 	$scope.weightP = 100;
 
-	$scope.spaceConstraints = [];
-
 	$scope.getBuildings = function () {
         myHttp.query({
             'query': 'buildings',
@@ -56,15 +54,6 @@ app.controller("AppController", function( $scope, myHttp ) {
         }).success(function (data) {
             $scope.rooms = data;
 			$scope.act_room = $scope.rooms[0];
-        });
-	}
-
-	$scope.getSpaceConstraints = function () {
-		myHttp.query({
-            'query': 'subjectSpaceConstraints',
-            'method': 'get-all'
-        }).success(function (data) {
-            $scope.spaceConstraints = data;
         });
 	}
 
@@ -117,7 +106,6 @@ app.controller("AppController", function( $scope, myHttp ) {
         });
 	}
 
-	$scope.getSpaceConstraints();
 	$scope.getBuildings();
 	$scope.getTeachers();
 	$scope.getSubjects();
@@ -130,7 +118,18 @@ app.controller("AppController", function( $scope, myHttp ) {
 //////////////////////////////
 app.controller('SubjectsCtrl', function( $scope, myHttp ) {
 	$scope.chosenRooms = [];
+	$scope.selectedRooms = [];
+	$scope.spaceConstraints = [];
+	$scope.chosenR = '';
+	$scope.act_building = '';
+	$scope.disabledSubjectCon = false;
+
 	$scope.updateR = function() {
+		if($scope.disabledSubjectCon){
+			$scope.chosenRooms = [];
+			$scope.disabledSubjectCon = false;
+			$scope.weightP = 100;
+		}
 		for (var i = $scope.chosenRooms.length - 1; i >= 0; i--) {
 			if($scope.chosenRooms[i] == $scope.act_room) {
 				console.log("matches");
@@ -141,6 +140,7 @@ app.controller('SubjectsCtrl', function( $scope, myHttp ) {
 		$scope.chosenRooms.push($scope.act_room);
 		$scope.chosenR = $scope.chosenRooms[0];
 	}
+
 	$scope.removeR = function () {
 		for (var i = $scope.chosenRooms.length - 1; i >= 0; i--) {
 			if($scope.chosenRooms[i] == $scope.chosenR) {
@@ -170,6 +170,7 @@ app.controller('SubjectsCtrl', function( $scope, myHttp ) {
     }
 
 	$scope.saveAct = function() {
+		var _subject = $scope.subject;
 		var newdata = [
 			$scope.chosenRooms,
 			$scope.subject,
@@ -183,7 +184,6 @@ app.controller('SubjectsCtrl', function( $scope, myHttp ) {
 			'id': $scope.subject.id
         }).success(function (data) {
 			if(data[0]==null){
-				console.log('New SubjectPreferredRoomConstraint');
 				myHttp.query({
 					'query'	: 'subjectSpaceConstraints',
 					'method': 'new',
@@ -199,14 +199,16 @@ app.controller('SubjectsCtrl', function( $scope, myHttp ) {
 						'method': 'new',
 						'data'	: newdata2
 					}).success(function (result) {
-						window.alert("Successfully uploaded!");
+						window.alert("Successfully created SubjectPreferredSpace constraint for " +_subject.name +"!");
 					});
 				});
 			} else {
 				window.alert("There is already a constraint for that: " + $scope.subject.name);
 			}
 			$scope.chosenR = '';
+			$scope.act_building = "";
 			$scope.chosenRooms = [];
+			$scope.selectedRooms = [];
 			$scope.subject = null;
 			$scope.getSpaceConstraints();
         });
@@ -220,10 +222,73 @@ app.controller('SubjectsCtrl', function( $scope, myHttp ) {
 				'id': id
 			}).success(function (data) {
 				$scope.getSpaceConstraints();
+				$scope.chosenRooms = [];
+				$scope.weightP = 100;
+				$scope.disabledSubjectCon = false;
 			});
 		}
     };
 
+	$scope.selectRoom = function (act_building) {
+		myHttp.query({
+			'query': 'rooms',
+			'method': 'get-single',
+			'id': act_building.id
+		}).success(function (result){
+			$scope.selectedRooms = result;
+			$scope.act_room = result[0];
+		})
+	}
+
+	$scope.isSubjectConWrong = function () {
+		if($scope.subject && $scope.chosenRooms.length > 0 && $scope.weightP)
+			return false;
+		else
+			return true;
+	}
+
+	$scope.getSpaceConstraints = function () {
+		myHttp.query({
+            'query': 'subjectSpaceConstraints',
+            'method': 'get-all'
+        }).success(function (data) {
+            $scope.spaceConstraints = data;
+			$scope.act_subSpaceCon = data[0];
+        });
+	}
+
+	$scope.selectSubjectCon = function (subjectCon) {
+		if($scope.act_subSpaceCon != undefined){
+			$scope.disabledSubjectCon = true;
+			$scope.chosenRooms = [];
+			$scope.weightP = parseInt(subjectCon.weight_percentage);
+			myHttp.query({
+				'query': 'preferredRooms',
+				'method': 'get-single',
+				'id': subjectCon.id
+			}).success(function (results){
+				for($i = 0; $i < results.length; $i++){
+					$scope.chosenRooms.push(results[$i]);
+					$scope.chosenR = $scope.chosenRooms[0];
+				}
+			})
+		}
+	}
+
+	$scope.deleteRoomsNAT = function(id){
+		if(confirm("Are you sure you want to delete this time constraint?")){
+			myHttp.query({
+				'query': 'roomsNAT',
+				'method': 'delete',
+				'id': id
+			}).success(function (data) {
+				$scope.getRoomsNAT();
+				$scope.chosenTimes = [];
+			});
+		}
+	}
+
+	$scope.getSpaceConstraints();
 });
 
 //////////////////////////////
@@ -340,7 +405,6 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 			'id': _activity.id
 		}).success( function (data0){
 			if(data0[0]==null){
-				window.alert(data0[0]);
 				var data = [
 					_activity,
 					_weightPTime,
@@ -361,7 +425,9 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 						'method': 'new',
 						'data': preferredTimes
 					}).success(function (result){
-						console.log('Succesfully created a new Preferred time constraint with id: ' + result + ', and ' + _chosenTime.length + ' preferred hours!');
+						$scope.takenTime = false;
+						$scope.takenSpace = false;
+						window.alert('Succesfully created a new Preferred time constraint with id: ' + result + ', and ' + _chosenTime.length + ' preferred hours!');
 					});
 				});
 			} else{
@@ -371,6 +437,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 
 		$scope.activity = '';
 		$scope.timeToDefault();
+		$scope.spaceToDefault();
 	}
 
 	$scope.deleteTime = function(id){
@@ -380,9 +447,11 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 				'method': 'delete',
 				'id': id
 			}).success(function (data) {
+				$scope.spaceToDefault();
 				$scope.timeToDefault();
 				$scope.activity = '';
 				$scope.takenTime = false;
+				$scope.takenSpace = false;
 			});
 		}
 	}
@@ -395,8 +464,10 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 				'id': id
 			}).success(function (data) {
 				$scope.spaceToDefault();
+				$scope.timeToDefault();
 				$scope.activity = '';
 				$scope.takenSpace = false;
+				$scope.takenTime = false;
 			});
 		}
 	}
@@ -432,7 +503,9 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 						'method': 'new',
 						'data': preferredSpaces
 					}).success(function (result2){
-						console.log('Succesfully created a new Preferred space constraint with id: ' + result1 + ', and ' + _chosenSpaces.length + ' preferred rooms!');
+						$scope.takenTime = false;
+						$scope.takenSpace = false;
+						window.alert('Succesfully created a new Preferred space constraint with id: ' + result1 + ', and ' + _chosenSpaces.length + ' preferred rooms!');
 					});
 				});
 			} else{
@@ -442,6 +515,7 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 
 		$scope.activity = '';
 		$scope.spaceToDefault();
+		$scope.timeToDefault();
 	}
 
 	$scope.isTimeWrong = function () {
@@ -519,8 +593,6 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 					})
 				}
 			})
-
-			//$scope.chosenTimes = activity.chosenTimes;
 		}
 	}
 
@@ -635,7 +707,7 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 				'method': 'new',
 				'data': _activities
 			}).success(function (result2){
-				console.log('Succesfully created a new No Overlap constraint with id: ' + result1 + ', with ' + _chosenActivities.length + ' activities!');
+				window.alert('Succesfully created a new No Overlap constraint with id: ' + result1 + ', with ' + _chosenActivities.length + ' activities!');
 			});
 		});
 
@@ -659,8 +731,6 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 				'method': 'delete',
 				'id': id
 			}).success(function (data) {
-				// $scope.timeToDefault();
-				// $scope.activity = '';
 				$scope.getNOverlaps();
 				$scope.chosenActivities = [];
 			});
@@ -692,7 +762,6 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 		if($scope.noverlap != undefined){
 			$scope.disabledCActivities = true;
 			$scope.chosenActivities = [];
-			// $scope.actNoverlaps = [];
 			$scope.weightO = parseInt(noverlap.weight_percentage);
 			myHttp.query({
 				'query': 'listActivityNOverlaps',

@@ -144,7 +144,6 @@ input +.buttons{
 }
 
 nav{
-	/* float: left; */
 	margin-left: 2em;
 	margin-top: 1.75em;
 }
@@ -177,9 +176,6 @@ nav li{
 }
 
 #box{ 
-	/*border: 0.25em inset;*/
-	/* float: right; 
-	width: 700px;  */
 	margin-right: 3em;
 	margin-top: 0.25em;
 	margin-bottom: 1em;
@@ -195,7 +191,6 @@ ul.tabs {
  padding: 0;
  float: left;
  list-style: none;
- /*height: 32px; /*--Set height of tabs--*/
  border-bottom: 1px solid #999;
  border-left: 1px solid #999;
  width: 100%;
@@ -263,7 +258,6 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 
 .tab_content {
  padding: 20px;
- /* font-size: 1.2em; */
 }
 
 
@@ -274,11 +268,6 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
   margin-bottom: 18px;
   margin-left: 0px;
 }
-
-/* select{
-	min-width: 150px;
-	background-color: beige;
-} */
 
 .taken{
 	background: lightcoral;

@@ -46,15 +46,7 @@
 						<?php echo $semester?>
 					</select><br/>
 					<input class="buttons" type="submit" name="view" value="View/Edit Table"/>
-				</section><!--end exist-->
-				
-				<!-- <section id="upload">
-					<h1>Upload a .fet XML File</h1>
-					<label>FET file:</label><input type="file" name="user-file" /><br/>
-					<label>Semester:</label><input class="text" type="text" name="uploadSem" /><br/>
-					<input class="buttons" type="submit" name="upload" value="Upload File" />
-				</section>end upload -->
-				
+				</section><!--end exist-->				
 				<section id="logout" style="display:flex; height:200px">
 					<input class="buttons" type="submit" name="logout" value="Logout" style="margin:auto" />
 				</section><!--end logout-->

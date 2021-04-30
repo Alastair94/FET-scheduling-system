@@ -114,7 +114,6 @@
 			buildNode($fet, $year, 'Number_of_Students', $tuple['num_students']);
 
 			$query2 = "SELECT group_id, group_name, num_of_students FROM groups WHERE groups.student_id = ".$tuple['student_id'];
-			// $query2 .= "AND groups.user_table_id = ".$userTableID;
 			$queryResult2 = $mysqli->query($query2);
 			while($tuple2 = $queryResult2->fetch_assoc()){
 				$group = $fet->createElement('Group');
@@ -124,7 +123,6 @@
 				buildNode($fet, $group, 'Number_of_Students', $tuple2['num_of_students']);
 
 				$query3 = "SELECT subgroup_name, num_of_students FROM subgroups WHERE subgroups.group_id = ".$tuple2['group_id'];
-				// $query2 .= "AND groups.user_table_id = ".$userTableID;
 				$queryResult3 = $mysqli->query($query3);
 				while($tuple3 = $queryResult3->fetch_assoc()){
 					$subgroup = $fet->createElement('Subgroup');
@@ -185,7 +183,6 @@
 		$activities = $fet->createElement('Activities_List');
 		$activities = $root->appendChild($activities);
 		
-		//$count = 1;
 		while($tuple = $queryResult->fetch_assoc()){
 			$activity = $fet->createElement('Activity');
 			$activity = $activities->appendChild($activity);
@@ -211,7 +208,6 @@
 
 			buildNode($fet, $activity, 'Duration', $tuple['duration']);
 			buildNode($fet, $activity, 'Total_Duration', $tuple['total_duration']);
-			//buildNode($fet, $activity, 'Id', $count);
 			buildNode($fet, $activity, 'Id', $tuple['activities_id']);
 			buildNode($fet, $activity, 'Activity_Group_Id', $tuple['activity_group_id']);
 			if($tuple['number_of_students'] != -1){
@@ -219,7 +215,6 @@
 			}
 			buildNode($fet, $activity, 'Active',  $tuple['active']==0?"true":"false");
 			buildNode($fet, $activity, 'Comments',  "");	
-			//$count++;	
 		}
 	}	
 
@@ -274,65 +269,11 @@
 		buildNode($fet, $basic, 'Weight_Percentage', '100');
 		buildNode($fet, $basic, 'Active', 'True');				
 		buildNode($fet, $basic, 'Comments',  '');
-					
-		getMinDays($fet, $timeCons, $mysqli, $userTableID);
-		getNOverlapActivities($fet, $timeCons, $mysqli, $userTableID);
 		
-		getSameStartHour($fet, $timeCons, $mysqli, $userTableID);
+		getNOverlapActivities($fet, $timeCons, $mysqli, $userTableID);
 		getTeachersNAT($fet, $timeCons, $mysqli, $userTableID);
 		getTeachersMaxHours($fet, $timeCons, $mysqli, $userTableID);
-	}
-
-#-------------------------------------------------------------------------------------------------
-#querys the database to retrieve ConstraintMinDaysBetweenActivities for Time_Constraints_List
-#from constraints, time_constraints, and min_days_constraints tables		
-	function getMinDays(&$fet, $timeCons, $mysqli, $userTableID){
-		$query = "SELECT weight_percentage, consecutive_if_same_day, num_of_activities, min_days, active, min_days_constraints.comments, ";
-		$query .= "min_days_cons_id FROM user_tables, min_days_constraints ";
-		$query .= "WHERE user_tables.user_table_id = min_days_constraints.min_days_cons_id "; ///////////////////////////////////// min_days_constraints.user_table_id
-		$query .= "AND min_days_constraints.min_days_cons_id = ".$userTableID;
-		$queryResult = $mysqli->query($query);
-
-		while($tuple = $queryResult->fetch_assoc()){
-			$minDaysCons = $fet->createElement('ConstraintMinDaysBetweenActivities');
-			$minDaysCons = $timeCons->appendChild($minDaysCons);
-
-			buildNode($fet, $minDaysCons, 'Weight_Percentage', $tuple['weight_percentage']);
-			buildNode($fet, $minDaysCons, 'Consecutive_If_Same_Day', $tuple['consecutive_if_same_day']);
-			buildNode($fet, $minDaysCons, 'Number_of_Activities', $tuple['num_of_activities']);
-			
-			
-			#passes the min_days_const_id to retrieve all activity ids in min_days_for_activities table
-			activityIDNode($fet, $minDaysCons, "min_days_for_activities", "min_days_cons_id", $tuple['min_days_cons_id'], $mysqli);
-
-			buildNode($fet, $minDaysCons, 'MinDays', $tuple['min_days']);
-			buildNode($fet, $minDaysCons, 'Active',  $tuple['active']);
-			buildNode($fet, $minDaysCons, 'Comments', $tuple['comments']);	
-		}
-	}
-
-#-------------------------------------------------------------------------------------------------
-#querys the database to retrieve ConstraintActivitiesSameStartingHour for Time_Constraints_List 
-# from constraints, time_constraints and same_start_hour_constraint tables	
-	function getSameStartHour(&$fet, $timeCons, $mysqli, $userTableID){
-		$query = "SELECT weight_percentage, num_of_activities, active, same_start_hr_constraints.comments, same_start_cons_id ";
-		$query .= "FROM user_tables, same_start_hr_constraints WHERE user_tables.user_table_id = same_start_hr_constraints.same_start_cons_id ";
-		$query .= "AND same_start_hr_constraints.same_start_cons_id = ".$userTableID;
-		$queryResult = $mysqli->query($query);
-
-		while($tuple = $queryResult->fetch_assoc()){
-			$minDaysCons = $fet->createElement('ConstraintActivitiesSameStartingHour');
-			$minDaysCons = $timeCons->appendChild($minDaysCons);
-
-			buildNode($fet, $minDaysCons, 'Weight_Percentage', $tuple['weight_percentage']);
-			buildNode($fet, $minDaysCons, 'Number_of_Activities', $tuple['num_of_activities']);
-		
-			#passes the same_start_cons_id to retrieve all activity ids in activites_same_start table
-			activityIDNode($fet, $minDaysCons, "activities_same_start", "same_start_cons_id", $tuple['same_start_cons_id'], $mysqli);
-
-			buildNode($fet, $minDaysCons, 'Active', $tuple['active']);
-			buildNode($fet, $minDaysCons, 'Comments', $tuple['comments']);
-		}
+		getActivitiesPreferredStartingTime($fet, $timeCons, $mysqli, $userTableID);
 	}
 
 #-------------------------------------------------------------------------------------------------
@@ -350,7 +291,6 @@
 
 		$query = "SELECT *FROM space_constraints ";
 		$query .= "WHERE space_constraints.user_table_id = ".$userTableID." ";
-		// $query .= "AND space_constraints.subject_id = subjects.subj_id";
 		$queryResult = $mysqli->query($query);
 
 		while($tuple = $queryResult->fetch_assoc()){
@@ -358,16 +298,14 @@
 				if($tuple['num_of_pref_rooms'] == 1){
 					$actPrefRooms = $fet->createElement('ConstraintSubjectPreferredRoom');
 					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);
-					//buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
 
 				} else {
 					$actPrefRooms = $fet->createElement('ConstraintSubjectPreferredRooms');
 					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);					
 				}
 				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
-				// buildNode($fet, $actPrefRooms, 'Subject', $tuple['subj_name']);
 				buildNode($fet, $actPrefRooms, 'Weight_Percentage', $tuple['weight_percentage']);
-				buildNode($fet, $actPrefRooms, 'Active', 'true');			//////////////////////////////////////////////////
+				buildNode($fet, $actPrefRooms, 'Active', 'true');
 				buildNode($fet, $actPrefRooms, 'Comments', $tuple['comments']);
 			} 
 			else if ($tuple['subject_id'] == NULL){
@@ -379,7 +317,6 @@
 				} else {
 					$actPrefRooms = $fet->createElement('ConstraintActivityPreferredRooms');
 					$actPrefRooms = $spaceCons->appendChild($actPrefRooms);					
-					// buildNode($fet, $actPrefRooms, 'Permanently_Locked', $tuple['permanently_locked']);
 				}
 				getPrefRooms($fet, $actPrefRooms, $mysqli, $tuple['space_cons_id']);
 				buildNode($fet, $actPrefRooms, 'Activity_Id', $tuple['activity_id']);
@@ -389,6 +326,7 @@
 				
 			}
 		}
+
 		getRoomsNAT($fet, $spaceCons, $mysqli, $userTableID);
 	}
 
@@ -419,6 +357,32 @@
 		}
 	}
 
+	function getPrefTimes(&$fet, $actPrefTimes, $mysqli, $time_cons_id){
+		$query="SELECT * FROM preferred_times INNER JOIN days ON preferred_times.day_id = days.days_id INNER JOIN hours ON preferred_times.hour_id = hours.hours_id ".
+		" WHERE time_cons_id = ".$time_cons_id;
+		$queryResult = $mysqli->query($query);
+
+		$qCount = "SELECT count(*) AS \"count\" FROM preferred_times INNER JOIN days ON preferred_times.day_id = days.days_id INNER JOIN hours ON preferred_times.hour_id = hours.hours_id ".
+		" WHERE time_cons_id = ".$time_cons_id;
+		$qCountRes = $mysqli->query($qCount);
+		
+		$count = $qCountRes->fetch_assoc();
+
+		if($count['count'] == 1){
+			$tuple = $queryResult->fetch_assoc();
+			buildNode($fet, $actPrefTimes, 'Preferred_Day', $tuple['day_name']);
+			buildNode($fet, $actPrefTimes, 'Preferred_Hour', $tuple['hour_name']);
+		}else {
+			buildNode($fet, $actPrefTimes, 'Number_of_Preferred_Starting_Times', $count['count']);
+			while($tuple = $queryResult->fetch_assoc()){
+				$actPrefTimes2 = $fet->createElement('Preferred_Starting_Time');
+				$actPrefTimes2 = $actPrefTimes->appendChild($actPrefTimes2);
+				buildNode($fet, $actPrefTimes, 'Preferred_Day', $tuple['day_name']);
+				buildNode($fet, $actPrefTimes, 'Preferred_Hour', $tuple['hour_name']);	
+			}
+		}
+	}
+
 	function getNOverlapActivities(&$fet, $timeCons, $mysqli, $userTableID){
 		$query = "SELECT anoc_id, num_of_activities, weight_percentage, active, comments FROM activities_not_overlapping_con WHERE activities_not_overlapping_con.user_table_id = ".$userTableID;
 		$queryResult = $mysqli->query($query);
@@ -437,7 +401,7 @@
 				buildNode($fet, $NOverlapCons, 'Activity_Id', $tuple2['activity_id']);
 			}
 
-			buildNode($fet, $NOverlapCons, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $NOverlapCons, 'Active', 'true');
 			buildNode($fet, $NOverlapCons, 'Comments', $tuple['comments']);
 		}
 	}
@@ -464,7 +428,7 @@
 				buildNode($fet, $actTeachersNAT, 'Hour', $tuple2['hour_name']);
 			}
 
-			buildNode($fet, $teachersNAT, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $teachersNAT, 'Active', 'true');
 			buildNode($fet, $teachersNAT, 'Comments', $tuple['comments']);
 		}
 	}
@@ -491,7 +455,7 @@
 				buildNode($fet, $actRoomsNAT, 'Hour', $tuple2['hour_name']);
 			}
 
-			buildNode($fet, $roomsNAT, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $roomsNAT, 'Active', 'true');
 			buildNode($fet, $roomsNAT, 'Comments', $tuple['comments']);
 		}
 	}
@@ -509,10 +473,33 @@
 			buildNode($fet, $teachersMaxHours, 'Teacher_Name', $tuple['teach_name']);
 			buildNode($fet, $teachersMaxHours, 'Maximum_Hours_Daily', $tuple['max_hours']);
 		
-			buildNode($fet, $teachersMaxHours, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $teachersMaxHours, 'Active', 'true');
 			buildNode($fet, $teachersMaxHours, 'Comments', $tuple['comments']);
 		}
 	}
+
+	function getActivitiesPreferredStartingTime(&$fet, $timeCons, $mysqli, $userTableID){
+		$query = "SELECT * FROM time_constraints WHERE time_constraints.user_table_id = ".$userTableID;
+		$queryResult = $mysqli->query($query);
+
+		while($tuple = $queryResult->fetch_assoc()){
+			if($tuple['num_of_pref_times'] == 1){
+				$actPrefTimes = $fet->createElement('ConstraintActivityPreferredStartingTime');
+				$actPrefTimes = $timeCons->appendChild($actPrefTimes);
+		
+			} else {
+				$actPrefTimes = $fet->createElement('ConstraintActivityPreferredStartingTimes');
+				$actPrefTimes = $timeCons->appendChild($actPrefTimes);					
+			}
+			buildNode($fet, $actPrefTimes, 'Weight_Percentage', $tuple['weight_percentage']);
+			buildNode($fet, $actPrefTimes, 'Activity_Id', $tuple['activity_id']);
+			getPrefTimes($fet, $actPrefTimes, $mysqli, $tuple['time_cons_id']);
+	
+			buildNode($fet, $actPrefTimes, 'Active', 'true');
+			buildNode($fet, $actPrefTimes, 'Comments', $tuple['comments']);
+		}
+	}
+	
 #-------------------------------------------------------------------------------------------------
 #Main Program
 #all queries are according to user_table_id, which is passed through session cookies

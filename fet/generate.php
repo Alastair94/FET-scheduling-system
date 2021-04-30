@@ -7,13 +7,8 @@
 	$semFile = $semester.".fet";
 	$pathToMyDir .= $semester."/";
 
-	$fetcmd = "export DISPLAY=:0.0;"."cd ".$pathToMyDir.";echo mate | sudo -S fet-cl --inputfile=".$semFile." --outputdir=".$semester." 2>&1";
-	$output = null;
-	$return = null;
-	exec($fetcmd, $output, $return);
-
-	print_r($output);
-	print_r($fetcmd);
+	$fetcmd = "export DISPLAY=:0.0;"."cd ".$pathToMyDir.";echo mate | sudo -S fet-cl --inputfile=".$semFile." --outputdir=".$semester;
+	exec($fetcmd);
 ?>
 <!DOCTYPE html>
 <html>

@@ -170,11 +170,7 @@
 										</div>
 									</div>
 								</div>
-								<br><br>
-								<!-- <div style="clear:both;">
-									<button ng-click="addGroup()">Add Group</button><br>
-								</div> -->
-								
+								<br><br>							
 								<div style="clear:both" ng-include src="template.url"></div>
 							</div>
 							<!-- =================== TAB 5 ======================= -->
@@ -326,13 +322,20 @@
 									</div>
 									<div>
 										<div style="text-align:center;margin-bottom:30px;">
-											Activities:<br>
-											<select 
-												ng-model="activity" 
-												ng-options="'ID: ' + act.id for act in activities"
-												ng-change="isTaken(activity)">
-												<option value="" selected disabled hidden>Choose here</option>
-											</select>
+											<h3>Activities</h3>
+											<div style="margin-top:30px;display:flex">
+												<div style="margin-left:auto;margin-right:auto">
+													<select 
+														ng-model="activity" 
+														ng-options="'ID: ' + act.id for act in activities"
+														style="width:125px">
+														<option value="" selected disabled hidden>Choose here</option>
+													</select>
+												</div>
+												<div style="margin-left:auto;margin-right:auto">
+													<button ng-click="deleteAct(activity.id)" ng-disabled="!activity" style="float:inline-end">Delete Activity</button>
+												</div>
+											</div>
 										</div>
 										<table style="width:100%; text-align: center; table-layout: fixed">
 											<tr>

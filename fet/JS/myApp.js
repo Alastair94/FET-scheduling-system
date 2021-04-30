@@ -231,7 +231,6 @@ $scope.saveHour = function () {
 //		TeachersCtrl		//
 //////////////////////////////
 app.controller('TeachersCtrl', function( $scope, myHttp ) {
-	//$scope.teachers = [];
 	$scope.addItem = function() {
 		var data = $scope.teacherName;
 		if(data) {
@@ -257,7 +256,6 @@ app.controller('TeachersCtrl', function( $scope, myHttp ) {
 
         for (var i = $scope.teachers.length - 1; i >= 0; i--) {
             if ($scope.teachers[i].id === id) {
-                //$scope.item = $scope.teachers[i];
                 $scope.item = angular.copy($scope.teachers[i]);
                 $scope.temp = angular.copy($scope.item);
             }
@@ -337,14 +335,12 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
     }
 
 	$scope.getGroups = function (id) {
-		//window.alert("Valami");
 		if(id){
 			myHttp.query({
 				'query': 'groups',
 				'method': 'get-single',
 				'id': id
 			}).success(function (data){
-				// window.alert(data[0].id);
 				$scope.groups = data;
 				if($scope.groups[0] != undefined){
 					$scope.act_group = $scope.groups[0];
@@ -366,7 +362,6 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 				'method': 'get-single',
 				'id': id
 			}).success(function (data){
-				// window.alert(data[0].subgroup_name);
 				$scope.subgroups = data;
 				if($scope.subgroups[0] != undefined){
 					$scope.act_subgroup = $scope.subgroups[0];
@@ -382,26 +377,22 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 
 	$scope.selectGroup = function () {
 		for (var i = 0; i < $scope.chosenStudents.length; i++) {
-			// window.alert($scope.chosenStudents[i].group_name);
 			if($scope.chosenStudents[i].group_name == $scope.act_group.group_name) {			
 				console.log("Group matches");	
 				return;
 			}
 		}
-		//window.alert($scope.act_group.group_name);
 		$scope.chosenStudents.push($scope.act_group);
 		$scope.chosenS = $scope.chosenStudents[0];
 	}
 
 	$scope.selectSubGroup = function () {
 		for (var i = 0; i < $scope.chosenStudents.length; i++) {
-			// window.alert($scope.chosenStudents[i].group_name);
 			if($scope.chosenStudents[i].subgroup_name == $scope.act_subgroup.subgroup_name) {			
 				console.log("Subgroup matches");	
 				return;
 			}
 		}
-		//window.alert($scope.act_group.group_name);
 		$scope.chosenStudents.push($scope.act_subgroup);
 		$scope.chosenS = $scope.chosenStudents[0];
 	}
@@ -499,15 +490,15 @@ app.controller('ActivitiesCtrl', function( $scope, myHttp ) {
 		$scope.checked = false;
 	}
 	
-	$scope.deleteAct = function() {
+	$scope.deleteAct = function(id) {
 		myHttp.query({
             'query'	: 'activities',
             'method': 'delete',
-			'id':$scope.tmp_id
+			'id': id
 			})
 			.success(function (result) {
+				$scope.activity = '';
 				$scope.getActivities();
-				$scope.button_value = 'Save';
 				$scope.checked = false;
 			});
 		
@@ -901,7 +892,6 @@ app.controller('StudentsCtrl', function ($scope, myHttp) {
 				$scope.groups = data;
 				if($scope.groups[0] != undefined){
 					$scope.act_group = $scope.groups[0];
-					//$scope.getSubgroups($scope.act_group.id);
 					$scope.outGroup = $scope.act_group.group_name;
 					$scope.outGroupNumber = parseInt($scope.act_group.num_of_students);
 				}else{
@@ -958,7 +948,6 @@ app.controller('SpaceCtrl', function( $scope, myHttp ) {
     $scope.data = [];
     $scope.rooms = [];
     $scope.update = function () {
-        //console.log("B id ");
         $scope.rooms = [];
         for (var i = 0; i < $scope.data.length; i++) {
             if ($scope.data[i].building_id == $scope.building.id) {
@@ -1134,9 +1123,7 @@ app.controller('SpaceCtrl', function( $scope, myHttp ) {
                         if ($scope.data[j].building_id === q) {
                             console.log('match ' + j);
                             $scope.data.splice(j, 1);
-                            //$scope.deleteRoom($scope.data[j].id);
                         }
-                        //console.log($scope.data[j].building_id);
                     };
                     console.log($scope.data);
                     $scope.building = $scope.buildings[0];
