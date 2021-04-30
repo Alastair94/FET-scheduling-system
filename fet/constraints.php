@@ -365,12 +365,68 @@
 								<button ng-click="saveTeachersNAT()" ng-disabled="isTeachersNATWrong() || disabledTeachersNAT" style="height:50px; width:150px; margin:auto" >Add constraint</button>
 								<button ng-click="deleteTeachersNAT(act_teachersNAT.nat_id)" ng-show="disabledTeachersNAT"  style="height:50px; width:150px; margin:auto"  >Delete constraint</button>
 							</div>
-							<select size="10" 
-									ng-model="act_teachersNAT"
-									ng-options="t.teacher_name for t in teachersNATs" 
-									ng-click="selectTeachersNAT(act_teachersNAT)"
-									style="min-width: 150px;">
-							</select>
+							<div>
+								Constraints:
+								<select size="10" 
+										ng-model="act_teachersNAT"
+										ng-options="t.teacher_name for t in teachersNATs" 
+										ng-click="selectTeachersNAT(act_teachersNAT)"
+										style="min-width: 150px;">
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div id="tab5" class="tab_content" ng-controller="TeachersMaxHoursCtrl">
+						<h2>Max classes per day for teachers</h2>
+						<div style="display:flex">
+							<div style="margin-left:auto;margin-right:auto;">
+								<div style="margin-bottom:30px;">
+									Teacher:<br>
+									<select 
+										ng-model="act_teacher" 
+										ng-options="t.name for t in teachers"
+										ng-click="toDefault()">
+										<option value="" selected disabled hidden>Choose here</option>
+									</select>
+								</div>
+								<div style="margin-bottom:30px;">
+									Max classes per day:<br>
+									<input size="10"
+										ng-model="maxHour"
+										type="number"
+										min="1" max="50"
+										ng-disabled="disabledMaxHourCON"
+										>
+								</div>
+								<div>
+									Weight Percentage<br>
+									<input size="10"
+										ng-model="weightT"
+										type="number"
+										min="0" max="100"
+										ng-disabled="disabledMaxHourCON"
+										ng-change="isWeightWrong()"
+										>
+									<br>
+								</div>
+							</div>
+							<div style="width:300px; margin-left:auto;margin-right:auto;text-align:center">
+								<button ng-click="saveMaxHourCON()" ng-disabled="isMaxHourCONWrong() || disabledMaxHourCON" style="height:50px; width:150px;" >Add constraint</button>
+								<button ng-click="deleteMaxHourCON(act_maxHourCON.teachers_mh_id)" ng-show="disabledMaxHourCON"  style="height:50px; width:150px;"  >Delete constraint</button>
+								<div ng-show="wrongWeight" style="color:red;font-size:14px;margin-top:40px;">
+									You selected a weight less than 100%. The generation algorithm is not perfectly optimized to work with such weights. It is recommended to work only with 100% weights for these constraints.
+								</div>
+							</div>
+							<div style="margin-left:auto;margin-right:auto;">
+								Constraints:<br>
+								<select size="10" 
+										ng-model="act_maxHourCON"
+										ng-options="m.teacher_name for m in maxHourCONs" 
+										ng-click="selectMaxHourCON(act_maxHourCON)"
+										style="min-width: 150px;margin:auto;">
+								</select>
+							</div>
 						</div>
 					</div>
 
@@ -426,12 +482,15 @@
 								<button ng-click="saveRoomsNAT()" ng-disabled="isRoomsNATWrong() || disabledRoomsNAT" style="height:50px; width:150px; margin:auto" >Add constraint</button>
 								<button ng-click="deleteRoomsNAT(act_roomsNAT.nat_id)" ng-show="disabledRoomsNAT"  style="height:50px; width:150px; margin:auto"  >Delete constraint</button>
 							</div>
-							<select size="10" 
+							<div>
+								Constraints:
+								<select size="10" 
 									ng-model="act_roomsNAT"
 									ng-options="r.building_name + '->' + r.room_name for r in roomsNATs" 
 									ng-click="selectRoomsNAT(act_roomsNAT)"
 									style="min-width: 150px;">
-							</select>
+								</select>
+							</div>
 						</div>
 					</div>
 

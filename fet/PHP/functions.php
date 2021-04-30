@@ -282,6 +282,21 @@ function queryAll($mysqli)
                 }
                 $result->free();
             }
+        } else if($_GET['query'] == 'maxHourCON'){
+            $sql = 'SELECT * FROM teachers_max_hours INNER JOIN teachers ON teachers_max_hours.teacher_id = teachers.teacher_id '.
+            'WHERE teachers_max_hours.user_table_id = '.$user_table_id;
+
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['teachers_mh_id']   = $row['teachers_mh_id'];
+                    $row_array['weight_percentage'] = $row['weight_percentage'];
+                    $row_array['teacher_id'] = $row['teacher_id'];
+                    $row_array['teacher_name'] = $row['teach_name'];
+                    $row_array['max_hours'] = $row['max_hours'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
         }
 
         return json_encode($return_arr);
@@ -567,6 +582,15 @@ function createNew($mysqli)
         $stmt = $mysqli->prepare('INSERT INTO not_available_times (weight_percentage, teacher_id, room_id, num_of_times, active, comments, user_table_id) VALUES (?, NULL, ?, ?, NULL, NULL, ?);');
         $stmt->bind_param("iiii", $weight_percentage, $room_id, $num_of_times, $user_table_id);
         $stmt->execute();
+    } else if ($_GET['query'] == 'maxHourCON'){
+        $data = json_decode($_GET['data']);
+        $teacher_id = $data[0]->id;
+        $weight_percentage  = $data[1];
+        $max_hours = $data[2];
+
+        $stmt = $mysqli->prepare('INSERT INTO teachers_max_hours (teacher_id, weight_percentage, max_hours, active, comments, user_table_id) VALUES (?, ?, ?, NULL, NULL, ?);');
+        $stmt->bind_param("iiii", $teacher_id, $weight_percentage, $max_hours, $user_table_id);
+        $stmt->execute();
     }
 
     $nrows = $mysqli->insert_id;
@@ -620,6 +644,8 @@ function destroyRow($mysqli, $id)
     } else if ($_GET['query'] == 'roomsNAT'){
         $mysqli->query("DELETE FROM not_available_times WHERE nat_id = $id");
         $mysqli->query("DELETE FROM list_of_nat WHERE nat_id = $id");
+    } else if ($_GET['query'] == 'maxHourCON'){
+        $mysqli->query("DELETE FROM teachers_max_hours WHERE teachers_mh_id = $id");
     }
 
     $i = $mysqli->affected_rows;
@@ -866,6 +892,21 @@ function queryById($mysqli, $id){
                     $row_array['weight_percentage'] = $row['weight_percentage'];
                     $row_array['room_id']   = $row['room_id '];
                     $row_array['num_of_times']   = $row['num_of_times '];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if($_GET['query'] == 'maxHourCON'){
+            $sql = 'SELECT * FROM teachers_max_hours INNER JOIN teachers ON teachers_max_hours.teacher_id = teachers.teacher_id '.
+            'WHERE teachers_max_hours.teacher_id = '.$id;
+
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['teachers_mh_id']   = $row['teachers_mh_id'];
+                    $row_array['teacher_id'] = $row['teacher_id'];
+                    $row_array['weight_percentage'] = $row['weight_percentage'];
+                    $row_array['teacher_name'] = $row['teach_name'];
+                    $row_array['max_hours'] = $row['max_hours'];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();

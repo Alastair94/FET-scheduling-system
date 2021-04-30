@@ -10,7 +10,6 @@
 		$nodeVal = $node->appendChild($nodeVal);
 	}
 
-
 #-------------------------------------------------------------------------------------------------
 #querys the database to retrieve the row count from $table	
 	function getCount(&$fet, $table, $mysqli, $join, $name){ 
@@ -281,6 +280,7 @@
 		
 		getSameStartHour($fet, $timeCons, $mysqli, $userTableID);
 		getTeachersNAT($fet, $timeCons, $mysqli, $userTableID);
+		getTeachersMaxHours($fet, $timeCons, $mysqli, $userTableID);
 	}
 
 #-------------------------------------------------------------------------------------------------
@@ -496,6 +496,23 @@
 		}
 	}
 
+	function getTeachersMaxHours(&$fet, $timeCons, $mysqli, $userTableID){
+		$query = $sql = 'SELECT * FROM teachers_max_hours INNER JOIN teachers ON teachers_max_hours.teacher_id = teachers.teacher_id '.
+		'WHERE teachers_max_hours.user_table_id = '.$userTableID;
+		$queryResult = $mysqli->query($query);
+
+		while($tuple = $queryResult->fetch_assoc()){
+			$teachersMaxHours = $fet->createElement('ConstraintTeacherMaxHoursDaily');
+			$teachersMaxHours = $timeCons->appendChild($teachersMaxHours);
+
+			buildNode($fet, $teachersMaxHours, 'Weight_Percentage', $tuple['weight_percentage']);
+			buildNode($fet, $teachersMaxHours, 'Teacher_Name', $tuple['teach_name']);
+			buildNode($fet, $teachersMaxHours, 'Maximum_Hours_Daily', $tuple['max_hours']);
+		
+			buildNode($fet, $teachersMaxHours, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $teachersMaxHours, 'Comments', $tuple['comments']);
+		}
+	}
 #-------------------------------------------------------------------------------------------------
 #Main Program
 #all queries are according to user_table_id, which is passed through session cookies
@@ -515,7 +532,6 @@
 		
 		$root = $fet->createElement('fet');
 		$rootAttr = $fet->createAttribute('version');
-		//$rootAttr->value = '5.18.0';
 		$rootAttr->value = '5.49.0';
 		$root->appendChild($rootAttr);
 		$fet->appendChild($root);
@@ -527,9 +543,7 @@
 		getSubjects($fet, $root, $mysqli, $userTableID);
 		getTeachers($fet, $root, $mysqli, $userTableID);
 		getStudents($fet, $root, $mysqli, $userTableID);
-		
-		//buildNode($fet, $root, 'Activity_Tags_List', '');
-		
+				
 		getActivities($fet, $root, $mysqli, $userTableID);
 		getBuildings($fet, $root, $mysqli, $userTableID);
 		getRooms($fet, $root, $mysqli, $userTableID);
@@ -539,7 +553,6 @@
 		#closes the link to the database
 		$mysqli->close();
 		
-		/*echo $fet->saveXML();*/
 		$dir = "/opt/lampp/htdocs/fet/uploads/".$userName."/".$semester."/";
 		$dir .= $semester.".fet";
 		$fet->save($dir);

@@ -616,7 +616,7 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 				}
 			}
 		}
-		
+
 		var data = [
 			_chosenActivities,
 			_weightO
@@ -638,7 +638,7 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 				console.log('Succesfully created a new No Overlap constraint with id: ' + result1 + ', with ' + _chosenActivities.length + ' activities!');
 			});
 		});
-		
+
 		$scope.chosenActivities = [];
 		$scope.activity = $scope.activities[0];
 		$scope.weightO = 100;
@@ -682,7 +682,7 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 					'method': 'get-single',
 					'id': element.anoc_id
 				}).success(function(result){
-					$scope.actNoverlaps.push(result);					
+					$scope.actNoverlaps.push(result);
 				})
 			});
 		})
@@ -713,13 +713,13 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 });
 
 //////////////////////////////
-//		TeachersNACtrl		//
+//		TeachersNATCtrl		//
 //////////////////////////////
 app.controller('TeachersNATCtrl', function( $scope, myHttp ) {
 	$scope.chosenTimes = [];
 	$scope.teachersNATs = [];
 	$scope.weightT = 100;
-	$scope.disabledTeachersNAT = false;	
+	$scope.disabledTeachersNAT = false;
 
 	$scope.selectTime = function (){
 		if($scope.disabledTeachersNAT){
@@ -789,7 +789,7 @@ app.controller('TeachersNATCtrl', function( $scope, myHttp ) {
 				window.alert("There is already a time constraint for " + _teacher.name + "!");
 			}
 		})
-		
+
 		$scope.chosenTimes = [];
 		$scope.act_teacher = $scope.teachers[0];
 		$scope.weightT = 100;
@@ -811,7 +811,7 @@ app.controller('TeachersNATCtrl', function( $scope, myHttp ) {
 			$scope.act_teachersNAT = data[0];
 		});
 	}
-	
+
 	$scope.selectTeachersNAT = function (teachersNAT) {
 		if($scope.act_teachersNAT != undefined){
 			$scope.disabledTeachersNAT = true;
@@ -841,9 +841,108 @@ app.controller('TeachersNATCtrl', function( $scope, myHttp ) {
 				$scope.chosenTimes = [];
 			});
 		}
-	}	
+	}
 
 	$scope.getTeachersNAT();
+});
+
+//////////////////////////////
+//		TeachersMaxHourCtrl		//
+//////////////////////////////
+app.controller('TeachersMaxHoursCtrl', function( $scope, myHttp ) {
+	$scope.maxHourCONs = [];
+	$scope.weightT = 100;
+	$scope.maxHour = 5;
+	$scope.disabledTeachersNAT = false;
+	$scope.wrongWeight = false;
+
+	$scope.saveMaxHourCON = function () {
+		let _teacher = $scope.act_teacher;
+		let _weightT = $scope.weightT;
+		let _maxHour = $scope.maxHour;
+
+		myHttp.query({
+			'query': 'maxHourCON',
+			'method': 'get-single',
+			'id': _teacher.id
+		}).success(function(result){
+			if(result[0]==null){
+				let data = [
+					_teacher,
+					_weightT,
+					_maxHour
+				];
+				myHttp.query({
+					'query': 'maxHourCON',
+					'method': 'new',
+					'data': data
+				}).success(function (result_id){
+					window.alert('Successfully created constraint for '+_teacher.name+' with '+_maxHour+' classes per day!');
+					$scope.getMaxHourCONs();
+					$scope.weightT = 100;
+					$scope.maxHour = 5;
+					$scope.act_teacher = $scope.teachers[0];
+				});
+			}else{
+				window.alert("There is already a time constraint for " + _teacher.name + "!");
+			}
+		})
+	}
+
+	$scope.isMaxHourCONWrong = function () {
+		if($scope.act_teacher && $scope.maxHour && $scope.weightT)
+			return false;
+		else
+			return true;
+	}
+
+	$scope.getMaxHourCONs = function () {
+		myHttp.query({
+			'query': 'maxHourCON',
+			'method': 'get-all'
+		}).success(function (data) {
+			$scope.maxHourCONs = data;
+			$scope.act_maxHourCON = data[0];
+		});
+	}
+
+	$scope.selectMaxHourCON = function (maxHourCON) {
+		if($scope.act_maxHourCON != undefined){
+			$scope.disabledMaxHourCON = true;
+			$scope.wrongWeight = false;
+			$scope.weightT = parseInt(maxHourCON.weight_percentage);
+			$scope.maxHour = parseInt(maxHourCON.max_hours);
+		}
+	}
+
+	$scope.toDefault = function() {
+		if(!$scope.disabledTeachersNAT){
+			$scope.disabledMaxHourCON = false;
+			$scope.weightT = 100;
+			$scope.maxHour = 5;
+		}
+	}
+
+	$scope.deleteMaxHourCON = function(id){
+		if(confirm("Are you sure you want to delete this constraint?")){
+			myHttp.query({
+				'query': 'maxHourCON',
+				'method': 'delete',
+				'id': id
+			}).success(function (data) {
+				$scope.getMaxHourCONs();
+				$scope.toDefault();
+			});
+		}
+	}
+
+	$scope.isWeightWrong = function() {
+		if($scope.weightT!=100)
+			$scope.wrongWeight = true;
+		else
+			$scope.wrongWeight = false;
+	}
+	$scope.getMaxHourCONs();
 });
 
 //////////////////////////////
@@ -939,7 +1038,7 @@ app.controller('RoomsNATCtrl', function( $scope, myHttp ) {
 				window.alert("There is already a time constraint for " + _room.room_name + "!");
 			}
 		})
-		
+
 		$scope.chosenTimes = [];
 		$scope.act_building = '';
 		$scope.act_room = '';
@@ -962,7 +1061,7 @@ app.controller('RoomsNATCtrl', function( $scope, myHttp ) {
 			$scope.act_roomsNAT = data[0];
 		});
 	}
-	
+
 	$scope.selectRoomsNAT = function (roomsNAT) {
 		if($scope.act_roomsNAT != undefined){
 			$scope.disabledRoomsNAT = true;
@@ -992,7 +1091,7 @@ app.controller('RoomsNATCtrl', function( $scope, myHttp ) {
 				$scope.chosenTimes = [];
 			});
 		}
-	}	
+	}
 
 	$scope.getRoomsNAT();
 });
