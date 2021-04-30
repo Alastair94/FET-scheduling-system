@@ -1,11 +1,10 @@
 <?php
-define("HOST", "localhost"); // The host you want to connect to.
-define("USER", "root"); // The database username.
-define("PASSWORD", ""); // The database password. 
-define("DATABASE", "fet"); // The database name.
+define("HOST", "localhost");
+define("USER", "root");
+define("PASSWORD", "");
+define("DATABASE", "fet");
 
 $dbname = "fet";
 $users = "users"; 
  
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-// If you are connecting via TCP/IP rather than a UNIX socket remember to add the port number as a parameter.

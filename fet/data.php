@@ -26,7 +26,7 @@
 				
 				
 				<article id="box">
-					<ul class="tabs">
+					<ul id="datatab" class="tabs" style="width:100%;">
 					   <li><a href="#tab1" data-toggle="tab">Days and Hours</a></li>
 					   <li><a href="#tab2" data-toggle="tab">Teachers</a></li>
 					   <li><a href="#tab3" data-toggle="tab">Subjects</a></li>
@@ -279,12 +279,13 @@
 											</select>
 										</div>
 									</div>
-									<div style="width: 175px; float: left; font-size: 15px;">
-										Duration:<br>
+									<div style="width: 100%; font-size: 15px; display:flex; margin-top:20px; height:30px;">
+										<p>Duration:</p>
 										<input size="10"
 											ng-model="duration"
 											type="number"
-											min="1">
+											min="1"
+											style="width:40px">
 										<br>
 										<input
 											type="radio"
@@ -310,7 +311,9 @@
 											ng-options="sb.name for sb in subjects" >
 											<option value="" selected disabled hidden>Subjects</option>
 										</select>
-										<br><br>Student number:<br>
+										<p>
+										Student number:
+										</p>
 										<input
 											type="number"
 											ng-model="student_number"
@@ -321,15 +324,53 @@
 									<div style="clear: both">
 										<button ng-click="saveAct()" ng-disabled="isOK()">{{button_value}}</button>
 									</div>
-									<div >
-										<p style="text-align:center;">Activities</p>
-										<ul class="unstyled" style="font-size: 16px;">
-											<li ng-repeat="act in activities">
-												Teacher: {{act.teach_name}} <br> Subject: {{act.subj_name}} <br> Year: {{act.year_name}} <br> Number of students: {{act.number_of_students}} <br>
-												Duration: {{act.duration}} <br> Student name: {{act.student_name}}
-												<a href ng-click="editThis(act.id)">edit</a>
-											</li>
-										</ul>
+									<div>
+										<div style="text-align:center;margin-bottom:30px;">
+											Activities:<br>
+											<select 
+												ng-model="activity" 
+												ng-options="'ID: ' + act.id for act in activities"
+												ng-change="isTaken(activity)">
+												<option value="" selected disabled hidden>Choose here</option>
+											</select>
+										</div>
+										<table style="width:100%; text-align: center; table-layout: fixed">
+											<tr>
+												<th>ID:</th>
+												<th>Duration:</th>
+												<th>Active:</th>
+												<th>Teacher:</th>
+												<th>Subject:</th>
+												<th>Headcount:</th>
+											</tr>
+											<tr style="height: 30px">
+												<td>{{activity.id}} </td>
+												<td>{{activity.duration}}</td>
+												<td>{{activity.active==0 && 'True' || activity.active==1 && 'False' || ''}}</td>
+												<td>{{activity.teach_name}}</td>
+												<td>{{activity.subj_name}}</td>
+												<td>{{activity.number_of_students}}</td>
+											</tr>
+											<tr>
+												<td colspan="6">Students:</td>
+											</tr>
+											<tr>
+												<th colspan="2">Years:</th>
+												<th colspan="2">Groups:</th>
+												<th colspan="2">Subgroups:</th>
+											</tr>
+										</table>
+										<div style="width:100%; display:flex; text-align: center;">
+											<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+												<p ng-repeat="act in activity.year_array">{{act.year_name}}</p>
+											</div>
+											<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+												<p ng-repeat="act in activity.group_array">{{act.group_name}}</p>
+											</div>
+											<div style="width:33%; border: 1px solid black; height:150px; overflow-y:scroll; overflow-x:hidden;">
+												<p ng-repeat="act in activity.subgroup_array">{{act.subgroup_name}}</p>
+											</div>
+										</div>
 									</div>
 									<span ng-show="checked">
 									<button ng-click="cancel()" ng-disabled="isOK()">Cancel</button>

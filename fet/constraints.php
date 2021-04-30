@@ -24,52 +24,59 @@
 				<?php include 'html/nav.html'?>
 		
 			<article id="box">
-				<ul class="tabs">
-					<li><a href="#tab1" data-toggle="tab">Subjects</a></li>
-					<li><a href="#tab2" data-toggle="tab">Space&Time for activities</a></li>
+				<ul class="tabs" style="text-align:center">
+					<li><a href="#tab1" data-toggle="tab">Subjects pref. rooms</a></li>
+					<li><a href="#tab2" data-toggle="tab">Activities pref. space&time</a></li>
 					<li><a href="#tab3" data-toggle="tab">Not overlapping activities</a></li>
+					<li><a href="#tab4" data-toggle="tab">Teachers not available times</a></li>
+					<li><a href="#tab5" data-toggle="tab">Teachers max classes per day</a></li>
+					<li><a href="#tab6" data-toggle="tab">Rooms not available times</a></li>
+					<li><a href="#tab7" data-toggle="tab">Max gaps between classes</a></li>
 				</ul>
 				<div class="tab_container" ng-controller="AppController">
 				
 					<div id="tab1" class="tab_content">
-						<div ng-controller="SubjectsCtrl">
+						<div ng-controller="SubjectsCtrl" >
 							<div>
-								Subject:<br>
-								<select 
-									ng-model="subject" 
-									ng-options="sb.name for sb in subjects" >
-									<option value="" selected disabled hidden>Choose here</option>
-								</select>
-							</div>
-							<div>
-								Preferred Room:<br>
-								<div style="width: 175px; float: left">
-									<select size="10" 
-										ng-model="act_room" 
-										ng-options="r.name for r in rooms" style="min-width: 150px;" 
-										ng-dblclick="updateR()" autofocus>
+								<h2>Subjects' preferred rooms:</h2>
+								<div>
+									Subject:<br>
+									<select 
+										ng-model="subject" 
+										ng-options="sb.name for sb in subjects" >
+										<option value="" selected disabled hidden>Choose here</option>
 									</select>
 								</div>
+								<div>
+									Preferred Room:<br>
+									<div style="width: 175px; float: left">
+										<select size="10" 
+											ng-model="act_room" 
+											ng-options="r.name for r in rooms" style="min-width: 150px;" 
+											ng-dblclick="updateR()" autofocus>
+										</select>
+									</div>
 
-								<div style="width: 175px; float: left">	
-									<select size="10" 
-										ng-model="chosenR"
-										ng-options="cr.name for cr in chosenRooms" style="min-width: 150px;" 
-										ng-dblclick="removeR()">
-									</select>
+									<div style="width: 175px; float: left">	
+										<select size="10" 
+											ng-model="chosenR"
+											ng-options="cr.name for cr in chosenRooms" style="min-width: 150px;" 
+											ng-dblclick="removeR()">
+										</select>
+									</div>
 								</div>
-							</div>
-							<div>
-								Weight Percentage<br>
-								<input size="10"
-									ng-model="weightP"
-									type="number"
-									min="0" max="100" 
-									>
-							</div>
+								<div>
+									Weight Percentage<br>
+									<input size="10"
+										ng-model="weightP"
+										type="number"
+										min="0" max="100" 
+										>
+								</div>
 								<button ng-click="saveAct()" >Add</button><br>
-							<div style="clear:both" class="unstyled">
-								<br>Subject constraints:<br>
+							</div>
+							<p>Subject constraints:</p>
+							<div style="display:flex; overflow-y:scroll; overflow-x:hidden; height: 200px;" class="unstyled">
 								<ul class="unstyled">
 									<li ng-repeat="sConstraint in spaceConstraints">
 										<!-- Constraint ID: {{sConstraint.id}}<br> -->
@@ -81,11 +88,11 @@
 								</ul>
 							</div>
 							<div ng-include src="template.url"></div>
-							<div ng-view></div>
 						</div>
 					</div>
 
 					<div id="tab2" class="tab_content" ng-controller="ActivitiesCtrl">
+						<h2>Activities' preferred time&space:</h2>
 						<div>
 							<div>
 								Activities:<br>
@@ -162,10 +169,7 @@
 									</select>
 								</div>
 								<div>
-									<div>
-										<p>Preferred time: <span style="color:green">{{act_day.day_name}} {{act_hour.hour_name}}</span></p>
-									</div>
-									<div style="display:flex;">
+									<div style="display:flex;  margin-top:40px;">
 										<div style="display:flex;">
 											<input type="checkbox" ng-disabled="takenTime" id="centralTime" ng-click="isItCentralTime()" ng-model="act_central_time"><label for="centralTime">Is it central?</label>
 										</div>
@@ -214,10 +218,7 @@
 									</select>
 								</div>
 								<div>
-									<div>
-										<p>Preferred room: <span style="color:green">{{act_building.name}} {{act_room.room_name}}</span></p>
-									</div>
-									<div style="display:flex;">
+									<div style="display:flex; margin-top:40px;">
 										<div style="display:flex;">
 											<input ng-disabled="takenSpace" type="checkbox" id="centralSpace" ng-click="isItCentralSpace()" ng-model="act_central_space"><label for="centralSpace">Is it central?</label>
 										</div>
@@ -239,6 +240,7 @@
 							<div ng-include src="template.url"></div>
 						</div>
 					</div>
+
 					<div id="tab3" class="tab_content" ng-controller="OverlappingCtrl">
 						<div>
 							<div style="display:flex">
@@ -321,6 +323,56 @@
 									<p ng-repeat="act in activity.subgroup_array">{{act.subgroup_name}}</p>
 								</div>
 							</div>
+						</div>
+					</div>
+
+					<div id="tab4" class="tab_content" ng-controller="TeachersNACtrl">
+						<div style="margin-bottom:20px">
+							Teacher:<br>
+							<select 
+								ng-model="act_teacher" 
+								ng-options="t.name for t in teachers"
+								ng-change="isTaken(act_teacher)">
+								<option value="" selected disabled hidden>Choose here</option>
+							</select>
+						</div>
+						<div style="display:flex">
+							<select size="10" 
+									ng-model="act_day"
+									ng-disabled="takenTime"
+									ng-options="d.day_name for d in days" style="min-width: 150px;">
+							</select>
+							<select size="10" 
+									ng-model="act_hour"
+									ng-options="h.hour_name for h in hours" style="min-width: 150px;"
+									ng-disabled="takenTime"
+									ng-dblclick="selectTime()">
+							</select>
+							<select size="10" 
+									ng-model="chosen_time"
+									ng-dblclick="removeTime()"
+									ng-disabled="disabledTeachersNAT"
+									ng-options="c.day_name + '->' + c.hour_name for c in chosenTimes" style="min-width: 150px;">
+							</select>
+							<div style="margin:auto;">
+								Weight Percentage<br>
+								<input size="10"
+									ng-model="weightT"
+									type="number"
+									min="0" max="100"
+									ng-disabled="disabledTeachersNAT"
+									>
+							</div>
+							<div style="margin:auto; margin-left:20px;margin-right:20px; width:150px">
+								<button ng-click="saveTeachersNAT()" ng-disabled="isTeachersNATWrong() || disabledTeachersNAT" style="height:50px; width:150px; margin:auto" >Add time constraint</button>
+								<button ng-click="deleteTeachersNAT(act_teachersNAT.tnat_id)" ng-show="disabledTeachersNAT"  style="height:50px; width:150px; margin:auto"  >Delete time constraint</button>
+							</div>
+							<select size="10" 
+									ng-model="act_teachersNAT"
+									ng-options="t.teacher_name for t in teachersNATs" 
+									ng-click="selectTeachersNAT(act_teachersNAT)"
+									style="min-width: 150px;">
+							</select>
 						</div>
 					</div>
 				</div>

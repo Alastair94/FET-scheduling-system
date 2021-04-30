@@ -177,10 +177,10 @@
 #-------------------------------------------------------------------------------------------------
 #querys the database to retrieve Activites_List from activities table
 	function getActivities(&$fet, $root, $mysqli, $userTableID){
-		$query = "SELECT activities_id, teach_name, subj_name, /*year_name,*/ duration, total_duration, activity_group_id, active, user_tables.comments, activities.number_of_students ";
+		$query = "SELECT activities_id, teach_name, subj_name, duration, total_duration, activity_group_id, active, activities.number_of_students ";
 		$query .= "FROM user_tables, activities, teachers, subjects WHERE  user_tables.user_table_id = activities.user_table_id ";
 		$query .= "AND activities.teacher_id = teachers.teacher_id AND activities.subj_id = subjects.subj_id ";
-		$query .= "AND /*activities.student_id = students.student_id AND */activities.user_table_id = ".$userTableID;
+		$query .= "AND activities.user_table_id = ".$userTableID;
 		$queryResult = $mysqli->query($query);
 
 		$activities = $fet->createElement('Activities_List');
@@ -194,17 +194,6 @@
 			buildNode($fet, $activity, 'Teacher', $tuple['teach_name']);
 			buildNode($fet, $activity, 'Subject', $tuple['subj_name']);
 
-			// $query2 = "SELECT activity_years.year_name, activity_groups.group_name, activity_subgroups.subgroup_name FROM activity_years, activity_groups, activity_subgroups WHERE activity_years.activity_id = ".$tuple['activities_id']." ";
-			// $query2 .= "AND activity_groups.activity_id = ".$tuple['activities_id']." AND activity_subgroups.activity_id = ".$tuple['activities_id'];
-			// $queryResult2 = $mysqli->query($query2);
-			// while($tuple2 = $queryResult2->fetch_assoc()){
-			// 	if($tuple2['subgroup_name'])	
-			// 		buildNode($fet, $activity, 'Students', $tuple2['subgroup_name']);
-			// 	else if($tuple2['group_name'])
-			// 		buildNode($fet, $activity, 'Students', $tuple2['group_name']);
-			// 	else if($tuple2['year_name'])
-			// 		buildNode($fet, $activity, 'Students', $tuple2['year_name']);
-			// }
 			$query2 = "SELECT year_name FROM activity_years WHERE activity_id = ".$tuple['activities_id'];
 			$queryResult2 = $mysqli->query($query2);
 			while($tuple2 = $queryResult2->fetch_assoc()){
@@ -230,7 +219,7 @@
 				buildNode($fet, $activity, 'Number_Of_Students', $tuple['number_of_students']);
 			}
 			buildNode($fet, $activity, 'Active',  $tuple['active']==0?"true":"false");
-			buildNode($fet, $activity, 'Comments',  $tuple['comments']);	
+			buildNode($fet, $activity, 'Comments',  "");	
 			//$count++;	
 		}
 	}	
@@ -290,7 +279,8 @@
 		getMinDays($fet, $timeCons, $mysqli, $userTableID);
 		getNOverlapActivities($fet, $timeCons, $mysqli, $userTableID);
 		
-		getSameStartHour($fet, $timeCons, $mysqli, $userTableID);	
+		getSameStartHour($fet, $timeCons, $mysqli, $userTableID);
+		getTeachersNAT($fet, $timeCons, $mysqli, $userTableID);
 	}
 
 #-------------------------------------------------------------------------------------------------
@@ -448,6 +438,33 @@
 
 			buildNode($fet, $NOverlapCons, 'Active', 'true'); //////////////////////////////////////////
 			buildNode($fet, $NOverlapCons, 'Comments', $tuple['comments']);
+		}
+	}
+
+	function getTeachersNAT(&$fet, $timeCons, $mysqli, $userTableID){
+		$query = "SELECT * FROM teachers_not_available_t INNER JOIN teachers ON teachers_not_available_t.teacher_id = teachers.teacher_id WHERE teachers_not_available_t.user_table_id = ".$userTableID;
+		$queryResult = $mysqli->query($query);
+
+		while($tuple = $queryResult->fetch_assoc()){
+			$teachersNAT = $fet->createElement('ConstraintTeacherNotAvailableTimes');
+			$teachersNAT = $timeCons->appendChild($teachersNAT);
+
+			buildNode($fet, $teachersNAT, 'Weight_Percentage', $tuple['weight_percentage']);
+			buildNode($fet, $teachersNAT, 'Teacher', $tuple['teach_name']);
+			buildNode($fet, $teachersNAT, 'Number_of_Not_Available_Times', $tuple['num_of_times']);
+		
+			$query2 = "SELECT * FROM list_of_tnat INNER JOIN days ON list_of_tnat.day_id = days.days_id INNER JOIN hours ON list_of_tnat.hour_id = hours.hours_id  WHERE tnat_id = ".$tuple['tnat_id'];
+			$queryResult2 = $mysqli->query($query2);
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				$actTeachersNAT = $fet->createElement('Not_Available_Time');
+				$actTeachersNAT = $teachersNAT->appendChild($actTeachersNAT);					
+
+				buildNode($fet, $actTeachersNAT, 'Day', $tuple2['day_name']);
+				buildNode($fet, $actTeachersNAT, 'Hour', $tuple2['hour_name']);
+			}
+
+			buildNode($fet, $teachersNAT, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $teachersNAT, 'Comments', $tuple['comments']);
 		}
 	}
 

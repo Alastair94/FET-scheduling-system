@@ -1,12 +1,13 @@
 <?php
 	include 'PHP/validUser.php';
+	include 'PHP/writeToXML.php';
 	$semester = $_SESSION['user']['semester'];
 	$userID = $_SESSION['user']['username'];
 	$pathToMyDir = "/opt/lampp/htdocs/fet/uploads/".$userID."/";
 	$semFile = $semester.".fet";
 	$pathToMyDir .= $semester."/";
 
-	$fetcmd = "export DISPLAY=:0.0;cd ".$pathToMyDir.";echo mate | sudo -S fet-cl --inputfile=".$semFile." --outputdir=".$semester." 2>&1";
+	$fetcmd = "export DISPLAY=:0.0;"."cd ".$pathToMyDir.";echo mate | sudo -S fet-cl --inputfile=".$semFile." --outputdir=".$semester." 2>&1";
 	$output = null;
 	$return = null;
 	exec($fetcmd, $output, $return);
@@ -32,7 +33,6 @@
 				<legend><?php echo ucfirst($semester);?></legend>
 				<?php include 'html/nav.html'?>
 			<article id="box">
-				<?php include 'PHP/writeToXML.php'?>
 				<?php
 					$pathToTables = 'uploads/'.$userID.'/'.$semester.'/'.$semester.'/timetables'.'/'.$semester.'/'.$semester;
 					echo "

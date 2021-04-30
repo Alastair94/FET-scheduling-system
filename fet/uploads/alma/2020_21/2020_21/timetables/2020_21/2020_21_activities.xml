@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Activities_Timetable>
+<Activity>
+	<Id>72</Id>
+	<Day>Péntek</Day>
+	<Hour>13:40-15:10</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>74</Id>
+	<Day>Hétfő</Day>
+	<Hour>17:20-18:50</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>75</Id>
+	<Day>Kedd</Day>
+	<Hour>08:00-09:30</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>76</Id>
+	<Day>Kedd</Day>
+	<Hour>11:50-13:20</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>77</Id>
+	<Day>Szerda</Day>
+	<Hour>11:50-13:20</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>78</Id>
+	<Day>Szerda</Day>
+	<Hour>13:40-15:10</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>79</Id>
+	<Day>Péntek</Day>
+	<Hour>17:20-18:50</Hour>
+	<Room></Room>
+</Activity>
+<Activity>
+	<Id>80</Id>
+	<Day>Kedd</Day>
+	<Hour>08:00-09:30</Hour>
+	<Room></Room>
+</Activity>
+</Activities_Timetable>

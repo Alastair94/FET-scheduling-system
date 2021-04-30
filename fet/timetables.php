@@ -27,7 +27,7 @@
 		</header>
 		<article>
 			<form name="fet" action="" method="POST" enctype="multipart/form-data">
-			<fieldset style="margin-right:200px;margin-left:200px;">
+			<fieldset style="margin-right:100px;margin-left:100px;">
 				<legend>Time Tables</legend>
 				
 				<section id="create">
@@ -42,21 +42,21 @@
 				<section id="exist">
 					<h1>Work on Existing Tables</h1>
 					<label>Semester:</label><select style="margin-bottom: 3em; margin-top: 0.5em;" name="existSem">
-						<option value="" selected></option>
+						<option value="" selected disabled hidden>Choose here</option>
 						<?php echo $semester?>
 					</select><br/>
 					<input class="buttons" type="submit" name="view" value="View/Edit Table"/>
 				</section><!--end exist-->
 				
-				<section id="upload">
+				<!-- <section id="upload">
 					<h1>Upload a .fet XML File</h1>
 					<label>FET file:</label><input type="file" name="user-file" /><br/>
 					<label>Semester:</label><input class="text" type="text" name="uploadSem" /><br/>
 					<input class="buttons" type="submit" name="upload" value="Upload File" />
-				</section><!--end upload-->
+				</section>end upload -->
 				
-				<section id="logout">
-					<input class="buttons" type="submit" name="logout" value="Logout" />
+				<section id="logout" style="display:flex; height:200px">
+					<input class="buttons" type="submit" name="logout" value="Logout" style="margin:auto" />
 				</section><!--end logout-->
 			</fieldset>
 			</form>

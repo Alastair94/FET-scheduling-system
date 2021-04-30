@@ -87,14 +87,14 @@ legend {
 label{
 	float: left;
 	display: block;
-	width: 5em;
+	width: 110px;
 	text-align: left;
 	font-size: 1.15em;
 	vertical-align: bottom;
 }
 
 #upload, #exist, #create{
-	width: 350px;
+	width: 450px;
 	min-height: 275px;
 	border: 0.25em inset;	
 	padding-left: 0.35em;
@@ -117,7 +117,7 @@ input +.buttons{
 }
 
 .buttons{
-	width: 125px;
+	width: 150px;
 	height: 25px;
 	margin-top: 0.5em;
 }
@@ -202,7 +202,7 @@ ul.tabs {
 
 }
 
-ul.tabs li {
+ul.tabs:not(#datatab) li{
  float: left;
  margin: 0;
  padding: 0;
@@ -214,6 +214,21 @@ ul.tabs li {
  overflow: hidden;
  position: relative;
  background: #e0e0e0;
+ min-width:400px;
+}
+
+ul.tabs li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 31px; /*--Subtract 1px from the height of the unordered list--*/
+	line-height: 31px; /*--Vertically aligns the text within the tab--*/
+	border: 1px solid #999;
+	border-left: none;
+	margin-bottom: -1px; /*--Pull the list item down 1px--*/
+	overflow: hidden;
+	position: relative;
+	background: #e0e0e0;
 }
 
 ul.tabs li a {
@@ -248,7 +263,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 
 .tab_content {
  padding: 20px;
- font-size: 1.2em;
+ /* font-size: 1.2em; */
 }
 
 

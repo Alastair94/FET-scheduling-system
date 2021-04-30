@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Teachers_Timetable>
+  <Teacher name="Teszt Elek">
+   <Day name="Hétfő">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Kedd">
+    <Hour name="08:00-09:30">
+     <Subject name="Matematika"></Subject><Students name="Matematikus"></Students>
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Szerda">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     <Subject name="Kommunikáció"></Subject><Students name="2019"></Students><Students name="2016"></Students>
+    </Hour>
+    <Hour name="13:40-15:10">
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+    </Hour>
+    <Hour name="15:30-17:00">
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+    </Hour>
+    <Hour name="17:20-18:50">
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+    </Hour>
+   </Day>
+   <Day name="Csütörtök">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Péntek">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="Nyelvész"></Students><Students name="Szoftvertesztelő"></Students>
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+  </Teacher>
+  <Teacher name="Wincs Eszter">
+   <Day name="Hétfő">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Kedd">
+    <Hour name="08:00-09:30">
+     <Subject name="Kommunikáció"></Subject><Students name="2016"></Students>
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Szerda">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Csütörtök">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Péntek">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     <Subject name="Informatika gy."></Subject><Students name="Informatikus"></Students>
+    </Hour>
+   </Day>
+  </Teacher>
+  <Teacher name="Kukor Ica">
+   <Day name="Hétfő">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     <Subject name="Matematika"></Subject><Students name="2018"></Students><Students name="2019"></Students><Students name="2020"></Students><Students name="2017"></Students><Students name="2016"></Students>
+    </Hour>
+   </Day>
+   <Day name="Kedd">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     <Subject name="Kommunikáció"></Subject><Students name="2020"></Students>
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Szerda">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Csütörtök">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Péntek">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+  </Teacher>
+  <Teacher name="Fá Zoltán">
+   <Day name="Hétfő">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Kedd">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Szerda">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Csütörtök">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+   <Day name="Péntek">
+    <Hour name="08:00-09:30">
+     
+    </Hour>
+    <Hour name="10:00-11:30">
+     
+    </Hour>
+    <Hour name="11:50-13:20">
+     
+    </Hour>
+    <Hour name="13:40-15:10">
+     
+    </Hour>
+    <Hour name="15:30-17:00">
+     
+    </Hour>
+    <Hour name="17:20-18:50">
+     
+    </Hour>
+   </Day>
+  </Teacher>
+</Teachers_Timetable>
