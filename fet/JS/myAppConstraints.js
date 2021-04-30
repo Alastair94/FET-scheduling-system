@@ -715,7 +715,7 @@ app.controller('OverlappingCtrl', function( $scope, myHttp ) {
 //////////////////////////////
 //		TeachersNACtrl		//
 //////////////////////////////
-app.controller('TeachersNACtrl', function( $scope, myHttp ) {
+app.controller('TeachersNATCtrl', function( $scope, myHttp ) {
 	$scope.chosenTimes = [];
 	$scope.teachersNATs = [];
 	$scope.weightT = 100;
@@ -777,11 +777,11 @@ app.controller('TeachersNACtrl', function( $scope, myHttp ) {
 						_chosenTimes
 					];
 					myHttp.query({
-						'query': 'listTeachersNAT',
+						'query': 'listNAT',
 						'method': 'new',
 						'data': data2
 					}).success(function(final_result){
-						window.alert('Succesfully created a new TeacherNotAvailableTimes constraint for ' + _teacher.name + ' with id: ' + result_id + ', with ' + _chosenTimes.length + ' times!');
+						window.alert('Successfully created a new TeacherNotAvailableTimes constraint for ' + _teacher.name + ' with id: ' + result_id + ', with ' + _chosenTimes.length + ' not available times!');
 						$scope.getTeachersNAT();
 					})
 				});
@@ -818,9 +818,9 @@ app.controller('TeachersNACtrl', function( $scope, myHttp ) {
 			$scope.chosenTimes = [];
 			$scope.weightT = parseInt(teachersNAT.weight_percentage);
 			myHttp.query({
-				'query': 'listTeachersNAT',
+				'query': 'listNAT',
 				'method': 'get-single',
-				'id': teachersNAT.tnat_id
+				'id': teachersNAT.nat_id
 			}).success(function (results){
 				for($i = 0; $i < results.length; $i++){
 					$scope.chosenTimes.push(results[$i]);
@@ -833,7 +833,7 @@ app.controller('TeachersNACtrl', function( $scope, myHttp ) {
 	$scope.deleteTeachersNAT = function(id){
 		if(confirm("Are you sure you want to delete this time constraint?")){
 			myHttp.query({
-				'query': 'TeachersNAT',
+				'query': 'teachersNAT',
 				'method': 'delete',
 				'id': id
 			}).success(function (data) {
@@ -845,6 +845,158 @@ app.controller('TeachersNACtrl', function( $scope, myHttp ) {
 
 	$scope.getTeachersNAT();
 });
+
+//////////////////////////////
+//		RoomsNATCtrl		//
+//////////////////////////////
+app.controller('RoomsNATCtrl', function( $scope, myHttp ) {
+	$scope.chosenRooms = [];
+	$scope.roomsNATs = [];
+	$scope.selectedRooms = [];
+	$scope.chosenTimes = [];
+	$scope.act_building = '';
+	$scope.act_room = '';
+	$scope.act_roomsNAT = '';
+	$scope.weightR = 100;
+	$scope.disabledRoomsNAT = false;
+
+	$scope.selectRoom = function (act_building) {
+		myHttp.query({
+			'query': 'rooms',
+			'method': 'get-single',
+			'id': act_building.id
+		}).success(function (result){
+			$scope.selectedRooms = result;
+			$scope.act_room = result[0];
+		})
+	}
+
+	$scope.selectTime = function (){
+		if($scope.disabledRoomsNAT){
+			$scope.chosenTimes = [];
+			$scope.disabledRoomsNAT = false;
+			$scope.weightR = 100;
+		}
+		for (var i = 0; i < $scope.chosenTimes.length; i++) {
+			if($scope.chosenTimes[i].day_name + $scope.chosenTimes[i].hour_name == $scope.act_day.day_name + $scope.act_hour.hour_name) {
+				console.log("Time matches");
+				return;
+			}
+		}
+		let time = {
+			...$scope.act_day,
+			...$scope.act_hour
+		}
+		$scope.chosenTimes.push(time);
+		$scope.chosen_time = $scope.chosenTimes[0];
+	}
+
+	$scope.removeTime = function () {
+		for (var i = $scope.chosenTimes.length - 1; i >= 0; i--) {
+			if($scope.chosenTimes[i] == $scope.chosen_time) {
+				$scope.chosenTimes.splice($scope.chosenTimes.indexOf($scope.chosen_time),1);
+				$scope.chosen_time = $scope.chosenTimes[0];
+				return;
+			}
+		}
+	}
+
+	$scope.saveRoomsNAT = function () {
+		let _chosenTimes = $scope.chosenTimes;
+		let _weightR = $scope.weightR;
+		let _room = $scope.act_room;
+
+		myHttp.query({
+			'query': 'roomsNAT',
+			'method': 'get-single',
+			'id': _room.id
+		}).success(function(result){
+			if(result[0]==null){
+				let data = [
+					_chosenTimes,
+					_weightR,
+					_room
+				];
+				myHttp.query({
+					'query': 'roomsNAT',
+					'method': 'new',
+					'data': data
+				}).success(function (result_id){
+					let data2 = [
+						result_id,
+						_chosenTimes
+					];
+					myHttp.query({
+						'query': 'listNAT',
+						'method': 'new',
+						'data': data2
+					}).success(function(final_result){
+						window.alert('Successfully created a new RoomNotAvailableTimes constraint for ' + _room.room_name + ' with id: ' + result_id + ', with ' + _chosenTimes.length + ' not available times!');
+						$scope.getRoomsNAT();
+					})
+				});
+			}else{
+				window.alert("There is already a time constraint for " + _room.room_name + "!");
+			}
+		})
+		
+		$scope.chosenTimes = [];
+		$scope.act_building = '';
+		$scope.act_room = '';
+		$scope.weightR = 100;
+	}
+
+	$scope.isRoomsNATWrong = function () {
+		if($scope.act_room && $scope.chosenTimes.length > 0 && $scope.weightR)
+			return false;
+		else
+			return true;
+	}
+
+	$scope.getRoomsNAT = function () {
+		myHttp.query({
+			'query': 'roomsNAT',
+			'method': 'get-all'
+		}).success(function (data) {
+			$scope.roomsNATs = data;
+			$scope.act_roomsNAT = data[0];
+		});
+	}
+	
+	$scope.selectRoomsNAT = function (roomsNAT) {
+		if($scope.act_roomsNAT != undefined){
+			$scope.disabledRoomsNAT = true;
+			$scope.chosenTimes = [];
+			$scope.weightR = parseInt(roomsNAT.weight_percentage);
+			myHttp.query({
+				'query': 'listNAT',
+				'method': 'get-single',
+				'id': roomsNAT.nat_id
+			}).success(function (results){
+				for($i = 0; $i < results.length; $i++){
+					$scope.chosenTimes.push(results[$i]);
+					$scope.chosen_time = $scope.chosenTimes[0];
+				}
+			})
+		}
+	}
+
+	$scope.deleteRoomsNAT = function(id){
+		if(confirm("Are you sure you want to delete this time constraint?")){
+			myHttp.query({
+				'query': 'roomsNAT',
+				'method': 'delete',
+				'id': id
+			}).success(function (data) {
+				$scope.getRoomsNAT();
+				$scope.chosenTimes = [];
+			});
+		}
+	}	
+
+	$scope.getRoomsNAT();
+});
+
 
 app.factory('myHttp', function($http){
 	return {

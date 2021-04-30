@@ -1,5 +1,6 @@
 This file contains the result (log) of last operation
 
-FET command line simulation started on 4/30/21 9:14 AM
+FET command line simulation started on 4/30/21 1:27 PM
 
-Cannot precompute - data is wrong - aborting
+Starting timetable generation...
+Simulation successful

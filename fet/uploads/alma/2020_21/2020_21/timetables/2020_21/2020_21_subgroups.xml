@@ -18,7 +18,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -26,7 +26,7 @@
      
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="11:50-13:20">
      
@@ -89,10 +89,10 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:30-17:00">
      
@@ -120,12 +120,12 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
     <Hour name="08:00-09:30">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="10:00-11:30">
      
@@ -148,7 +148,7 @@
      
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="11:50-13:20">
      
@@ -191,7 +191,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -222,7 +222,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -230,7 +230,7 @@
      
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="11:50-13:20">
      
@@ -239,7 +239,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Teacher name="Wincs Eszter"></Teacher><Subject name="Informatika gy."></Subject>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -293,16 +293,16 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:30-17:00">
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Wincs Eszter"></Teacher><Subject name="Informatika gy."></Subject>
+     
     </Hour>
    </Day>
   </Subgroup>
@@ -324,7 +324,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -341,7 +341,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Teacher name="Wincs Eszter"></Teacher><Subject name="Informatika gy."></Subject>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -358,13 +358,13 @@
      
     </Hour>
     <Hour name="13:40-15:10">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:30-17:00">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Csütörtök">
@@ -378,13 +378,13 @@
      
     </Hour>
     <Hour name="13:40-15:10">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="17:20-18:50">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
    </Day>
    <Day name="Péntek">
@@ -395,7 +395,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -404,7 +404,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Wincs Eszter"></Teacher><Subject name="Informatika gy."></Subject>
+     
     </Hour>
    </Day>
   </Subgroup>
@@ -426,7 +426,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -457,7 +457,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Kommunikáció"></Subject>
+     
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -497,7 +497,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -506,7 +506,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Kommunikáció"></Subject>
     </Hour>
    </Day>
   </Subgroup>
@@ -528,7 +528,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -536,10 +536,10 @@
      
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="11:50-13:20">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Kommunikáció"></Subject>
+     
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -565,7 +565,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Kommunikáció"></Subject>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -599,10 +599,10 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
     <Hour name="15:30-17:00">
      
@@ -630,7 +630,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -701,7 +701,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -732,12 +732,12 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
     <Hour name="08:00-09:30">
-     <Teacher name="Wincs Eszter"></Teacher><Subject name="Kommunikáció"></Subject>
+     
     </Hour>
     <Hour name="10:00-11:30">
      
@@ -763,13 +763,13 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     <Teacher name="Teszt Elek"></Teacher><Subject name="Kommunikáció"></Subject>
+     
     </Hour>
     <Hour name="13:40-15:10">
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Teacher name="Wincs Eszter"></Teacher><Subject name="Kommunikáció"></Subject>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -803,7 +803,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Teacher name="Kukor Ica"></Teacher><Subject name="Matematika"></Subject>
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -812,7 +812,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     
+     <Teacher name="Teszt Elek"></Teacher><Subject name="Kommunikáció"></Subject>
     </Hour>
    </Day>
   </Subgroup>

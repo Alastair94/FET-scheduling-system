@@ -252,15 +252,31 @@ function queryAll($mysqli)
                 $result->free();
             }
         } else if($_GET['query'] == 'teachersNAT'){
-            $sql = 'SELECT * FROM teachers_not_available_t INNER JOIN teachers ON teachers_not_available_t.teacher_id = teachers.teacher_id '.
-            'WHERE teachers_not_available_t.user_table_id = '.$user_table_id;
+            $sql = 'SELECT * FROM not_available_times INNER JOIN teachers ON not_available_times.teacher_id = teachers.teacher_id '.
+            'WHERE not_available_times.user_table_id = '.$user_table_id;
 
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
-                    $row_array['tnat_id']   = $row['tnat_id'];
+                    $row_array['nat_id']   = $row['nat_id'];
                     $row_array['weight_percentage'] = $row['weight_percentage'];
                     $row_array['teacher_id'] = $row['teacher_id'];
                     $row_array['teacher_name'] = $row['teach_name'];
+                    $row_array['num_of_times'] = $row['num_of_times'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if($_GET['query'] == 'roomsNAT'){
+            $sql = 'SELECT * FROM not_available_times INNER JOIN rooms ON not_available_times.room_id = rooms.room_id INNER JOIN buildings ON rooms.building_id = buildings.building_id '.
+            'WHERE not_available_times.user_table_id = '.$user_table_id;
+
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['nat_id']   = $row['nat_id'];
+                    $row_array['weight_percentage'] = $row['weight_percentage'];
+                    $row_array['room_id'] = $row['room_id'];
+                    $row_array['room_name'] = $row['room_name'];
+                    $row_array['building_name'] = $row['build_name'];
                     $row_array['num_of_times'] = $row['num_of_times'];
                     array_push($return_arr, $row_array);
                 }
@@ -530,18 +546,27 @@ function createNew($mysqli)
         $weight_percentage  = $data[1];
         $teacher_id = $data[2]->id;
 
-        $stmt = $mysqli->prepare('INSERT INTO teachers_not_available_t (weight_percentage, teacher_id, num_of_times, active, comments, user_table_id) VALUES (?, ?, ?, NULL, NULL, ?);');
+        $stmt = $mysqli->prepare('INSERT INTO not_available_times (weight_percentage, teacher_id, room_id, num_of_times, active, comments, user_table_id) VALUES (?, ?, NULL, ?, NULL, NULL, ?);');
         $stmt->bind_param("iiii", $weight_percentage, $teacher_id, $num_of_times, $user_table_id);
         $stmt->execute();
-    } else if ($_GET['query'] == 'listTeachersNAT'){
+    } else if ($_GET['query'] == 'listNAT'){
         $data = json_decode($_GET['data']);
-        $tnat_id = $data[0];
+        $nat_id = $data[0];
 
         foreach($data[1] as &$v){
-            $stmt = $mysqli->prepare('INSERT INTO list_of_tnat (tnat_id, day_id, hour_id) VALUES (?, ?, ?);');
-            $stmt->bind_param("iii", $tnat_id, $v->day_id, $v->hour_id);
+            $stmt = $mysqli->prepare('INSERT INTO list_of_nat (nat_id, day_id, hour_id) VALUES (?, ?, ?);');
+            $stmt->bind_param("iii", $nat_id, $v->day_id, $v->hour_id);
             $stmt->execute();
         }
+    } else if ($_GET['query'] == 'roomsNAT'){
+        $data = json_decode($_GET['data']);
+        $num_of_times = count($data[0]);
+        $weight_percentage  = $data[1];
+        $room_id = $data[2]->id;
+
+        $stmt = $mysqli->prepare('INSERT INTO not_available_times (weight_percentage, teacher_id, room_id, num_of_times, active, comments, user_table_id) VALUES (?, NULL, ?, ?, NULL, NULL, ?);');
+        $stmt->bind_param("iiii", $weight_percentage, $room_id, $num_of_times, $user_table_id);
+        $stmt->execute();
     }
 
     $nrows = $mysqli->insert_id;
@@ -589,9 +614,12 @@ function destroyRow($mysqli, $id)
     } else if ($_GET['query'] == 'activityNOverlaps'){
         $mysqli->query("DELETE FROM activities_not_overlapping_con WHERE anoc_id = $id");
         $mysqli->query("DELETE FROM list_of_anoc WHERE anoc_id = $id");
-    } else if ($_GET['query'] == 'TeachersNAT'){
-        $mysqli->query("DELETE FROM teachers_not_available_t WHERE tnat_id = $id");
-        $mysqli->query("DELETE FROM list_of_tnat WHERE tnat_id = $id");
+    } else if ($_GET['query'] == 'teachersNAT'){
+        $mysqli->query("DELETE FROM not_available_times WHERE nat_id = $id");
+        $mysqli->query("DELETE FROM list_of_nat WHERE nat_id = $id");
+    } else if ($_GET['query'] == 'roomsNAT'){
+        $mysqli->query("DELETE FROM not_available_times WHERE nat_id = $id");
+        $mysqli->query("DELETE FROM list_of_nat WHERE nat_id = $id");
     }
 
     $i = $mysqli->affected_rows;
@@ -803,10 +831,10 @@ function queryById($mysqli, $id){
             }
         } else if ($_GET['query'] == 'teachersNAT'){
             $sql = 
-            'SELECT * FROM teachers_not_available_t WHERE teacher_id = '.$id;
+            'SELECT * FROM not_available_times WHERE teacher_id = '.$id;
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
-                    $row_array['tnat_id']   = $row['tnat_id '];
+                    $row_array['nat_id']   = $row['nat_id '];
                     $row_array['weight_percentage'] = $row['weight_percentage'];
                     $row_array['teacher_id']   = $row['teacher_id '];
                     $row_array['num_of_times']   = $row['num_of_times '];
@@ -814,17 +842,30 @@ function queryById($mysqli, $id){
                 }
                 $result->free();
             }
-        } else if ($_GET['query'] == 'listTeachersNAT'){
+        } else if ($_GET['query'] == 'listNAT'){
             $sql = 
-            'SELECT * FROM list_of_tnat INNER JOIN days ON list_of_tnat.day_id = days.days_id INNER JOIN hours ON list_of_tnat.hour_id = hours.hours_id WHERE tnat_id = '.$id;
+            'SELECT * FROM list_of_nat INNER JOIN days ON list_of_nat.day_id = days.days_id INNER JOIN hours ON list_of_nat.hour_id = hours.hours_id WHERE nat_id = '.$id;
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
-                    $row_array['list_tnat_id']   = $row['list_tnat_id'];
-                    $row_array['tnat_id'] = $row['tnat_id'];
-                    $row_array['day_id']   = $row['list_of_tnat.day_id'];
+                    $row_array['list_nat_id']   = $row['list_nat_id'];
+                    $row_array['nat_id'] = $row['nat_id'];
+                    $row_array['day_id']   = $row['list_of_nat.day_id'];
                     $row_array['day_name']   = $row['day_name'];
-                    $row_array['hour_id']   = $row['list_of_tnat.hour_id'];
+                    $row_array['hour_id']   = $row['list_of_nat.hour_id'];
                     $row_array['hour_name']   = $row['hour_name'];
+                    array_push($return_arr, $row_array);
+                }
+                $result->free();
+            }
+        } else if ($_GET['query'] == 'roomsNAT'){
+            $sql = 
+            'SELECT * FROM not_available_times WHERE room_id = '.$id;
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $row_array['nat_id']   = $row['nat_id '];
+                    $row_array['weight_percentage'] = $row['weight_percentage'];
+                    $row_array['room_id']   = $row['room_id '];
+                    $row_array['num_of_times']   = $row['num_of_times '];
                     array_push($return_arr, $row_array);
                 }
                 $result->free();

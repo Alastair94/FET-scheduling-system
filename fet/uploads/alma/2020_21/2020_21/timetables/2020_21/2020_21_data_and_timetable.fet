@@ -287,6 +287,13 @@
 
 <Rooms_List>
 <Room>
+	<Name>001</Name>
+	<Building>A</Building>
+	<Capacity>200</Capacity>
+	<Virtual>false</Virtual>
+	<Comments></Comments>
+</Room>
+<Room>
 	<Name>100</Name>
 	<Building>C</Building>
 	<Capacity>30</Capacity>
@@ -365,11 +372,30 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintTeacherNotAvailableTimes>
+<ConstraintTeacherNotAvailableTimes>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Teacher>Fá Zoltán</Teacher>
+	<Number_of_Not_Available_Times>3</Number_of_Not_Available_Times>
+	<Not_Available_Time>
+		<Day>Hétfő</Day>
+		<Hour>10:00-11:30</Hour>
+	</Not_Available_Time>
+	<Not_Available_Time>
+		<Day>Hétfő</Day>
+		<Hour>13:40-15:10</Hour>
+	</Not_Available_Time>
+	<Not_Available_Time>
+		<Day>Hétfő</Day>
+		<Hour>17:20-18:50</Hour>
+	</Not_Available_Time>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintTeacherNotAvailableTimes>
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>72</Activity_Id>
-	<Preferred_Day>Péntek</Preferred_Day>
-	<Preferred_Hour>13:40-15:10</Preferred_Hour>
+	<Preferred_Day>Kedd</Preferred_Day>
+	<Preferred_Hour>10:00-11:30</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -377,8 +403,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>74</Activity_Id>
-	<Preferred_Day>Hétfő</Preferred_Day>
-	<Preferred_Hour>17:20-18:50</Preferred_Hour>
+	<Preferred_Day>Péntek</Preferred_Day>
+	<Preferred_Hour>11:50-13:20</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -386,8 +412,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>75</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>08:00-09:30</Preferred_Hour>
+	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Hour>10:00-11:30</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -395,8 +421,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>76</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>11:50-13:20</Preferred_Hour>
+	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Hour>15:30-17:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -404,8 +430,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>77</Activity_Id>
-	<Preferred_Day>Szerda</Preferred_Day>
-	<Preferred_Hour>11:50-13:20</Preferred_Hour>
+	<Preferred_Day>Péntek</Preferred_Day>
+	<Preferred_Hour>17:20-18:50</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -413,7 +439,7 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>78</Activity_Id>
-	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Day>Csütörtök</Preferred_Day>
 	<Preferred_Hour>13:40-15:10</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
@@ -422,8 +448,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>79</Activity_Id>
-	<Preferred_Day>Péntek</Preferred_Day>
-	<Preferred_Hour>17:20-18:50</Preferred_Hour>
+	<Preferred_Day>Kedd</Preferred_Day>
+	<Preferred_Hour>15:30-17:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -431,8 +457,8 @@
 <ConstraintActivityPreferredStartingTime>
 	<Weight_Percentage>100</Weight_Percentage>
 	<Activity_Id>80</Activity_Id>
-	<Preferred_Day>Kedd</Preferred_Day>
-	<Preferred_Hour>08:00-09:30</Preferred_Hour>
+	<Preferred_Day>Szerda</Preferred_Day>
+	<Preferred_Hour>15:30-17:00</Preferred_Hour>
 	<Permanently_Locked>false</Permanently_Locked>
 	<Active>true</Active>
 	<Comments></Comments>
@@ -470,6 +496,32 @@
 	<Active>true</Active>
 	<Comments></Comments>
 </ConstraintSubjectPreferredRoom>
+<ConstraintRoomNotAvailableTimes>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Room>001</Room>
+	<Number_of_Not_Available_Times>2</Number_of_Not_Available_Times>
+	<Not_Available_Time>
+		<Day>Hétfő</Day>
+		<Hour>10:00-11:30</Hour>
+	</Not_Available_Time>
+	<Not_Available_Time>
+		<Day>Hétfő</Day>
+		<Hour>15:30-17:00</Hour>
+	</Not_Available_Time>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintRoomNotAvailableTimes>
+<ConstraintRoomNotAvailableTimes>
+	<Weight_Percentage>100</Weight_Percentage>
+	<Room>124</Room>
+	<Number_of_Not_Available_Times>1</Number_of_Not_Available_Times>
+	<Not_Available_Time>
+		<Day>Péntek</Day>
+		<Hour>15:30-17:00</Hour>
+	</Not_Available_Time>
+	<Active>true</Active>
+	<Comments></Comments>
+</ConstraintRoomNotAvailableTimes>
 </Space_Constraints_List>
 
 </fet>

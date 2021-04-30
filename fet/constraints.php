@@ -326,7 +326,7 @@
 						</div>
 					</div>
 
-					<div id="tab4" class="tab_content" ng-controller="TeachersNACtrl">
+					<div id="tab4" class="tab_content" ng-controller="TeachersNATCtrl">
 						<div style="margin-bottom:20px">
 							Teacher:<br>
 							<select 
@@ -339,13 +339,11 @@
 						<div style="display:flex">
 							<select size="10" 
 									ng-model="act_day"
-									ng-disabled="takenTime"
 									ng-options="d.day_name for d in days" style="min-width: 150px;">
 							</select>
 							<select size="10" 
 									ng-model="act_hour"
 									ng-options="h.hour_name for h in hours" style="min-width: 150px;"
-									ng-disabled="takenTime"
 									ng-dblclick="selectTime()">
 							</select>
 							<select size="10" 
@@ -364,8 +362,8 @@
 									>
 							</div>
 							<div style="margin:auto; margin-left:20px;margin-right:20px; width:150px">
-								<button ng-click="saveTeachersNAT()" ng-disabled="isTeachersNATWrong() || disabledTeachersNAT" style="height:50px; width:150px; margin:auto" >Add time constraint</button>
-								<button ng-click="deleteTeachersNAT(act_teachersNAT.tnat_id)" ng-show="disabledTeachersNAT"  style="height:50px; width:150px; margin:auto"  >Delete time constraint</button>
+								<button ng-click="saveTeachersNAT()" ng-disabled="isTeachersNATWrong() || disabledTeachersNAT" style="height:50px; width:150px; margin:auto" >Add constraint</button>
+								<button ng-click="deleteTeachersNAT(act_teachersNAT.nat_id)" ng-show="disabledTeachersNAT"  style="height:50px; width:150px; margin:auto"  >Delete constraint</button>
 							</div>
 							<select size="10" 
 									ng-model="act_teachersNAT"
@@ -375,6 +373,68 @@
 							</select>
 						</div>
 					</div>
+
+					<div id="tab6" class="tab_content" ng-controller="RoomsNATCtrl">
+						<div style="margin-bottom:20px;display:flex;">
+							<div>
+								Building:<br>
+								<select 
+									ng-model="act_building" 
+									ng-options="b.name for b in buildings"
+									ng-change="selectRoom(act_building)"
+									style="width:130px;">>
+									<option value="" selected disabled hidden>Choose here</option>
+								</select>
+							</div>
+							<div style="margin-left:20px;">
+								Room:<br>
+								<select 
+									ng-model="act_room" 
+									ng-options="r.room_name for r in selectedRooms"
+									ng-disabled="!act_building"
+									style="width:130px;">
+									<option value="" selected disabled hidden>Choose here</option>
+								</select>
+							</div>
+						</div>
+						<div style="display:flex">
+							<select size="10" 
+									ng-model="act_day"
+									ng-options="d.day_name for d in days" style="min-width: 150px;">
+							</select>
+							<select size="10" 
+									ng-model="act_hour"
+									ng-options="h.hour_name for h in hours" style="min-width: 150px;"
+									ng-dblclick="selectTime()">
+							</select>
+							<select size="10" 
+									ng-model="chosen_time"
+									ng-dblclick="removeTime()"
+									ng-disabled="disabledRoomsNAT"
+									ng-options="c.day_name + '->' + c.hour_name for c in chosenTimes" style="min-width: 150px;">
+							</select>
+							<div style="margin:auto;">
+								Weight Percentage<br>
+								<input size="10"
+									ng-model="weightR"
+									type="number"
+									min="0" max="100"
+									ng-disabled="disabledRoomsNAT"
+									>
+							</div>
+							<div style="margin:auto; margin-left:20px;margin-right:20px; width:150px">
+								<button ng-click="saveRoomsNAT()" ng-disabled="isRoomsNATWrong() || disabledRoomsNAT" style="height:50px; width:150px; margin:auto" >Add constraint</button>
+								<button ng-click="deleteRoomsNAT(act_roomsNAT.nat_id)" ng-show="disabledRoomsNAT"  style="height:50px; width:150px; margin:auto"  >Delete constraint</button>
+							</div>
+							<select size="10" 
+									ng-model="act_roomsNAT"
+									ng-options="r.building_name + '->' + r.room_name for r in roomsNATs" 
+									ng-click="selectRoomsNAT(act_roomsNAT)"
+									style="min-width: 150px;">
+							</select>
+						</div>
+					</div>
+
 				</div>
 				<br>
 				</article>	

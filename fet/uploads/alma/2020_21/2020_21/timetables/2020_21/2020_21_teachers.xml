@@ -23,10 +23,10 @@
    </Day>
    <Day name="Kedd">
     <Hour name="08:00-09:30">
-     <Subject name="Matematika"></Subject><Students name="Matematikus"></Students>
+     
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="Nyelvész"></Students><Students name="Szoftvertesztelő"></Students>
     </Hour>
     <Hour name="11:50-13:20">
      
@@ -46,19 +46,19 @@
      
     </Hour>
     <Hour name="10:00-11:30">
-     
+     <Subject name="Matematika"></Subject><Students name="Matematikus"></Students>
     </Hour>
     <Hour name="11:50-13:20">
-     <Subject name="Kommunikáció"></Subject><Students name="2019"></Students><Students name="2016"></Students>
+     
     </Hour>
     <Hour name="13:40-15:10">
-     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+     
     </Hour>
     <Hour name="15:30-17:00">
-     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+     
     </Hour>
     <Hour name="17:20-18:50">
-     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
+     
     </Hour>
    </Day>
    <Day name="Csütörtök">
@@ -72,13 +72,13 @@
      
     </Hour>
     <Hour name="13:40-15:10">
-     
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
     </Hour>
     <Hour name="17:20-18:50">
-     
+     <Subject name="Matematika"></Subject><Students name="Szoftverfejlesztők"></Students>
     </Hour>
    </Day>
    <Day name="Péntek">
@@ -92,13 +92,13 @@
      
     </Hour>
     <Hour name="13:40-15:10">
-     <Subject name="Matematika"></Subject><Students name="2020"></Students><Students name="Nyelvész"></Students><Students name="Szoftvertesztelő"></Students>
+     
     </Hour>
     <Hour name="15:30-17:00">
      
     </Hour>
     <Hour name="17:20-18:50">
-     
+     <Subject name="Kommunikáció"></Subject><Students name="2019"></Students><Students name="2016"></Students>
     </Hour>
    </Day>
   </Teacher>
@@ -125,7 +125,7 @@
    </Day>
    <Day name="Kedd">
     <Hour name="08:00-09:30">
-     <Subject name="Kommunikáció"></Subject><Students name="2016"></Students>
+     
     </Hour>
     <Hour name="10:00-11:30">
      
@@ -137,7 +137,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Subject name="Informatika gy."></Subject><Students name="Informatikus"></Students>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -157,7 +157,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Subject name="Kommunikáció"></Subject><Students name="2016"></Students>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -200,7 +200,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Subject name="Informatika gy."></Subject><Students name="Informatikus"></Students>
+     
     </Hour>
    </Day>
   </Teacher>
@@ -222,7 +222,7 @@
      
     </Hour>
     <Hour name="17:20-18:50">
-     <Subject name="Matematika"></Subject><Students name="2018"></Students><Students name="2019"></Students><Students name="2020"></Students><Students name="2017"></Students><Students name="2016"></Students>
+     
     </Hour>
    </Day>
    <Day name="Kedd">
@@ -233,7 +233,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     <Subject name="Kommunikáció"></Subject><Students name="2020"></Students>
+     
     </Hour>
     <Hour name="13:40-15:10">
      
@@ -259,7 +259,7 @@
      
     </Hour>
     <Hour name="15:30-17:00">
-     
+     <Subject name="Kommunikáció"></Subject><Students name="2020"></Students>
     </Hour>
     <Hour name="17:20-18:50">
      
@@ -293,7 +293,7 @@
      
     </Hour>
     <Hour name="11:50-13:20">
-     
+     <Subject name="Matematika"></Subject><Students name="2018"></Students><Students name="2019"></Students><Students name="2020"></Students><Students name="2017"></Students><Students name="2016"></Students>
     </Hour>
     <Hour name="13:40-15:10">
      

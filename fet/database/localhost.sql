@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2021 at 09:18 AM
+-- Generation Time: Apr 30, 2021 at 01:29 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -415,28 +415,45 @@ INSERT INTO `list_of_anoc` (`list_anoc_id`, `anoc_id`, `activity_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list_of_tnat`
+-- Table structure for table `list_of_nat`
 --
 
-CREATE TABLE `list_of_tnat` (
-  `list_tnat_id` int(11) NOT NULL,
-  `tnat_id` int(11) NOT NULL,
+CREATE TABLE `list_of_nat` (
+  `list_nat_id` int(11) NOT NULL,
+  `nat_id` int(11) NOT NULL,
   `day_id` int(11) NOT NULL,
   `hour_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
--- Dumping data for table `list_of_tnat`
+-- Dumping data for table `list_of_nat`
 --
 
-INSERT INTO `list_of_tnat` (`list_tnat_id`, `tnat_id`, `day_id`, `hour_id`) VALUES
+INSERT INTO `list_of_nat` (`list_nat_id`, `nat_id`, `day_id`, `hour_id`) VALUES
 (1, 4, 17, 35),
 (2, 4, 17, 36),
 (3, 5, 17, 34),
 (4, 5, 17, 36),
 (5, 5, 17, 35),
-(8, 7, 17, 35),
-(9, 7, 17, 37);
+(12, 14, 17, 34),
+(13, 14, 17, 36),
+(14, 14, 17, 38),
+(18, 16, 17, 34),
+(19, 16, 17, 37),
+(20, 17, 21, 37);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `list_of_rnat`
+--
+
+CREATE TABLE `list_of_rnat` (
+  `list_rnat_id` int(11) NOT NULL,
+  `rnat_id` int(11) NOT NULL,
+  `day_id` int(11) NOT NULL,
+  `hour_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -466,6 +483,34 @@ CREATE TABLE `min_days_for_activities` (
   `min_days_cons_id` int(11) NOT NULL,
   `activities_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `not_available_times`
+--
+
+CREATE TABLE `not_available_times` (
+  `nat_id` int(11) NOT NULL,
+  `weight_percentage` int(3) NOT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `room_id` int(11) DEFAULT NULL,
+  `num_of_times` int(5) NOT NULL,
+  `active` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'true',
+  `comments` longtext COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `user_table_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `not_available_times`
+--
+
+INSERT INTO `not_available_times` (`nat_id`, `weight_percentage`, `teacher_id`, `room_id`, `num_of_times`, `active`, `comments`, `user_table_id`) VALUES
+(4, 100, 18, NULL, 2, NULL, NULL, 192),
+(5, 100, 19, NULL, 3, NULL, NULL, 192),
+(14, 100, 21, NULL, 3, NULL, NULL, 192),
+(16, 100, NULL, 113, 2, NULL, NULL, 192),
+(17, 100, NULL, 112, 1, NULL, NULL, 192);
 
 -- --------------------------------------------------------
 
@@ -564,7 +609,24 @@ INSERT INTO `rooms` (`room_id`, `room_name`, `capacity`, `building_id`, `user_ta
 (109, '100', 30, 18, 192),
 (110, '101', 30, 18, 192),
 (111, '102', 30, 18, 192),
-(112, '124', 200, 18, 192);
+(112, '124', 200, 18, 192),
+(113, '001', 200, 16, 192);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms_not_available_times`
+--
+
+CREATE TABLE `rooms_not_available_times` (
+  `rnat_id` int(11) NOT NULL,
+  `weight_percentage` int(3) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `num_of_times` int(5) NOT NULL,
+  `active` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'true',
+  `comments` longtext COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `user_table_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -787,31 +849,6 @@ INSERT INTO `teachers` (`teacher_id`, `teach_name`, `user_table_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teachers_not_available_t`
---
-
-CREATE TABLE `teachers_not_available_t` (
-  `tnat_id` int(11) NOT NULL,
-  `weight_percentage` int(3) NOT NULL,
-  `teacher_id` int(11) NOT NULL,
-  `num_of_times` int(5) NOT NULL,
-  `active` varchar(5) COLLATE utf8_hungarian_ci DEFAULT 'true',
-  `comments` longtext COLLATE utf8_hungarian_ci DEFAULT NULL,
-  `user_table_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
-
---
--- Dumping data for table `teachers_not_available_t`
---
-
-INSERT INTO `teachers_not_available_t` (`tnat_id`, `weight_percentage`, `teacher_id`, `num_of_times`, `active`, `comments`, `user_table_id`) VALUES
-(4, 100, 18, 2, NULL, NULL, 192),
-(5, 100, 19, 3, NULL, NULL, 192),
-(7, 95, 20, 2, NULL, NULL, 192);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `time_constraints`
 --
 
@@ -992,10 +1029,16 @@ ALTER TABLE `list_of_anoc`
   ADD PRIMARY KEY (`list_anoc_id`);
 
 --
--- Indexes for table `list_of_tnat`
+-- Indexes for table `list_of_nat`
 --
-ALTER TABLE `list_of_tnat`
-  ADD PRIMARY KEY (`list_tnat_id`);
+ALTER TABLE `list_of_nat`
+  ADD PRIMARY KEY (`list_nat_id`);
+
+--
+-- Indexes for table `list_of_rnat`
+--
+ALTER TABLE `list_of_rnat`
+  ADD PRIMARY KEY (`list_rnat_id`);
 
 --
 -- Indexes for table `min_days_constraints`
@@ -1011,6 +1054,12 @@ ALTER TABLE `min_days_for_activities`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_min_days_for_activities_min_days_constraint1` (`min_days_cons_id`),
   ADD KEY `fk_min_days_for_activities_actvites1` (`activities_id`);
+
+--
+-- Indexes for table `not_available_times`
+--
+ALTER TABLE `not_available_times`
+  ADD PRIMARY KEY (`nat_id`);
 
 --
 -- Indexes for table `preferred_rooms`
@@ -1033,6 +1082,12 @@ ALTER TABLE `rooms`
   ADD PRIMARY KEY (`room_id`),
   ADD KEY `fk_rooms_building1` (`building_id`),
   ADD KEY `fk_rooms_user_tables1` (`user_table_id`);
+
+--
+-- Indexes for table `rooms_not_available_times`
+--
+ALTER TABLE `rooms_not_available_times`
+  ADD PRIMARY KEY (`rnat_id`);
 
 --
 -- Indexes for table `same_start_hr_constraints`
@@ -1091,13 +1146,6 @@ ALTER TABLE `subjects`
 ALTER TABLE `teachers`
   ADD PRIMARY KEY (`teacher_id`),
   ADD KEY `fk_teachers_user_tables1` (`user_table_id`);
-
---
--- Indexes for table `teachers_not_available_t`
---
-ALTER TABLE `teachers_not_available_t`
-  ADD PRIMARY KEY (`tnat_id`),
-  ADD UNIQUE KEY `teacher_id_unique` (`teacher_id`);
 
 --
 -- Indexes for table `time_constraints`
@@ -1209,10 +1257,16 @@ ALTER TABLE `list_of_anoc`
   MODIFY `list_anoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `list_of_tnat`
+-- AUTO_INCREMENT for table `list_of_nat`
 --
-ALTER TABLE `list_of_tnat`
-  MODIFY `list_tnat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `list_of_nat`
+  MODIFY `list_nat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `list_of_rnat`
+--
+ALTER TABLE `list_of_rnat`
+  MODIFY `list_rnat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `min_days_constraints`
@@ -1225,6 +1279,12 @@ ALTER TABLE `min_days_constraints`
 --
 ALTER TABLE `min_days_for_activities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `not_available_times`
+--
+ALTER TABLE `not_available_times`
+  MODIFY `nat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `preferred_rooms`
@@ -1242,7 +1302,13 @@ ALTER TABLE `preferred_times`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+
+--
+-- AUTO_INCREMENT for table `rooms_not_available_times`
+--
+ALTER TABLE `rooms_not_available_times`
+  MODIFY `rnat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `semesters`
@@ -1285,12 +1351,6 @@ ALTER TABLE `subjects`
 --
 ALTER TABLE `teachers`
   MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `teachers_not_available_t`
---
-ALTER TABLE `teachers_not_available_t`
-  MODIFY `tnat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `time_constraints`

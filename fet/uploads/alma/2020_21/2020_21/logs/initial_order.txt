@@ -1,0 +1,13 @@
+﻿This is the initial evaluation order of activities computed by FET. If the generation gets stuck after a certain number of activities, please check the activity corresponding to this number+1. You might find errors in your input.
+
+The initial order of activities (id-s):
+
+No: 1, Id: 78,     Duration: 3/0, Teachers: Teszt Elek, Subject: Matematika, Activity tags: , Students: Szoftverfejlesztők
+No: 2, Id: 72,     Duration: 1/0, Teachers: Teszt Elek, Subject: Matematika, Activity tags: , Students: 2020, Nyelvész, Szoftvertesztelő
+No: 3, Id: 74,     Duration: 1/0, Teachers: Kukor Ica, Subject: Matematika, Activity tags: , Students: 2018, 2019, 2020, 2017, 2016
+No: 4, Id: 77,     Duration: 1/0, Teachers: Teszt Elek, Subject: Kommunikáció, Activity tags: , Students: 2019, 2016
+No: 5, Id: 79,     Duration: 1/0, Teachers: Wincs Eszter, Subject: Informatika gy., Activity tags: , Students: Informatikus
+No: 6, Id: 75,     Duration: 1/0, Teachers: Teszt Elek, Subject: Matematika, Activity tags: , Students: Matematikus
+No: 7, Id: 80,     Duration: 1/0, Teachers: Wincs Eszter, Subject: Kommunikáció, Activity tags: , Students: 2016
+No: 8, Id: 76,     Duration: 1/0, Teachers: Kukor Ica, Subject: Kommunikáció, Activity tags: , Students: 2020
+End - the order of activities (id-s)

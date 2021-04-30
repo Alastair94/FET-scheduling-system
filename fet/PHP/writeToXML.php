@@ -389,6 +389,7 @@
 				
 			}
 		}
+		getRoomsNAT($fet, $spaceCons, $mysqli, $userTableID);
 	}
 
 #-------------------------------------------------------------------------------------------------
@@ -442,7 +443,7 @@
 	}
 
 	function getTeachersNAT(&$fet, $timeCons, $mysqli, $userTableID){
-		$query = "SELECT * FROM teachers_not_available_t INNER JOIN teachers ON teachers_not_available_t.teacher_id = teachers.teacher_id WHERE teachers_not_available_t.user_table_id = ".$userTableID;
+		$query = "SELECT * FROM not_available_times INNER JOIN teachers ON not_available_times.teacher_id = teachers.teacher_id WHERE not_available_times.user_table_id = ".$userTableID;
 		$queryResult = $mysqli->query($query);
 
 		while($tuple = $queryResult->fetch_assoc()){
@@ -453,7 +454,7 @@
 			buildNode($fet, $teachersNAT, 'Teacher', $tuple['teach_name']);
 			buildNode($fet, $teachersNAT, 'Number_of_Not_Available_Times', $tuple['num_of_times']);
 		
-			$query2 = "SELECT * FROM list_of_tnat INNER JOIN days ON list_of_tnat.day_id = days.days_id INNER JOIN hours ON list_of_tnat.hour_id = hours.hours_id  WHERE tnat_id = ".$tuple['tnat_id'];
+			$query2 = "SELECT * FROM list_of_nat INNER JOIN days ON list_of_nat.day_id = days.days_id INNER JOIN hours ON list_of_nat.hour_id = hours.hours_id  WHERE nat_id = ".$tuple['nat_id'];
 			$queryResult2 = $mysqli->query($query2);
 			while($tuple2 = $queryResult2->fetch_assoc()){
 				$actTeachersNAT = $fet->createElement('Not_Available_Time');
@@ -465,6 +466,33 @@
 
 			buildNode($fet, $teachersNAT, 'Active', 'true'); //////////////////////////////////////////
 			buildNode($fet, $teachersNAT, 'Comments', $tuple['comments']);
+		}
+	}
+
+	function getRoomsNAT(&$fet, $spaceCons, $mysqli, $userTableID){
+		$query = "SELECT * FROM not_available_times INNER JOIN rooms ON not_available_times.room_id = rooms.room_id WHERE not_available_times.user_table_id = ".$userTableID;
+		$queryResult = $mysqli->query($query);
+
+		while($tuple = $queryResult->fetch_assoc()){
+			$roomsNAT = $fet->createElement('ConstraintRoomNotAvailableTimes');
+			$roomsNAT = $spaceCons->appendChild($roomsNAT);
+
+			buildNode($fet, $roomsNAT, 'Weight_Percentage', $tuple['weight_percentage']);
+			buildNode($fet, $roomsNAT, 'Room', $tuple['room_name']);
+			buildNode($fet, $roomsNAT, 'Number_of_Not_Available_Times', $tuple['num_of_times']);
+		
+			$query2 = "SELECT * FROM list_of_nat INNER JOIN days ON list_of_nat.day_id = days.days_id INNER JOIN hours ON list_of_nat.hour_id = hours.hours_id  WHERE nat_id = ".$tuple['nat_id'];
+			$queryResult2 = $mysqli->query($query2);
+			while($tuple2 = $queryResult2->fetch_assoc()){
+				$actRoomsNAT = $fet->createElement('Not_Available_Time');
+				$actRoomsNAT = $roomsNAT->appendChild($actRoomsNAT);					
+
+				buildNode($fet, $actRoomsNAT, 'Day', $tuple2['day_name']);
+				buildNode($fet, $actRoomsNAT, 'Hour', $tuple2['hour_name']);
+			}
+
+			buildNode($fet, $roomsNAT, 'Active', 'true'); //////////////////////////////////////////
+			buildNode($fet, $roomsNAT, 'Comments', $tuple['comments']);
 		}
 	}
 
